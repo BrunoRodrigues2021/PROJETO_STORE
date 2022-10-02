@@ -1,0 +1,13 @@
+{
+  "aws": {
+    "region": "us-east-1",
+    "parameterStore": {
+      "storeDb": {
+        "parameters": "/store/dev/db_config"
+      }
+    }
+  },
+  "routesPrefix": "/store",
+  "httpServerPort": 8080,
+  "requestTimeout": 30000
+}
