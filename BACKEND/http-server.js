@@ -16,28 +16,24 @@ class HttpServer {
     }
 
     startServer() {
+        this._app.use(CORS);
+        this._app.use((req, res, next) => {
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header(
+                'Access-Control-Allow-Headers',
+                'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
+            );
+            res.header(
+                'Access-Control-Allow-Methods',
+                'GET, POST, PUT, PATCH, DELETE'
+            );
+            next();
+        });
         this._server = http.createServer(this._app);
         this._server.listen(this._httpServerPort, '0.0.0.0');
         this._server.on('error', this._onServerError);
         this._server.on('listening', this._onServerListening);
-        this._app.use(function (req, res, next) {
 
-            // Website you wish to allow to connect
-            res.setHeader('Access-Control-Allow-Origin', '*');
-
-            // Request methods you wish to allow
-            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-            // Request headers you wish to allow
-            res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-            // Set to true if you need the website to include cookies in the requests sent
-            // to the API (e.g. in case you use sessions)
-            res.setHeader('Access-Control-Allow-Credentials', true);
-
-            // Pass to next layer of middleware
-            next();
-        });
     }
 
     _onServerListening() {
@@ -63,6 +59,7 @@ class HttpServer {
         this._app.set('port', this._httpServerPort);
         this._app.use(bodyParser.json({limit: '2mb'}));
         this._app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
+        this._app.use(CORS);
     }
 
     _setupControllers() {
