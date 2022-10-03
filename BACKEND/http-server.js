@@ -2,7 +2,6 @@ const http = require("http");
 const express = require('express');
 const logger = require('./logger');
 const bodyParser = require('body-parser');
-const CORS = require('cors');
 const {httpServerPort, routesPrefix} = require('config');
 
 
@@ -55,9 +54,7 @@ class HttpServer {
                 'Access-Control-Allow-Methods',
                 'GET, POST, PUT, PATCH, DELETE'
             );
-            next();
         });
-        this._app.use(CORS);
     }
 
     _setupControllers() {
