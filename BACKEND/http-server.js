@@ -2,6 +2,7 @@ const http = require("http");
 const express = require('express');
 const logger = require('./logger');
 const bodyParser = require('body-parser');
+const CORS = require('cors');
 const {httpServerPort, routesPrefix} = require('config');
 
 
@@ -19,17 +20,7 @@ class HttpServer {
         this._server.listen(this._httpServerPort, '0.0.0.0');
         this._server.on('error', this._onServerError);
         this._server.on('listening', this._onServerListening);
-        this._app.use((req, res, next) => {
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header(
-                'Access-Control-Allow-Headers',
-                'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
-            );
-            res.header(
-                'Access-Control-Allow-Methods',
-                'GET, POST, PUT, PATCH, DELETE'
-            );
-        });
+        this._app.use(CORS);
     }
 
     _onServerListening() {
@@ -55,6 +46,19 @@ class HttpServer {
         this._app.set('port', this._httpServerPort);
         this._app.use(bodyParser.json({limit: '2mb'}));
         this._app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
+        this._app.use((req, res, next) => {
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header(
+                'Access-Control-Allow-Headers',
+                'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
+            );
+            res.header(
+                'Access-Control-Allow-Methods',
+                'GET, POST, PUT, PATCH, DELETE'
+            );
+            next();
+        });
+        this._app.use(CORS);
     }
 
     _setupControllers() {
