@@ -20,7 +20,6 @@ class HttpServer {
         this._server.listen(this._httpServerPort, '0.0.0.0');
         this._server.on('error', this._onServerError);
         this._server.on('listening', this._onServerListening);
-        this._app.use(CORS);
     }
 
     _onServerListening() {
@@ -46,7 +45,7 @@ class HttpServer {
         this._app.set('port', this._httpServerPort);
         this._app.use(bodyParser.json({limit: '2mb'}));
         this._app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
-
+        this._app.use(CORS);
     }
 
     _setupControllers() {
