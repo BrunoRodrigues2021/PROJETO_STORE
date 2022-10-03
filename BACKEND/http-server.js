@@ -16,19 +16,6 @@ class HttpServer {
     }
 
     startServer() {
-        this._app.use(CORS);
-        this._app.use((req, res, next) => {
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header(
-                'Access-Control-Allow-Headers',
-                'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
-            );
-            res.header(
-                'Access-Control-Allow-Methods',
-                'GET, POST, PUT, PATCH, DELETE'
-            );
-            next();
-        });
         this._server = http.createServer(this._app);
         this._server.listen(this._httpServerPort, '0.0.0.0');
         this._server.on('error', this._onServerError);
@@ -60,6 +47,18 @@ class HttpServer {
         this._app.use(bodyParser.json({limit: '2mb'}));
         this._app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
         this._app.use(CORS);
+        this._app.use((req, res, next) => {
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header(
+                'Access-Control-Allow-Headers',
+                'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
+            );
+            res.header(
+                'Access-Control-Allow-Methods',
+                'GET, POST, PUT, PATCH, DELETE'
+            );
+            next();
+        });
     }
 
     _setupControllers() {
