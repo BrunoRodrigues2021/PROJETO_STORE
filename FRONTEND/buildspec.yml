@@ -3,13 +3,24 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - cd FRONTEND
+      - npm cache clean --force
+      - sudo n rm 12.22.12
+      - sudo npm uninstall -g n
+      - sudo npm install -g n --force
+      - sudo n stable
+      - sudo npm install npm -g
+      - echo Installing source NPM dependencies...
+      - rm -rf node_modules package-lock.json
       - npm install
+      - npm install -g @angular/cli
   build:
     commands:
+      - echo Build started...
       - npm run build
 
 artifacts:
-  files:s
+  files:
     - '**/*'
-  discard-paths: no
-  base-directory: build
+  base-directory: 'FRONTEND/dist/store'
+  discard-paths: yes
