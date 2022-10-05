@@ -2,7 +2,6 @@ const http = require("http");
 const express = require('express');
 const logger = require('./logger');
 const bodyParser = require('body-parser');
-const CORS = require('cors');
 const {httpServerPort, routesPrefix} = require('config');
 
 
@@ -48,6 +47,12 @@ class HttpServer {
         this._app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
         this._app.use((req, res, next) => {
             this._app.use(CORS);
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header(
+                'Access-Control-Allow-Headers',
+                'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
+            );
+            res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
             next();
         });
     }
