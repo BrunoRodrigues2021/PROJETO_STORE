@@ -47,21 +47,9 @@ class HttpServer {
         this._app.use(bodyParser.json({limit: '2mb'}));
         this._app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
         this._app.use((req, res, next) => {
-            res.header('Access-Control-Allow-Origin', '*');
-            res.header(
-                'Access-Control-Allow-Headers',
-                'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
-            );
-            if (req.method === 'OPTIONS') {
-                res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-                return res.status(200).send({ message: 'ok' });
-            }
+            this._app.use(CORS);
             next();
         });
-        // this._app.use((req, res, next) => {
-        //     this._app.use(CORS);
-        //     next();
-        // });
     }
 
     _setupControllers() {
