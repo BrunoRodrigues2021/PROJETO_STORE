@@ -3,14 +3,13 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - npm install --location=global npm
       - npm install
   build:
     commands:
       - npm run build
 
 artifacts:
-  files:
+  files:s
     - '**/*'
   discard-paths: no
   base-directory: build
