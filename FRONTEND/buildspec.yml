@@ -1,10 +1,20 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      nodejs: '16.x'
   pre_build:
     commands:
       - echo Installing source NPM dependencies...
       - cd FRONTEND
+      - npm cache clean --force
+      - sudo n rm 12.22.12
+      - sudo npm uninstall -g n
+      - sudo npm install -g n --force
+      - sudo n stable
+      - sudo npm install npm -g
+      - rm -rf node_modules package-lock.json
       - npm install
       - npm install -g @angular/cli
   build:
