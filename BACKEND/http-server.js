@@ -46,7 +46,6 @@ class HttpServer {
         this._app.use(bodyParser.json({limit: '2mb'}));
         this._app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
         this._app.use((req, res, next) => {
-            this._app.use(CORS);
             res.header('Access-Control-Allow-Origin', '*');
             res.header(
                 'Access-Control-Allow-Headers',
