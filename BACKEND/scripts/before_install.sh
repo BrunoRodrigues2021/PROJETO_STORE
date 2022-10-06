@@ -1,15 +1,7 @@
 #!/bin/bash
-
-#download node and npm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-. ~/.nvm/nvm.sh
-nvm install node
-
-#create our working directory if it doesnt exist
-DIR="/home/ec2-user/store-backend"
-if [ -d "$DIR" ]; then
-  echo "${DIR} exists"
-else
-  echo "Creating ${DIR} directory"
-  mkdir ${DIR}
-fi
+sudo yum install nodejs
+sudo yum install npm
+sudo npm install pm2 -g
+sudo cd ./home/ec2-user
+sudo rm -r -f store-backend
+sudo mkdir store-backend
