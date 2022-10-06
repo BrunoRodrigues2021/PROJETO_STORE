@@ -5,23 +5,6 @@ files:
       destination: /home/ec2-user/store-backend
     file_exists_behavior: OVERWRITE
 
-permissions:
-  - object: /home/ec2-user/store-backend
-    pattern: "**"
-    except: [scripts/start_server.sh, scripts/application_stop.sh]
-    owner: ec2-user
-    group: ec2-user
-    type:
-      - directory
-      - file
-  - object: /home/ec2-user/store-backend
-    pattern: "*.sh"
-    owner: ec2-user
-    group: ec2-user
-    mode: 775
-    type:
-      - file
-
 hooks:
   BeforeInstall:
     - location: scripts/before_install.sh
@@ -32,6 +15,6 @@ hooks:
       timeout: 400
       runas: ec2-user
   ApplicationStop:
-    - location: scripts/application_stop.sh
+    - location: scripts/stop_server.sh
       timeout: 300
       runas: ec2-user
