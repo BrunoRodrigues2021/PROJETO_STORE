@@ -1,0 +1,16 @@
+.form-field {
+  &-small {
+    width: 160px;
+  }
+
+  &-medium {
+    width: 220px;
+  }
+
+  &-large {
+    width: 350px;
+  }
+  &-extra-large {
+    width: 420px;
+  }
+}

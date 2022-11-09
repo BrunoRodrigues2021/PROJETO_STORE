@@ -3,16 +3,21 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
 import { Routes, RouterModule } from "@angular/router";
+import {LoginComponent} from "./modules/login/login.component";
 
 
 const routes: Routes = [
   {
     path: "",
+    component: LoginComponent
+  },
+  {
+    path: "home",
     redirectTo: "home",
     pathMatch: "full"
   },
   {
-    path: "",
+    path: "home",
     component: MasterTemplateComponent,
     children: [
       {
@@ -22,8 +27,8 @@ const routes: Routes = [
     ]
   },
   {
-    path: "**",
-    redirectTo: "home"
+    path: "login",
+    redirectTo: "login"
   }
 ];
 
