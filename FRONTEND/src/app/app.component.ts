@@ -1,7 +1,4 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
-import {MenuItem, PrimeNGConfig} from "primeng/api";
-import {Subscription} from "rxjs";
-import {BreadcrumbService} from "./shared/breadcrumb.service";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -11,19 +8,9 @@ import {BreadcrumbService} from "./shared/breadcrumb.service";
 export class AppComponent {
   title = 'STORE';
 
-  breadcrumbItems: MenuItem[];
 
 
-  constructor(private breadcrumbService: BreadcrumbService, private cdr: ChangeDetectorRef) {}
+  constructor() {}
 
-  async ngOnInit() {
-    // this.breadcrumbService.getBreadcrumb().subscribe(async (items) => {
-    //   this.breadcrumbItems = [];
-    //   items.forEach((item) => {
-    //     this.breadcrumbItems.push(item);
-    //   });
-    //   this.cdr.detectChanges();
-    //   console.log(this.breadcrumbItems)
-    // });
-  }
+  async ngOnInit() { }
 }

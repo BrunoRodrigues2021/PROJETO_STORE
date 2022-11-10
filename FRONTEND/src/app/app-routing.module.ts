@@ -12,12 +12,12 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: "home",
-    redirectTo: "home",
+    path: "portal",
+    redirectTo: "portal",
     pathMatch: "full"
   },
   {
-    path: "home",
+    path: "portal",
     component: MasterTemplateComponent,
     children: [
       {

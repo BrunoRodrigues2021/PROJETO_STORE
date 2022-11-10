@@ -5,6 +5,13 @@ class UserErrors extends SharedErrors {
     constructor() {
         super();
     }
+
+    static get INVALID_CREDENTIALS() {
+        return {
+            code: HttpCodes.UNAUTHORIZED,
+            description: 'invalidCredentials'
+        }
+    }
 }
 
 module.exports = UserErrors;

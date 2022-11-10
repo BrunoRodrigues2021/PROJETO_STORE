@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { environment } from "../../../environments/environment";
 import { getProductsResponse } from "./interfaces/product-response-interface";
-import {SharedService} from "../../shared/shared.service";
+import {PortalService} from "../../shared/portal.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ManageProductsService extends SharedService {
+export class ManageProductsService extends PortalService {
 
-  baseUrl = environment.baseApiUrl + '/product';
+  baseUrl = this.BASE_PATH + '/product';
 
   constructor(private http: HttpClient) {
     super();

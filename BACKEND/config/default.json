@@ -7,6 +7,12 @@
       }
     }
   },
+  "jwt": {
+    "audience": "localhost",
+    "issuer": "portalStore",
+    "expirationTime": "1h",
+    "algorithm": "RS256"
+  },
   "routesPrefix": "/store",
   "httpServerPort": 8080,
   "requestTimeout": 30000

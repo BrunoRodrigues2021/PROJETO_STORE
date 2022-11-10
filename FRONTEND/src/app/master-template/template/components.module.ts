@@ -6,6 +6,9 @@ import {MenubarModule} from "primeng/menubar";
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {AvatarModule} from 'primeng/avatar';
 import {TieredMenuModule} from 'primeng/tieredmenu';
+import {MessageService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -14,9 +17,11 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
     MenubarModule,
     AvatarModule,
     OverlayPanelModule,
-    TieredMenuModule
+    TieredMenuModule,
+    ToastModule
   ],
-  declarations: [NavbarComponent],
+  providers: [MessageService],
+  declarations: [NavbarComponent, HomeComponent],
   exports: [NavbarComponent]
 })
 export class ComponentsModule {

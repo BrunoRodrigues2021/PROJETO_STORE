@@ -59,6 +59,7 @@ class HttpServer {
     _setupControllers() {
         this._app.use(`${routesPrefix}/product`, require('./controllers/product-controller'));
         this._app.use(`${routesPrefix}/user`, require('./controllers/user-controller'));
+        this._app.use(`${routesPrefix}/security`, require('./controllers/security-controller'));
     }
 }
 

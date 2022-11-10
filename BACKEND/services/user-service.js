@@ -12,6 +12,13 @@ class UserService {
 
         return newUser;
     }
+
+    async getUserByParam(param, value) {
+        return await User.findOne({
+            attributes: ['id', 'name', 'mail'],
+            where: {[param]: value}
+        })
+    }
 }
 
 module.exports =  new UserService();

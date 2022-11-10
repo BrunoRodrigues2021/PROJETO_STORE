@@ -6,7 +6,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ComponentsModule } from './master-template/base/components.module';
 import { MasterTemplateComponent } from './master-template/master-template.component';
 import { LoginComponent } from './modules/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -23,6 +22,9 @@ import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { ImageModule } from 'primeng/image';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import {ToastModule} from "primeng/toast";
+import {PortalService} from "./shared/portal.service";
+import {ComponentsModule} from "./master-template/template/components.module";
 
 @NgModule({
   declarations: [
@@ -33,7 +35,6 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -45,15 +46,17 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     InputTextModule,
     ImageModule,
     BreadcrumbModule,
+    ToastModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: httpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    ComponentsModule
   ],
-  providers: [BreadcrumbService],
+  providers: [BreadcrumbService, PortalService],
   exports: [],
   bootstrap: [AppComponent]
 })

@@ -1,10 +1,27 @@
 {
   "portal": {
     "general": {
-
-    },
-    "menu": {
-      "products": "Products"
+      "userMenuSettings": {
+        "userManagement": "User Management",
+        "changePassword": "Change Password",
+        "changeLanguage": "Change Language",
+        "english": "English",
+        "portuguese": "Portuguese",
+        "logout": "Logout"
+      },
+      "portalMenu": {
+        "users": "Users",
+        "products": "Products"
+      },
+      "breadcrumb": {
+        "home": "Home",
+        "products": {
+          "productsList": "Products",
+          "productCreate": "Product Create",
+          "productDelete": "Product Delete"
+        },
+        "users": "Users"
+      }
     },
     "components": {
       "login": {

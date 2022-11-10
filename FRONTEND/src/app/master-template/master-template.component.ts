@@ -12,16 +12,13 @@ import {TranslateService} from "@ngx-translate/core";
 export class MasterTemplateComponent implements OnInit {
   breadcrumbItems: MenuItem[];
 
-  private languageSubscription: Subscription;
-
   constructor(
     private cdr: ChangeDetectorRef,
     private breadcrumbService: BreadcrumbService,
     private translateService: TranslateService
   ) { }
 
-
-  async ngOnInit() {
+  ngOnInit() {
     this.breadcrumbService.getBreadcrumb().subscribe(async (items) => {
       this.breadcrumbItems = [];
       items.forEach((item) => {
@@ -29,15 +26,5 @@ export class MasterTemplateComponent implements OnInit {
       });
       this.cdr.detectChanges();
     });
-
-    const pagesName = [
-      'portal.menu.products'
-    ];
-    this.breadcrumbService.pushBreadcrumb(pagesName);
-
-    this.languageSubscription = this.translateService.onLangChange.subscribe(async () => {
-      this.breadcrumbService.pushBreadcrumb(pagesName);
-    });
   }
-
 }

@@ -7,10 +7,13 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ManageProductsService} from "./manage-products.service";
 
 import {ButtonModule} from 'primeng/button';
+import {PortalService} from "../../shared/portal.service";
+import { ProductsAddComponent } from './components/products-add/products-add.component';
 
 @NgModule({
   declarations: [
     ProductsListComponent,
+    ProductsAddComponent,
   ],
   imports: [
     CommonModule,
@@ -18,7 +21,7 @@ import {ButtonModule} from 'primeng/button';
     FontAwesomeModule,
     ButtonModule
   ],
-  providers: [ManageProductsService]
+  providers: [ManageProductsService, PortalService]
 })
 export class ManageProductsModule {
 }

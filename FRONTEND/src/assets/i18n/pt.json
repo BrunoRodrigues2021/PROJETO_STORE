@@ -1,10 +1,27 @@
 {
   "portal": {
     "general": {
-
-    },
-    "menu": {
-      "products": "Produtos"
+      "userMenuSettings": {
+        "userManagement": "Gerenciamento de usuário",
+        "changePassword": "Alterar senha",
+        "changeLanguage": "Alterar idioma",
+        "english": "Inglês",
+        "portuguese": "Português",
+        "logout": "Sair"
+      },
+      "portalMenu": {
+        "users": "Usuários",
+        "products": "Produtos"
+      },
+      "breadcrumb": {
+        "home": "Início",
+        "products": {
+          "productsList": "Produtos",
+          "productCreate": "Criar Produto",
+          "productDelete": "Deletar Produto"
+        },
+        "users": "Usuários"
+      }
     },
     "components": {
       "login": {

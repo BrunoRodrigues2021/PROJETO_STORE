@@ -1,7 +1,0 @@
-<p-menubar [model]="portalMenuItems">
-  <p-avatar image="./assets/images/user_image.jpg" styleClass="mr-2" shape="circle" (click)="toggleOverlay()">
-  </p-avatar>
-  <p-overlayPanel class="text-nowrap" (onShow)="onShowOverlay()" (onHide)="onHideOverlay()" #userOptionsOverlay>
-    <p-tieredMenu #menu [model]="userMenuItems" appendTo="body"></p-tieredMenu>
-  </p-overlayPanel>
-</p-menubar>

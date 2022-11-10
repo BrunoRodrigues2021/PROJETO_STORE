@@ -13,6 +13,7 @@
           </span>
         <button pButton type="button" class="form-field-extra-large p-button-sm mt-3"
                 (click)="executeLogin()" [label]="'portal.components.login.buttons.login' | translate"></button>
+        <p *ngIf="isProcessingRequest">Loading...</p>
       </div>
     </p-card>
   </div>

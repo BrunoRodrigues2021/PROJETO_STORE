@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import {HomeComponent} from "./template/home/home.component";
 
 
 export const MasterTemplateRoutes: Routes = [
@@ -10,5 +11,10 @@ export const MasterTemplateRoutes: Routes = [
         loadChildren: () => import("../modules/manage-products/manage-products.module").then(m => m.ManageProductsModule)
       }
     ]
+  },
+  {path: "", redirectTo: 'home', pathMatch: 'full'},
+  {
+    path: "home",
+    component: HomeComponent
   }
 ];

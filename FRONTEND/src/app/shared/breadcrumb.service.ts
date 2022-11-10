@@ -1,5 +1,5 @@
 import {MenuItem} from 'primeng/api';
-import {EventEmitter, Injectable} from '@angular/core';
+import {EventEmitter, Injectable, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -18,18 +18,22 @@ export class BreadcrumbService {
 
   pushBreadcrumb(pagesName: string[]) {
     let pageNameTranslate: MenuItem;
+      pagesName.forEach((pageName) => {
 
-    this.clearBreadcrumb();
+        pageNameTranslate = {
+          label: this.translateService.instant(pageName)
+        };
+        this.breadcrumbItemsArray.push(pageNameTranslate);
 
-    pagesName.forEach((pageName) => {
-      pageNameTranslate = {
-        label: this.translateService.instant(pageName)
-      };
-
-      this.breadcrumbItemsArray.push(pageNameTranslate);
-    });
+      });
 
     this.breadcrumbItems.emit(this.breadcrumbItemsArray);
+  }
+
+  removeItemOfBreadcrumb(pagesName: string[]) {
+    pagesName.forEach((pageName) => {
+      this.breadcrumbItemsArray.splice(this.breadcrumbItemsArray.indexOf({label: this.translateService.instant(pageName)}))
+    });
   }
 
   clearBreadcrumb() {
