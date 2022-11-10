@@ -11,6 +11,10 @@ import { MasterTemplateComponent } from './master-template/master-template.compo
 import { LoginComponent } from './modules/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule, TranslateService } from "@ngx-translate/core";
+import { BreadcrumbService } from "./shared/breadcrumb.service";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { httpLoaderFactory} from "./shared/http-loader-factory";
 
 /*PRIMENG COMPONENTS IMPORTS*/
 import { CardModule } from 'primeng/card';
@@ -32,6 +36,7 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
     CardModule,
@@ -39,10 +44,22 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     PasswordModule,
     InputTextModule,
     ImageModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
-  providers: [],
+  providers: [BreadcrumbService],
   exports: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private translateService: TranslateService) {
+    translateService.use(<string>translateService.getBrowserLang());
+    translateService.setDefaultLang('en');
+  }
+}

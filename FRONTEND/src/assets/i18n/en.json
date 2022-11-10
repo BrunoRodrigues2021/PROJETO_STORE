@@ -1,0 +1,17 @@
+{
+  "portal": {
+    "general": {
+
+    },
+    "menu": {
+      "products": "Products"
+    },
+    "components": {
+      "login": {
+        "buttons": {
+          "login": "Login"
+        }
+      }
+    }
+  }
+}

@@ -11,8 +11,8 @@
             <input id="password" type="password" class="form-field-extra-large p-inputtext-sm" pInputText>
             <label for="password">Password</label>
           </span>
-        <button pButton type="button" label="Login" class="form-field-extra-large p-button-sm mt-3"
-                (click)="executeLogin()"></button>
+        <button pButton type="button" class="form-field-extra-large p-button-sm mt-3"
+                (click)="executeLogin()" [label]="'portal.components.login.buttons.login' | translate"></button>
       </div>
     </p-card>
   </div>

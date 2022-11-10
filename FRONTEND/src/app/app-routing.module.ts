@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
 import { Routes, RouterModule } from "@angular/router";
-import {LoginComponent} from "./modules/login/login.component";
+import { LoginComponent } from "./modules/login/login.component";
 
 
 const routes: Routes = [
@@ -27,8 +27,8 @@ const routes: Routes = [
     ]
   },
   {
-    path: "login",
-    redirectTo: "login"
+    path: "**",
+    component: LoginComponent
   }
 ];
 
