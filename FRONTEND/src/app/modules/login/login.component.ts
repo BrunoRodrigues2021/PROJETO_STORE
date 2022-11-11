@@ -1,12 +1,7 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Router } from "@angular/router";
-import { BreadcrumbService } from "../../shared/breadcrumb.service";
-import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
-import {finalize, Subscription} from "rxjs";
-import {MenuItem, PrimeNGConfig} from "primeng/api";
 import {PortalService} from "../../shared/portal.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -38,21 +33,21 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.isProcessingRequest = true;
-
-    this.loginService.sendLoginRequest(this.loginForm.value.email, this.loginForm.value.password)
-      .pipe(finalize(() => {
-        this.isProcessingRequest = false;
-      }))
-      .subscribe(
-        async (response: any) => {
-          this.portalService.setUser(response['token']);
-          await this.router.navigate(['/portal']);
-        },
-        (responseError: HttpErrorResponse) => {
-          this.httpError = responseError;
-        }
-      );
+    // this.isProcessingRequest = true;
+    //
+    // this.loginService.sendLoginRequest(this.loginForm.value.email, this.loginForm.value.password)
+    //   .pipe(finalize(() => {
+    //     this.isProcessingRequest = false;
+    //   }))
+    //   .subscribe(
+    //     async (response: any) => {
+    //       this.portalService.setUser(response['token']);
+    //       await this.router.navigate(['/portal']);
+    //     },
+    //     (responseError: HttpErrorResponse) => {
+    //       this.httpError = responseError;
+    //     }
+    //   );
   }
 
   login2Step() {

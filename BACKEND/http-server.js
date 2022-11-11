@@ -8,7 +8,7 @@ const {httpServerPort, routesPrefix} = require('config');
 class HttpServer {
     constructor(port = httpServerPort) {
         this._app = express();
-        this._httpServerPort = port;
+        this._httpServerPort = 8080;
         this._setupServer();
         this._setupControllers();
         this._server = {};

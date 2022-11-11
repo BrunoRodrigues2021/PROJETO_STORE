@@ -8,6 +8,7 @@ import {PortalService} from "../../shared/portal.service";
 export class LoginService extends PortalService {
 
   constructor(private http: HttpClient) {
+    // @ts-ignore
     super();
   }
 

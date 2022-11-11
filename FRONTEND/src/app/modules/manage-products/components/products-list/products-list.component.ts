@@ -1,10 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ManageProductsService} from "../../manage-products.service";
 import {getProductsResponse} from "../../interfaces/product-response-interface";
-import {BreadcrumbService} from "../../../../shared/breadcrumb.service";
+import {BreadcrumbService} from "../../../../shared/components/breadcrumb/breadcrumb.service";
 import {Subscription} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
-import {Router} from "@angular/router";
+import {BreadcrumbItemList} from "../../../../shared/components/interfaces/breacrumb-interfaces";
+
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
@@ -24,14 +25,14 @@ export class ProductsListComponent implements OnInit {
   ngOnInit() {
     this.loadProducts();
 
-    const pagesName = [
-      'portal.general.breadcrumb.products.productsList'
+    const breadcrumbPages: BreadcrumbItemList = [
+      {label: 'portal.general.breadcrumb.products.productsList', route: 'products'},
     ];
 
-    this.breadcrumbService.pushBreadcrumb(pagesName);
+    this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
 
     this.languageSubscription = this.translateService.onLangChange.subscribe(async () => {
-      this.breadcrumbService.pushBreadcrumb(pagesName);
+      this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
     });
   }
 

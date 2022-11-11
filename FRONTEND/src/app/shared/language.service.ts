@@ -1,20 +1,25 @@
 import { Injectable } from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
-import {BreadcrumbService} from "./breadcrumb.service";
+import {BreadcrumbService} from "./components/breadcrumb/breadcrumb.service";
+import {PortalService} from "./portal.service";
 
 @Injectable({
   providedIn: 'root',
 })
-export class LanguageService {
+export class LanguageService extends PortalService {
 
   constructor(
     private translateService: TranslateService,
     private breadcrumbService: BreadcrumbService
-  ) {}
+  ) {
+    // @ts-ignore
+    super();
+  }
 
   changeLanguage(language: string) {
     this.breadcrumbService.clearBreadcrumb();
     this.translateService.use(language);
+    this.setLanguage(language);
 
     // this.moment.locale(language);
     //
@@ -36,5 +41,12 @@ export class LanguageService {
     //       this.messageService.add({severity: 'error', summary: 'Error', detail: message});
     //     }
     //   )
+  }
+
+  public getCurrentPortalLanguage() {
+    const language = localStorage.getItem(PortalService.LANGUAGE_STORAGE_KEY) ?
+      localStorage.getItem(PortalService.LANGUAGE_STORAGE_KEY) : navigator.language.split('-')[0];
+    // @ts-ignore
+    return Object.keys(PortalService.LANGUAGES).includes(language) ? language : PortalService.LANGUAGES.en;
   }
 }

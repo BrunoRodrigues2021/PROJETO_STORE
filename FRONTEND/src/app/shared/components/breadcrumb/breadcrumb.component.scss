@@ -1,0 +1,40 @@
+@import "../../../../assets/theme/material-icons";
+
+.breadcrumb-nav {
+  list-style: none;
+}
+
+.breadcrumb-nav li {
+  display: inline-block;
+}
+
+.breadcrumb-nav a {
+  font-size: 12px;
+  font-family: 'Arial';
+  font-weight: 600;
+  text-decoration: none;
+  color: #222;
+}
+
+.breadcrumb-nav li::after {
+  font-family: 'Material Icons';
+  content: "\e5cc";
+  vertical-align: middle;
+}
+
+.breadcrumb-nav li:last-child a {
+  color: #5595BC;
+}
+
+.breadcrumb-nav li:last-child a:hover {
+  text-decoration: none;
+  cursor: default;
+}
+
+.breadcrumb-nav li:last-child::after {
+  content: none;
+}
+
+.breadcrumb-nav a:hover {
+  text-decoration: underline;
+}

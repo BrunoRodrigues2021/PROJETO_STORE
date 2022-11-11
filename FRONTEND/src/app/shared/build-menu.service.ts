@@ -12,7 +12,7 @@ export class BuildMenuService {
   constructor(
     private translateService: TranslateService,
     private languageService: LanguageService,
-    private portalService: PortalService
+    private portalService: PortalService,
   ) {}
 
   getUserOptionsMenu(): Array<MenuItem> {
@@ -51,13 +51,16 @@ export class BuildMenuService {
     ];
   }
 
+
   getPortalMenuItems(): Array<MenuItem> {
     return [
       {
         label: this.translateService.instant('portal.general.portalMenu.users'),
+        routerLink: (['users']),
       },
       {
         label: this.translateService.instant('portal.general.portalMenu.products'),
+        routerLink: (['products'])
       }
     ];
   }

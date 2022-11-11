@@ -1,15 +1,15 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Subscription} from "rxjs";
-import {BreadcrumbService} from "../../../shared/components/breadcrumb/breadcrumb.service";
+import {BreadcrumbService} from "../../../../shared/components/breadcrumb/breadcrumb.service";
 import {TranslateService} from "@ngx-translate/core";
-import {BreadcrumbItemList} from "../../../shared/components/interfaces/breacrumb-interfaces";
+import {BreadcrumbItemList} from "../../../../shared/components/interfaces/breacrumb-interfaces";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-users-add',
+  templateUrl: './users-add.component.html',
+  styleUrls: ['./users-add.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class UsersAddComponent implements OnInit {
   private languageSubscription: Subscription;
 
   constructor(
@@ -19,7 +19,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const breadcrumbPages: BreadcrumbItemList = [
-      {label: 'portal.general.breadcrumb.home', route: 'home'}
+      {label: 'portal.general.breadcrumb.users.usersList', route: 'users'},
+      {label: 'portal.general.breadcrumb.users.userCreate', route: 'users/create'}
     ];
     this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
 

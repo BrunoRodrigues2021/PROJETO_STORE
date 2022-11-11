@@ -6,30 +6,39 @@ import {Router} from "@angular/router";
 @Injectable()
 export class PortalService {
 
+  constructor(private router: Router) {
+  }
+
   static LOCAL_STORAGE_KEY = 'portalToken';
   public static LANGUAGE_STORAGE_KEY = 'PortalLanguage';
   public static LANGUAGES = {
-    'pt': 'pt-br',
-    'es': 'es',
-    'en': 'en',
-    'pl': 'pl'
+    'pt': 'pt',
+    'en': 'en'
   };
 
   BASE_PATH = environment.baseApiUrl;
 
-  getUser() {
+  public getUser() {
     return localStorage.getItem(PortalService.LOCAL_STORAGE_KEY);
   }
 
-  setUser(token: any) {
+  public setUser(token: any) {
     localStorage.setItem(PortalService.LOCAL_STORAGE_KEY, token);
+  }
+
+  public setLanguage(language: string) {
+    localStorage.setItem(PortalService.LANGUAGE_STORAGE_KEY, language);
   }
 
   async destroyUser() {
     localStorage.clear();
   }
 
-  protected setupHeaders(contentType = null) {
+  public async navigateTo(route) {
+    await this.router.navigate([route]);
+  }
+
+  protected setupHeaders() {
     const token = this.getUser();
 
     const httpHeaders: HttpHeaders = new HttpHeaders();
@@ -38,12 +47,5 @@ export class PortalService {
     httpHeaders.set('Content-Type', 'application/json');
 
     return httpHeaders;
-  }
-
-  getCurrentPortalLanguage() {
-    const language = localStorage.getItem(PortalService.LANGUAGE_STORAGE_KEY) ?
-      localStorage.getItem(PortalService.LANGUAGE_STORAGE_KEY) : navigator.language.split('-')[0];
-    // @ts-ignore
-    return Object.keys(PortalAdminService.LANGUAGES).includes(language) ? language : PortalAdminService.LANGUAGES.en;
   }
 }

@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {LanguageService} from "./shared/language.service";
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,11 @@ import {Component} from '@angular/core';
 export class AppComponent {
   title = 'STORE';
 
+  constructor(private languageService: LanguageService) {}
 
+  async ngOnInit() {
+    // @ts-ignore
+    this.languageService.changeLanguage(this.languageService.getCurrentPortalLanguage());
 
-  constructor() {}
-
-  async ngOnInit() { }
+  }
 }

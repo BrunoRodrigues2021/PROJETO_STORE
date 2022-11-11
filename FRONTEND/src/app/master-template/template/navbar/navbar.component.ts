@@ -5,6 +5,7 @@ import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
 import {Subscription} from "rxjs";
 import {BuildMenuService} from "../../../shared/build-menu.service";
 import {Router} from "@angular/router";
+import {PortalService} from "../../../shared/portal.service";
 
 @Component({
   selector: 'app-navbar',
@@ -26,6 +27,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private messageService: MessageService,
     private buildMenuService: BuildMenuService,
+    private portalService: PortalService,
     private config: PrimeNGConfig,
     private cdr: ChangeDetectorRef,
     private router: Router
@@ -49,8 +51,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.languageChangeSubscription?.unsubscribe();
   }
 
-  backToHome() {
-    this.router.navigate(['/portal']);
+  async backToHome() {
+    await this.portalService.navigateTo("/portal");
   }
 
   primeNgTranslate(lang: string) {

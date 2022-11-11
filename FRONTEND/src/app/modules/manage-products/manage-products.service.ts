@@ -12,6 +12,7 @@ export class ManageProductsService extends PortalService {
   baseUrl = this.BASE_PATH + '/product';
 
   constructor(private http: HttpClient) {
+    // @ts-ignore
     super();
   }
 

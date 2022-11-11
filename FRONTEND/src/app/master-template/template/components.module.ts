@@ -8,7 +8,7 @@ import {AvatarModule} from 'primeng/avatar';
 import {TieredMenuModule} from 'primeng/tieredmenu';
 import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
-import { HomeComponent } from './home/home.component';
+import {HomeComponent} from './home/home.component';
 
 @NgModule({
   imports: [
@@ -18,7 +18,7 @@ import { HomeComponent } from './home/home.component';
     AvatarModule,
     OverlayPanelModule,
     TieredMenuModule,
-    ToastModule
+    ToastModule,
   ],
   providers: [MessageService],
   declarations: [NavbarComponent, HomeComponent],

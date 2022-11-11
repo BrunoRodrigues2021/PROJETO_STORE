@@ -17,10 +17,14 @@
         "home": "Home",
         "products": {
           "productsList": "Products",
-          "productCreate": "Product Create",
-          "productDelete": "Product Delete"
+          "productCreate": "Product create",
+          "productDelete": "Product delete"
         },
-        "users": "Users"
+        "users":  {
+          "usersList": "Users",
+          "userCreate": "User create",
+          "userDelete": "User delete"
+        }
       }
     },
     "components": {
