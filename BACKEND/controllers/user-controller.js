@@ -23,7 +23,8 @@ class UserController {
             this._handleInsertUser
         );
 
-        router.patch('/',
+        router.put('/:user_id',
+            UserValidatorMiddlewares.validateUpdateUserRequest,
             this._handleUpdateUsers
         );
 

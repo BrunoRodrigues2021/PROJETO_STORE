@@ -1,5 +1,18 @@
 @import './colors-general';
 
 
+/*Colors*/
+$color-primary: $rich-black;
+$color-secondary: $maximum-blue;
+
 /*Background Colors*/
-$background-color-main: $nimbus-gray-100;
+$background-primary-color: $rich-black;
+$background-primary-color-light: $rich-black-light;
+$background-secondary-color: $maximum-blue;
+$background-tertiary-color: $middle-blue;
+$background-neutral-color: $nimbus-gray-100;
+$background-dark: $black;
+$background-light: $white;
+
+/*Border Colors*/
+$border-primary-color: $nimbus-gray-700;

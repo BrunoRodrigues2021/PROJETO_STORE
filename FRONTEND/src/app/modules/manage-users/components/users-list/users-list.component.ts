@@ -24,6 +24,7 @@ export class UsersListComponent implements OnInit {
     this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
 
     this.languageSubscription = this.translateService.onLangChange.subscribe(async () => {
+      this.breadcrumbService.clearBreadcrumb();
       this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
     });
   }

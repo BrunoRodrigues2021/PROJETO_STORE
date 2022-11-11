@@ -48,6 +48,13 @@ class SharedErrors {
 
     /** Shared Validation Errors */
 
+    static get UNEXPECT_PARAMETER() {
+        return {
+            code: HttpCodes.BAD_REQUEST,
+            description: 'unexpectedParameter'
+        };
+    }
+
     static get INVALID_ID() {
         return {
             code: HttpCodes.BAD_REQUEST,

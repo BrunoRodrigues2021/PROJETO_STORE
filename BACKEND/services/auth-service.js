@@ -6,7 +6,7 @@ const _fileName = module.filename.split("/").pop();
 
 class AuthService {
     async generateToken(userData) {
-        logger.info(`${_fileName} : Generating JWT token : Email: ${userData.email}`);
+        logger.info(`${_fileName} : Generating JWT token : Eemail: ${userData.email}`);
         try {
             const privateKey = [
                 '-----BEGIN RSA PRIVATE KEY-----',
@@ -37,10 +37,13 @@ class AuthService {
 
             const payloadToSign = {
                 id: userData.id,
-                email: userData.mail,
+                name: userData.name,
+                email: userData.email,
+                language: userData.language,
+                userIsActive: !!userData.userActive
             };
 
-            const token =  await jwt.sign({UserData: payloadToSign}, privateKey,
+            const token =  await jwt.sign({userData: payloadToSign}, privateKey,
                 {
                     algorithm: config.jwt.algorithm,
                     issuer: config.jwt.issuer,
@@ -48,10 +51,10 @@ class AuthService {
                     expiresIn: config.jwt.expirationTime
                 }
             );
-            logger.info(`${_fileName} : JWT token generated successfully : Email: ${userData.email}`);
+            logger.info(`${_fileName} : JWT token generated successfully : Eemail: ${userData.email}`);
             return token;
         } catch (error) {
-            logger.error(`${_fileName} : Error generating JWT token : Email: ${userData.email} : Error :${error}`);
+            logger.error(`${_fileName} : Error generating JWT token : Eemail: ${userData.email} : Error :${error}`);
             return '';
         }
     }

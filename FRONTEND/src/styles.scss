@@ -1,7 +1,9 @@
 @import './assets/theme/main.scss';
 @import './assets/theme/constants';
+@import './assets/theme/colors';
 
 body {
   margin: 0;
   padding: 0;
+  background-color: $background-primary-color;
 }

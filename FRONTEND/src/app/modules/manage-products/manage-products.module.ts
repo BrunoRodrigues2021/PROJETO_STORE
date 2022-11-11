@@ -10,6 +10,7 @@ import {ManageProductsService} from "./manage-products.service";
 import {ButtonModule} from 'primeng/button';
 import {PortalService} from "../../shared/portal.service";
 
+
 @NgModule({
   declarations: [
     ProductsListComponent,

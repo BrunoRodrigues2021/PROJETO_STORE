@@ -9,6 +9,7 @@ class UserValidators extends SharedValidators {
     constructor() {
         super();
         this.validateGetUsersRequest = this.validateGetUsersRequest.bind(this);
+        this.validateUpdateUserRequest = this.validateUpdateUserRequest.bind(this);
     }
 
     validateGetUsersRequest(request, response, next) {
@@ -25,6 +26,25 @@ class UserValidators extends SharedValidators {
             return response.status(UserErrors.BAD_REQUEST.code).send({error});
         }
 
+
+        next();
+    }
+
+    validateUpdateUserRequest(request, response, next) {
+        logger.info(`${_fileName} : Validating update user information`);
+
+        const errors = [
+            ...this._validateRequestBodyParameters(request.body, ['name', 'email', 'language'])
+        ];
+
+        if(errors.length) {
+            const error = {
+                ...UserErrors.BAD_REQUEST,
+                errors: [...new Set(errors)]
+            };
+            logger.warn(`${_fileName} : Error updating user information : Error: ${JSON.stringify(error)}`);
+            return response.status(UserErrors.BAD_REQUEST.code).send({error});
+        }
 
         next();
     }

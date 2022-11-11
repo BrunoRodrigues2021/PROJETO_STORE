@@ -19,7 +19,7 @@ export class LanguageService extends PortalService {
   changeLanguage(language: string) {
     this.breadcrumbService.clearBreadcrumb();
     this.translateService.use(language);
-    this.setLanguage(language);
+    PortalService.setLanguage(language);
 
     // this.moment.locale(language);
     //
@@ -45,8 +45,7 @@ export class LanguageService extends PortalService {
 
   public getCurrentPortalLanguage() {
     const language = localStorage.getItem(PortalService.LANGUAGE_STORAGE_KEY) ?
-      localStorage.getItem(PortalService.LANGUAGE_STORAGE_KEY) : navigator.language.split('-')[0];
-    // @ts-ignore
+      localStorage.getItem(PortalService.LANGUAGE_STORAGE_KEY) : this.translateService.getBrowserLang();
     return Object.keys(PortalService.LANGUAGES).includes(language) ? language : PortalService.LANGUAGES.en;
   }
 }

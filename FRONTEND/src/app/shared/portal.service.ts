@@ -2,6 +2,7 @@ import {environment} from '../../environments/environment';
 import {HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
+import * as http from "http";
 
 @Injectable()
 export class PortalService {
@@ -9,7 +10,7 @@ export class PortalService {
   constructor(private router: Router) {
   }
 
-  static LOCAL_STORAGE_KEY = 'portalToken';
+  static LOCAL_STORAGE_TOKEN = 'portalToken';
   public static LANGUAGE_STORAGE_KEY = 'PortalLanguage';
   public static LANGUAGES = {
     'pt': 'pt',
@@ -18,20 +19,22 @@ export class PortalService {
 
   BASE_PATH = environment.baseApiUrl;
 
-  public getUser() {
-    return localStorage.getItem(PortalService.LOCAL_STORAGE_KEY);
+  static getUser() {
+    return localStorage.getItem(PortalService.LOCAL_STORAGE_TOKEN);
   }
 
-  public setUser(token: any) {
-    localStorage.setItem(PortalService.LOCAL_STORAGE_KEY, token);
+  static setUser(token: any) {
+    localStorage.setItem(PortalService.LOCAL_STORAGE_TOKEN, token);
   }
 
-  public setLanguage(language: string) {
+  static setLanguage(language: string) {
     localStorage.setItem(PortalService.LANGUAGE_STORAGE_KEY, language);
   }
 
-  async destroyUser() {
+   async userLogout() {
     localStorage.clear();
+    await this.navigateTo('login');
+    window.location.reload();
   }
 
   public async navigateTo(route) {
@@ -39,12 +42,12 @@ export class PortalService {
   }
 
   protected setupHeaders() {
-    const token = this.getUser();
+    const token = PortalService.getUser();
 
     const httpHeaders: HttpHeaders = new HttpHeaders();
 
     httpHeaders.set('Authorization', `Bearer ${token ? token : ''}`);
-    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders.set('Content-Type', 'text');
 
     return httpHeaders;
   }

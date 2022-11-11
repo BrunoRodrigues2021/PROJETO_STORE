@@ -7,7 +7,7 @@ class UserService {
     async insertUser() {
         const newUser = await User.create({
             name: 'Bruno',
-            mail: 'brunorodri2015@gmail.com'
+            email: 'brunorodri2015@gemail.com'
         });
 
         return newUser;
@@ -15,7 +15,7 @@ class UserService {
 
     async getUserByParam(param, value) {
         return await User.findOne({
-            attributes: ['id', 'name', 'mail'],
+            attributes: ['id', 'name', 'email'],
             where: {[param]: value}
         })
     }

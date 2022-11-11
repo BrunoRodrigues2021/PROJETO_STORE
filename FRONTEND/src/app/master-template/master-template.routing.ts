@@ -8,7 +8,7 @@ export const MasterTemplateRoutes: Routes = [
     children: [
       {
         path: "",
-        loadChildren: () => import("../modules/manage-products/manage-products.routing").then(m => m.ManageProductsRouting)
+        loadChildren: () => import("../modules/manage-products/manage-products.module").then(m => m.ManageProductsModule)
       }
     ],
   },
@@ -17,7 +17,7 @@ export const MasterTemplateRoutes: Routes = [
     children: [
       {
         path: "",
-        loadChildren: () => import("../modules/manage-users/manage-users.routing").then(m => m.ManageUsersRouting)
+        loadChildren: () => import("../modules/manage-users/manage-users.module").then(m => m.ManageUsersModule)
       }
     ],
   },

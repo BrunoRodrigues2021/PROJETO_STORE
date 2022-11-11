@@ -8,7 +8,7 @@ import { LoginComponent } from "./modules/login/login.component";
 
 const routes: Routes = [
   {
-    path: "",
+    path: "login",
     component: LoginComponent
   },
   {
@@ -28,8 +28,14 @@ const routes: Routes = [
   },
   {
     path: "**",
-    component: LoginComponent
-  }
+    redirectTo: "login",
+    pathMatch: "full"
+  },
+  {
+    path: "",
+    redirectTo: "login",
+    pathMatch: "full"
+  },
 ];
 
 @NgModule({

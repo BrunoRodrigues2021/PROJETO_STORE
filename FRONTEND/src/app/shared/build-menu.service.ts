@@ -46,7 +46,7 @@ export class BuildMenuService {
       {
         label: this.translateService.instant('portal.general.userMenuSettings.logout'),
         icon: 'icon mi-logout',
-        command: () => this.portalService.destroyUser()
+        command: () => this.portalService.userLogout()
       }
     ];
   }

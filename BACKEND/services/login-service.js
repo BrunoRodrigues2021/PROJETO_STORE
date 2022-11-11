@@ -1,5 +1,5 @@
 const logger = require('../logger');
-const UserErrors = require('../utils/errors/user-errors');
+const SecurityErrors = require('../utils/errors/security-errors');
 const HttpStatus = require('http-status-codes');
 const User = require("../sequelize/models/user-model");
 
@@ -11,20 +11,17 @@ class LoginService {
         const user = await this.checkPassword(credentials);
         if (!user) {
             logger.warn(`${_fileName} - Invalid credentials - Email: ${credentials.email}`);
-            return {
-                status: HttpStatus.FORBIDDEN,
-                responseBody: {error: UserErrors.INVALID_CREDENTIALS}
-            };
+            throw SecurityErrors.INVALID_CREDENTIALS;
         } else {
-            logger.info(`${_fileName} - Identified first login - Email: ${credentials.email}`);
+            logger.info(`${_fileName} - Successfully credentials validated - Email: ${credentials.email}`);
             return user;
         }
     }
 
     async checkPassword(credentials){
         return await User.findOne({
-            attributes: ['id', 'name', 'mail'],
-            where: {mail: credentials.email , password: credentials.password}
+            attributes: ['id', 'name', 'email', 'language', 'userActive'],
+            where: {email: credentials.email , password: credentials.password}
         })
     }
 

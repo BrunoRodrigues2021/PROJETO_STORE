@@ -16,4 +16,4 @@ import {ManageUsersRouting} from "./manage-users.routing";
     ManageUsersRouting
   ]
 })
-export class UsersListModule { }
+export class ManageUsersModule { }

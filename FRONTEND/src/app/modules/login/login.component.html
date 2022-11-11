@@ -2,18 +2,28 @@
   <div class="login-container">
     <p-card>
       <div class="content flex-column d-flex justify-content-center align-items-center">
-        <p-image src="./assets/images/store_logo.png" alt="Image" width="150"></p-image>
+        <p-image src="./assets/images/store_logo_black.png" alt="Image" width="150"></p-image>
+        <form id="login_form" [formGroup]="loginForm" (ngSubmit)="executeLogin()">
+          <div class="mt-4">
           <span class="p-float-label">
-            <input id="mail" type="text" class="form-field-extra-large p-inputtext-sm" pInputText>
-            <label for="mail">E-mail</label>
+            <input id="email" type="text" class="form-field-large p-inputtext-sm"
+                   formControlName="email" pInputText>
+            <label for="email">Email</label>
           </span>
-          <span class="p-float-label mt-4">
-            <input id="password" type="password" class="form-field-extra-large p-inputtext-sm" pInputText>
+            <span class="p-float-label mt-4">
+            <input id="password" type="password" class="form-field-large p-inputtext-sm"
+                   formControlName="password" pInputText>
             <label for="password">Password</label>
           </span>
-        <button pButton type="button" class="form-field-extra-large p-button-sm mt-3"
-                (click)="executeLogin()" [label]="'portal.components.login.buttons.login' | translate"></button>
-        <p *ngIf="isProcessingRequest">Loading...</p>
+            <button pButton type="submit" class="button-primary form-field-large p-button-sm mt-4"
+                    [label]="'portal.components.login.buttons.login' | translate"
+                    [disabled]="loginForm.invalid"></button>
+            <p *ngIf="isProcessingRequest">Loading...</p>
+          </div>
+        </form>
+        <div *ngIf="httpError">
+          {{httpError.description}}
+        </div>
       </div>
     </p-card>
   </div>

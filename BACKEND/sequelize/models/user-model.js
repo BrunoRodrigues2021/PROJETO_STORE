@@ -12,7 +12,15 @@ const User = portalDbConnection.define('user', {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        mail: {
+        email: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        password: {
+            type: Sequelize.STRING,
+            allowNull: true
+        },
+        language: {
             type: Sequelize.STRING,
             allowNull: false
         },

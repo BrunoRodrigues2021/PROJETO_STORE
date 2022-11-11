@@ -32,6 +32,7 @@ export class ProductsListComponent implements OnInit {
     this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
 
     this.languageSubscription = this.translateService.onLangChange.subscribe(async () => {
+      this.breadcrumbService.clearBreadcrumb();
       this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
     });
   }
@@ -45,6 +46,7 @@ export class ProductsListComponent implements OnInit {
       {
         next: (data) => {
           this.data = data;
+          console.log(data)
         },
         error: (error) => {
           console.log(error)

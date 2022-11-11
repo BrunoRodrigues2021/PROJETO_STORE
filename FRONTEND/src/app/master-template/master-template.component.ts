@@ -1,7 +1,5 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {MenuItem} from "primeng/api";
-import {BreadcrumbService} from "../shared/components/breadcrumb/breadcrumb.service";
-import {TranslateService} from "@ngx-translate/core";
+import {Component, OnInit} from '@angular/core';
+import {LanguageService} from "../shared/language.service";
 
 @Component({
   selector: 'app-master-template',
@@ -9,7 +7,10 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ['./master-template.component.scss']
 })
 export class MasterTemplateComponent implements OnInit {
-  constructor() { }
 
-  ngOnInit() {}
+  constructor(private languageService: LanguageService) {}
+
+  ngOnInit() {
+    this.languageService.changeLanguage(this.languageService.getCurrentPortalLanguage());
+  }
 }

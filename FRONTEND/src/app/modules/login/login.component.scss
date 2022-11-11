@@ -1,8 +1,11 @@
+@import "../../../assets/theme/colors";
+
 .login-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-shadow: rgba(255, 255, 255, 0.5) 0px 5px 15px;
 }
 
 .content {
@@ -10,5 +13,7 @@
 }
 
 ::ng-deep .login-container .p-card {
-  width: 560px !important;
+  width: 450px;
+  height: 500px;
+  background-color: $background-light;
 }

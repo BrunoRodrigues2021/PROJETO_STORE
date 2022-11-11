@@ -1,0 +1,12 @@
+
+.p-tieredmenu {
+  .p-menuitem-active>p-tieredmenusub>.p-submenu-list {
+    right: 100% !important;
+    left: unset !important;
+  }
+  .p-menuitem > .p-menuitem-link {
+    box-shadow: none;
+  }
+  padding: 0;
+}
+

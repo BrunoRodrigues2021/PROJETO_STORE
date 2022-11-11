@@ -48,6 +48,19 @@ class SharedValidators {
 
         return errors;
     }
+
+    _validateRequestBodyParameters(requestBody, params) {
+        const bodyAllowedParameters = new Set(params);
+        const errors = [];
+
+        for (const param in requestBody) {
+            if(!bodyAllowedParameters.has(param)) {
+                errors.push(SharedErrors.UNEXPECT_PARAMETER.description)
+            }
+        }
+
+        return errors;
+    }
 }
 
 module.exports = SharedValidators;

@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import { Router } from "@angular/router";
 import {PortalService} from "../../shared/portal.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {LoginService} from "./login.service";
+import {AuthService} from "../../shared/auth.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private portalService: PortalService,
+    private loginService: LoginService,
+    private translateService: TranslateService,
     private formBuilder: FormBuilder
   ) { }
 
@@ -27,27 +31,38 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  async executeLogin() {
-    this.portalService.setUser('token will be here');
-    await this.router.navigate(['/portal']);
+  ngOnDestroy() {
+    this.isProcessingRequest = false;
+    this.loginForm.reset();
+    this.httpError = null;
   }
 
-  login() {
-    // this.isProcessingRequest = true;
-    //
-    // this.loginService.sendLoginRequest(this.loginForm.value.email, this.loginForm.value.password)
-    //   .pipe(finalize(() => {
-    //     this.isProcessingRequest = false;
-    //   }))
-    //   .subscribe(
-    //     async (response: any) => {
-    //       this.portalService.setUser(response['token']);
-    //       await this.router.navigate(['/portal']);
-    //     },
-    //     (responseError: HttpErrorResponse) => {
-    //       this.httpError = responseError;
-    //     }
-    //   );
+  executeLogin() {
+    this.isProcessingRequest = true;
+
+    this.loginService.sendLoginRequest(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+        next: async (response) => {
+          PortalService.setUser(response['token']);
+          const parsedToken = AuthService.getParsedToken();
+
+          if(parsedToken.userData.language) {
+            PortalService.setLanguage(parsedToken.userData.language);
+          } else if (this.translateService.getBrowserLang()) {
+            PortalService.setLanguage(this.translateService.getBrowserLang());
+          } else {
+            PortalService.setLanguage('en');
+          }
+
+          await this.router.navigate(['/portal']);
+        },
+        error: (error) => {
+          this.httpError = error.error;
+        },
+        complete: () => {
+          this.isProcessingRequest = false;
+        }
+      }
+    );
   }
 
   login2Step() {

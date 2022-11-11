@@ -1,0 +1,21 @@
+@import "../../colors";
+
+.p-button {
+  border: none;
+
+  &:focus {
+    box-shadow: none;
+    border: none;
+  }
+
+}
+
+.button-primary {
+  background-color: $background-primary-color;
+  transition: 0.2s ease-in-out;
+}
+
+.button-primary:enabled:hover {
+  transition: 0.2s ease-in-out;
+  background-color: $background-primary-color-light;
+}

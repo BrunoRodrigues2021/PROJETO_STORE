@@ -24,10 +24,10 @@ export class ProductsAddComponent implements OnInit {
       {label: 'portal.general.breadcrumb.products.productCreate', route: 'products/create'}
     ];
 
-
     this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
 
     this.languageSubscription = this.translateService.onLangChange.subscribe(async () => {
+      this.breadcrumbService.clearBreadcrumb();
       this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
     });
   }

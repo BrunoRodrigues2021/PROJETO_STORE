@@ -14,6 +14,5 @@ export class AppComponent {
   async ngOnInit() {
     // @ts-ignore
     this.languageService.changeLanguage(this.languageService.getCurrentPortalLanguage());
-
   }
 }

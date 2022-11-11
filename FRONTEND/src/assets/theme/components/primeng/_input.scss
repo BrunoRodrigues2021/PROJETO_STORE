@@ -1,0 +1,14 @@
+@import "../../colors";
+
+.p-inputtext {
+  border: 1px solid $border-primary-color;
+  &:enabled {
+    &:focus {
+      border: 1px solid $border-primary-color;
+      box-shadow: none
+    }
+  }
+  &:hover {
+    border: 1px solid $border-primary-color !important;
+  }
+}

@@ -18,7 +18,7 @@ import {HomeComponent} from './home/home.component';
     AvatarModule,
     OverlayPanelModule,
     TieredMenuModule,
-    ToastModule,
+    ToastModule
   ],
   providers: [MessageService],
   declarations: [NavbarComponent, HomeComponent],

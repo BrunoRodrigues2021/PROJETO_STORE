@@ -1,16 +1,21 @@
-@import "../colors";
+@import "../../colors";
 
 .p-menubar {
   height: 60px;
+  background-color: #0A090C;
+  border-radius: 0;
+  border: none;
 
   p-menubarsub {
     display: flex;
     justify-content: center;
     width: 100%;
   }
-
   img {
     cursor: pointer;
+  }
+  .user-logo {
+    width: 40px;
   }
 }
 
@@ -22,10 +27,17 @@
   box-shadow: none !important;
 }
 
-
 .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link-active  {
   .p-menuitem-text {
     color: #2196F3;
   }
-  background-color: $background-color-main;
+  background-color: $background-secondary-color;
+}
+
+@media screen and (max-width: 960px) {
+  .p-menubar {
+    .user-logo {
+      display: none;
+    }
+  }
 }
