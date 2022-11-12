@@ -12,7 +12,6 @@ export class AppComponent {
   constructor(private languageService: LanguageService) {}
 
   async ngOnInit() {
-    // @ts-ignore
     this.languageService.changeLanguage(this.languageService.getCurrentPortalLanguage());
   }
 }

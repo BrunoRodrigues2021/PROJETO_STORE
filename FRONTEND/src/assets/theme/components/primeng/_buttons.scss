@@ -2,6 +2,8 @@
 
 .p-button {
   border: none;
+  display: flex;
+  justify-content: center;
 
   &:focus {
     box-shadow: none;

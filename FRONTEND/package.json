@@ -26,7 +26,6 @@
     "@ngx-translate/http-loader": "^7.0.0",
     "bootstrap": "^5.2.2",
     "infer-owner": "^1.0.4",
-    "jsonwebtoken-promisified": "^1.0.3",
     "primeng": "^14.1.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

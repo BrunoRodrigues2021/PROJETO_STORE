@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import { Router } from "@angular/router";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 import {PortalService} from "../../shared/portal.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "./login.service";
@@ -11,8 +11,7 @@ import {TranslateService} from "@ngx-translate/core";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   httpError: any;
   isProcessingRequest = false;
@@ -22,11 +21,12 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private translateService: TranslateService,
     private formBuilder: FormBuilder
-  ) { }
+  ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
+
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email, Validators.maxLength(128)]],
+      email: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8), Validators.email]],
       password: ['', [Validators.required, Validators.maxLength(64), Validators.minLength(8)]]
     });
   }

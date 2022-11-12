@@ -6,8 +6,8 @@
         <form id="login_form" [formGroup]="loginForm" (ngSubmit)="executeLogin()">
           <div class="mt-4">
           <span class="p-float-label">
-            <input id="email" type="text" class="form-field-large p-inputtext-sm"
-                   formControlName="email" pInputText>
+             <input id="email" type="email" class="form-field-large p-inputtext-sm"
+                    formControlName="email" pInputText>
             <label for="email">Email</label>
           </span>
             <span class="p-float-label mt-4">
@@ -16,7 +16,7 @@
             <label for="password">Password</label>
           </span>
             <button pButton type="submit" class="button-primary form-field-large p-button-sm mt-4"
-                    [label]="'portal.components.login.buttons.login' | translate"
+                    [textContent]="'portal.components.login.buttons.login' | translate"
                     [disabled]="loginForm.invalid"></button>
             <p *ngIf="isProcessingRequest">Loading...</p>
           </div>

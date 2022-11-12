@@ -16,14 +16,16 @@ import {ComponentsModule} from "./master-template/template/components.module";
 import {BreadcrumbModule} from "./shared/components/breadcrumb/breadcrumb.module";
 
 import {SharedModule} from "./shared/shared.module";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
     AppComponent,
     MasterTemplateComponent,
-    LoginComponent,
+    LoginComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

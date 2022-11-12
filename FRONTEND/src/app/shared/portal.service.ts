@@ -34,7 +34,7 @@ export class PortalService {
    async userLogout() {
     localStorage.clear();
     await this.navigateTo('login');
-    window.location.reload();
+    // window.location.reload();
   }
 
   public async navigateTo(route) {
