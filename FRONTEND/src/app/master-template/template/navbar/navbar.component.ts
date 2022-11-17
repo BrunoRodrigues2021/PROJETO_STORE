@@ -51,8 +51,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.languageChangeSubscription?.unsubscribe();
   }
 
-  async backToHome() {
-    await this.portalService.navigateTo("/portal");
+  backToHome() {
+    this.portalService.navigateTo("/portal");
   }
 
   primeNgTranslate(lang: string) {

@@ -31,14 +31,14 @@ export class PortalService {
     localStorage.setItem(PortalService.LANGUAGE_STORAGE_KEY, language);
   }
 
-   async userLogout() {
+  userLogout() {
     localStorage.clear();
-    await this.navigateTo('login');
+    this.navigateTo('login');
     // window.location.reload();
   }
 
-  public async navigateTo(route) {
-    await this.router.navigate([route]);
+  public navigateTo(route) {
+     this.router.navigate([route]);
   }
 
   protected setupHeaders() {

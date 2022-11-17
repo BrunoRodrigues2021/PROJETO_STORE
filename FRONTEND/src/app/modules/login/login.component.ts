@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private loginService: LoginService,
     private translateService: TranslateService,
+    private authService: AuthService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginService.sendLoginRequest(this.loginForm.value.email, this.loginForm.value.password).subscribe({
         next: async (response) => {
           PortalService.setUser(response['token']);
-          const parsedToken = AuthService.getParsedToken();
+          const parsedToken = this.authService.getParsedToken();
 
           if(parsedToken.userData.language) {
             PortalService.setLanguage(parsedToken.userData.language);

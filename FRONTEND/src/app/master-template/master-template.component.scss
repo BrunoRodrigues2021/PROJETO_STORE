@@ -1,6 +1,6 @@
 @import '../../assets/theme/colors';
 
-::ng-deep .p-card {
+.template-container ::ng-deep .p-card {
   position: absolute;
   width: 100%;
   height: calc(100% - 60px);

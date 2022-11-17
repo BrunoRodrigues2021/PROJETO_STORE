@@ -9,7 +9,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
 import {BreadcrumbService} from "./shared/components/breadcrumb/breadcrumb.service";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {httpLoaderFactory} from "./shared/http-loader-factory";
 import {PortalService} from "./shared/portal.service";
 import {ComponentsModule} from "./master-template/template/components.module";
@@ -17,6 +17,8 @@ import {BreadcrumbModule} from "./shared/components/breadcrumb/breadcrumb.module
 
 import {SharedModule} from "./shared/shared.module";
 import {CommonModule} from "@angular/common";
+import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
+import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
 
 @NgModule({
   declarations: [
@@ -44,7 +46,13 @@ import {CommonModule} from "@angular/common";
     }),
     ComponentsModule,
   ],
-  providers: [BreadcrumbService, PortalService],
+  providers: [
+    BreadcrumbService,
+    PortalService,
+    JwtHelperService,
+    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
