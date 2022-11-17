@@ -1,6 +1,7 @@
 {
   "portal": {
     "general": {
+      "currency": "BRL",
       "userMenuSettings": {
         "userManagement": "Gerenciamento de usuário",
         "changePassword": "Alterar senha",
@@ -31,6 +32,14 @@
       "login": {
         "buttons": {
           "login": "Entrar"
+        }
+      },
+      "product": {
+        "table": {
+          "headers": {
+            "product": "Produto",
+            "value": "Valor (R$)"
+          }
         }
       }
     }

@@ -9,6 +9,9 @@ import {ManageProductsService} from "./manage-products.service";
 
 import {ButtonModule} from 'primeng/button';
 import {PortalService} from "../../shared/portal.service";
+import {SharedModule} from "../../shared/shared.module";
+import {TranslateModule} from "@ngx-translate/core";
+import {CurrencyExchangePipe} from "../../shared/pipes/currency-exchange.pipe";
 
 
 @NgModule({
@@ -20,9 +23,15 @@ import {PortalService} from "../../shared/portal.service";
     CommonModule,
     ManageProductsRouting,
     FontAwesomeModule,
-    ButtonModule
+    ButtonModule,
+    SharedModule,
+    TranslateModule
   ],
-  providers: [ManageProductsService, PortalService]
+  providers: [
+    ManageProductsService,
+    PortalService,
+    CurrencyExchangePipe
+  ]
 })
 export class ManageProductsModule {
 }

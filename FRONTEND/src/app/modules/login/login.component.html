@@ -15,10 +15,15 @@
                    formControlName="password" pInputText>
             <label for="password">Password</label>
           </span>
-            <button pButton type="submit" class="button-primary form-field-large p-button-sm mt-4"
-                    [textContent]="'portal.components.login.buttons.login' | translate"
-                    [disabled]="loginForm.invalid"></button>
-            <p *ngIf="isProcessingRequest">Loading...</p>
+            <div class="mt-4">
+              <button *ngIf="!isProcessingRequest else loading" pButton type="submit"
+                      class="button-primary form-field-large p-button-sm"
+                      [textContent]="'portal.components.login.buttons.login' | translate"
+                      [disabled]="loginForm.invalid"></button>
+              <ng-template #loading>
+                <p-progressSpinner class="small-spinner"></p-progressSpinner>
+              </ng-template>
+            </div>
           </div>
         </form>
         <div *ngIf="httpError">

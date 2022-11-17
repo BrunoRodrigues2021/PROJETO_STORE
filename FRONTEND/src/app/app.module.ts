@@ -44,7 +44,7 @@ import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
         deps: [HttpClient]
       }
     }),
-    ComponentsModule,
+    ComponentsModule
   ],
   providers: [
     BreadcrumbService,

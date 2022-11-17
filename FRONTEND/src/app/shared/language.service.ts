@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {BreadcrumbService} from "./components/breadcrumb/breadcrumb.service";
 import {PortalService} from "./portal.service";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root',
@@ -9,11 +10,11 @@ import {PortalService} from "./portal.service";
 export class LanguageService extends PortalService {
 
   constructor(
-    private translateService: TranslateService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    translateService: TranslateService,
+    router: Router
   ) {
-    // @ts-ignore
-    super();
+    super(router, translateService);
   }
 
   changeLanguage(language: string) {

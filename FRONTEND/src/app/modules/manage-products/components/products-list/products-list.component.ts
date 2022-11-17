@@ -5,6 +5,8 @@ import {BreadcrumbService} from "../../../../shared/components/breadcrumb/breadc
 import {Subscription} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
 import {BreadcrumbItemList} from "../../../../shared/components/interfaces/breacrumb-interfaces";
+import {PortalService} from "../../../../shared/portal.service";
+import {SharedConstants} from "../../../../shared/shared-constants";
 
 @Component({
   selector: 'app-products-list',
@@ -12,7 +14,9 @@ import {BreadcrumbItemList} from "../../../../shared/components/interfaces/breac
   styleUrls: ['./products-list.component.scss']
 })
 export class ProductsListComponent implements OnInit {
+  isProcessingRequest = false;
   data: getProductsResponse[] = [];
+  currencyCode = SharedConstants.CURRENCY_EXCHANGE_RATE.EN
 
   private languageSubscription: Subscription;
 
@@ -22,7 +26,7 @@ export class ProductsListComponent implements OnInit {
     private breadcrumbService: BreadcrumbService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loadProducts();
 
     const breadcrumbPages: BreadcrumbItemList = [
@@ -30,10 +34,14 @@ export class ProductsListComponent implements OnInit {
     ];
 
     this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
+    this.currencyCode = await this.translateService.get('portal.general.currency').toPromise();
 
     this.languageSubscription = this.translateService.onLangChange.subscribe(async () => {
       this.breadcrumbService.clearBreadcrumb();
       this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
+      this.currencyCode = await this.translateService.get('portal.general.currency').toPromise();
+
+      this.loadProducts();
     });
   }
 
@@ -42,6 +50,8 @@ export class ProductsListComponent implements OnInit {
   }
 
   loadProducts() {
+    this.isProcessingRequest = true;
+
     this._manageProductsService.getProducts().subscribe(
       {
         next: (data) => {
@@ -51,7 +61,9 @@ export class ProductsListComponent implements OnInit {
         error: (error) => {
           console.log(error)
         },
-        complete: () => {}
+        complete: () => {
+          this.isProcessingRequest = false;
+        }
       }
 
     );

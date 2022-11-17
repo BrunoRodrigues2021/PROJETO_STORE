@@ -1,8 +1,18 @@
-<p>products-list works!</p>
+<p-table [value]="data" *ngIf="!isProcessingRequest else loading">
+  <ng-template pTemplate="header">
+    <tr>
+      <th [translate]="'portal.components.product.table.headers.product'"></th>
+      <th [translate]="'portal.components.product.table.headers.value'"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+    <tr>
+      <td>{{product.name}}</td>
+      <td>{{product.value | currencyExchange | currency : currencyCode}}</td>
+    </tr>
+  </ng-template>
+</p-table>
 
-<ng-container *ngFor="let d of data">
-  <p>{{d.id}}</p>
-  <p>{{d.name}}</p>
-  <p>{{d.userId}}</p>
-  <p>{{d.createdAt}}</p>
-</ng-container>
+<ng-template #loading>
+  <p-progressSpinner class="small-spinner"></p-progressSpinner>
+</ng-template>

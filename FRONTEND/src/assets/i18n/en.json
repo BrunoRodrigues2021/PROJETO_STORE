@@ -1,6 +1,7 @@
 {
   "portal": {
     "general": {
+      "currency": "USD",
       "userMenuSettings": {
         "userManagement": "User Management",
         "changePassword": "Change Password",
@@ -31,6 +32,14 @@
       "login": {
         "buttons": {
           "login": "Login"
+        }
+      },
+      "product": {
+        "table": {
+          "headers": {
+            "product": "Product",
+            "value": "Value ($)"
+          }
         }
       }
     }

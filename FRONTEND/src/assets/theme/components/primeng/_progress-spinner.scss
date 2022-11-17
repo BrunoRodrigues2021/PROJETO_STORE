@@ -1,0 +1,52 @@
+@import "../../colors";
+
+
+.default-spinner .p-progress-spinner {
+  width: 100px;
+  height: 100px;
+}
+
+.small-spinner .p-progress-spinner {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.very-small-spinner .p-progress-spinner {
+  height: 20px;
+  width: 20px;
+}
+
+.default-spinner .p-progress-spinner-circle {
+  animation: custom-progress-spinner-dash 1.5s ease-in-out infinite, custom-progress-spinner-color 6s ease-in-out infinite;
+}
+
+.small-spinner .p-progress-spinner-circle {
+  animation: custom-progress-spinner-dash 1.5s ease-in-out infinite, custom-progress-spinner-color 6s ease-in-out infinite;
+}
+
+.very-small-spinner .p-progress-spinner-circle {
+  animation: custom-progress-spinner-dash 1.5s ease-in-out infinite, custom-progress-spinner-color 6s ease-in-out infinite;
+}
+
+@keyframes custom-progress-spinner-color {
+  0%, 40%, 66%, 80%, 90%, 100% {
+    stroke: $color-primary;
+  }
+}
+
+@keyframes custom-progress-spinner-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}

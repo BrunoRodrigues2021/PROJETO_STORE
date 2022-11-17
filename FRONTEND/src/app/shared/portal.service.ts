@@ -3,12 +3,16 @@ import {HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import * as http from "http";
+import {TranslateService} from "@ngx-translate/core";
+import {SharedConstants} from "./shared-constants";
 
 @Injectable()
 export class PortalService {
 
-  constructor(private router: Router) {
-  }
+  constructor(
+    private router: Router,
+    protected translateService: TranslateService
+  ) {}
 
   static LOCAL_STORAGE_TOKEN = 'portalToken';
   public static LANGUAGE_STORAGE_KEY = 'PortalLanguage';
@@ -31,6 +35,16 @@ export class PortalService {
     localStorage.setItem(PortalService.LANGUAGE_STORAGE_KEY, language);
   }
 
+  getCurrencyExchangeRate(): string {
+    if (localStorage.getItem(PortalService.LANGUAGE_STORAGE_KEY) === 'en') {
+      return SharedConstants.CURRENCY_EXCHANGE_RATE.EN;
+    } else if (localStorage.getItem(PortalService.LANGUAGE_STORAGE_KEY) === 'pt') {
+      return SharedConstants.CURRENCY_EXCHANGE_RATE.PT;
+    }
+
+    return SharedConstants.CURRENCY_EXCHANGE_RATE.EN;
+  }
+
   userLogout() {
     localStorage.clear();
     this.navigateTo('login');
@@ -38,7 +52,7 @@ export class PortalService {
   }
 
   public navigateTo(route) {
-     this.router.navigate([route]);
+    this.router.navigate([route]);
   }
 
   protected setupHeaders() {

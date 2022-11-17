@@ -2,26 +2,18 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
-import {MenubarModule} from "primeng/menubar";
-import {OverlayPanelModule} from 'primeng/overlaypanel';
-import {AvatarModule} from 'primeng/avatar';
-import {TieredMenuModule} from 'primeng/tieredmenu';
-import {MessageService} from "primeng/api";
-import {ToastModule} from "primeng/toast";
 import {HomeComponent} from './home/home.component';
+import {Error404Component} from './errors/error404/error404.component';
+import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    MenubarModule,
-    AvatarModule,
-    OverlayPanelModule,
-    TieredMenuModule,
-    ToastModule
+    SharedModule
   ],
-  providers: [MessageService],
-  declarations: [NavbarComponent, HomeComponent],
+  providers: [],
+  declarations: [NavbarComponent, HomeComponent, Error404Component],
   exports: [NavbarComponent]
 })
 export class ComponentsModule {

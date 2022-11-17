@@ -1,8 +1,17 @@
 import {Routes} from "@angular/router";
 import {HomeComponent} from "./template/home/home.component";
+import {Error404Component} from "./template/errors/error404/error404.component";
 
 
 export const MasterTemplateRoutes: Routes = [
+  {
+    path: "home",
+    component: HomeComponent
+  },
+  {
+    path: "error404",
+    component: Error404Component
+  },
   {
     path: "products",
     children: [
@@ -21,9 +30,15 @@ export const MasterTemplateRoutes: Routes = [
       }
     ],
   },
-  {path: "", redirectTo: 'home', pathMatch: 'full'},
   {
-    path: "home",
-    component: HomeComponent
-  }
+    path: "",
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: "**",
+    redirectTo: 'error404',
+    pathMatch: 'full'
+  },
+
 ];

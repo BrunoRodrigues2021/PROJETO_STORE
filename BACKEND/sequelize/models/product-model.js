@@ -13,6 +13,11 @@ const Product = portalDbConnection.define('product', {
         name: {
             type: Sequelize.STRING,
             allowNull: false,
+        },
+        value: {
+            type: Sequelize.DOUBLE,
+            allowNull: false,
+
         }
     },
     {

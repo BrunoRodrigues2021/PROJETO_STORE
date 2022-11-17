@@ -1,29 +1,22 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
-  HttpEvent,
-  HttpInterceptor
+  HttpInterceptor, HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import {PortalService} from "../portal.service";
+import {catchError, throwError} from 'rxjs';
+import {Router} from "@angular/router";
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private router: Router) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = PortalService.getUser();
-
-    if(token) {
-      const cloneReq = request.clone({
-        headers: request.headers.set('Authorization', 'Bearer' + token)
-      });
-
-      return next.handle(cloneReq);
-    } else {
-      return next.handle(request);
-    }
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
+    return next.handle(req).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
+      })
+    );
   }
 }

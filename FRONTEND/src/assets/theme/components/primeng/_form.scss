@@ -14,3 +14,12 @@
     width: 420px;
   }
 }
+
+.p-float-label {
+  > label {
+    left: 0.1rem;
+  }
+  input.p-filled ~ label {
+    top: -0.5rem;
+  }
+}
