@@ -5,8 +5,8 @@ import {BreadcrumbService} from "../../../../shared/components/breadcrumb/breadc
 import {Subscription} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
 import {BreadcrumbItemList} from "../../../../shared/components/interfaces/breacrumb-interfaces";
-import {PortalService} from "../../../../shared/portal.service";
-import {SharedConstants} from "../../../../shared/shared-constants";
+import {SharedConstants} from "../../../../shared/constants/shared-constants";
+import {PaginationInterface} from "../../../../shared/interfaces/shared-interfaces";
 
 @Component({
   selector: 'app-products-list',
@@ -18,12 +18,17 @@ export class ProductsListComponent implements OnInit {
   data: getProductsResponse[] = [];
   currencyCode = SharedConstants.CURRENCY_EXCHANGE_RATE.EN
 
-  private languageSubscription: Subscription;
+  pagination: PaginationInterface = {
+    page: SharedConstants.PAGINATION.DEFAULT_PAGE,
+    pageSize: SharedConstants.PAGINATION.DEFAULT_PAGE_SIZE
+  };
+
+  private languageSubscription: Subscription ;
 
   constructor(
     private _manageProductsService: ManageProductsService,
     private translateService: TranslateService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
   ) {}
 
   async ngOnInit() {
@@ -52,7 +57,7 @@ export class ProductsListComponent implements OnInit {
   loadProducts() {
     this.isProcessingRequest = true;
 
-    this._manageProductsService.getProducts().subscribe(
+    this._manageProductsService.getProducts(this.pagination.page, this.pagination.pageSize).subscribe(
       {
         next: (data) => {
           this.data = data;

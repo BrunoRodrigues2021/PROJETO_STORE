@@ -1,5 +1,11 @@
 @import "../../../assets/theme/colors";
 
+.main-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
 .login-container {
   display: flex;
   justify-content: center;

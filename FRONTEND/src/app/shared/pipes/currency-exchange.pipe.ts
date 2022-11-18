@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import {PortalService} from "../portal.service";
-import {SharedConstants} from "../shared-constants";
+import {SharedConstants} from "../constants/shared-constants";
 
 @Pipe({
   name: 'currencyExchange'

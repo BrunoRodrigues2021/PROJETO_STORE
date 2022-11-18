@@ -46,6 +46,13 @@ class SharedErrors {
         };
     }
 
+    static get DATABASE_ERROR() {
+        return {
+            code: HttpCodes.UNAUTHORIZED,
+            description: 'databaseError'
+        };
+    }
+
     /** Shared Validation Errors */
 
     static get UNEXPECT_PARAMETER() {

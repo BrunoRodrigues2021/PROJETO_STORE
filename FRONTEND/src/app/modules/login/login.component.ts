@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    if(PortalService.getUser()){
+       this.router.navigate(['/home']).then();
+    }
 
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8), Validators.email]],
@@ -42,7 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isProcessingRequest = true;
 
     this.loginService.sendLoginRequest(this.loginForm.value.email, this.loginForm.value.password).subscribe({
-        next: async (response) => {
+        next: (response) => {
           PortalService.setUser(response['token']);
           const parsedToken = this.authService.getParsedToken();
 
@@ -54,7 +57,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             PortalService.setLanguage('en');
           }
 
-          await this.router.navigate(['/portal']);
+            this.router.navigate(['/home']).then();
         },
         error: (error) => {
           this.httpError = error.error;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import { Observable } from "rxjs";
 import { getProductsResponse } from "./interfaces/product-response-interface";
 import {PortalService} from "../../shared/portal.service";
@@ -16,8 +16,17 @@ export class ManageProductsService extends PortalService {
     super();
   }
 
-  getProducts(): Observable<getProductsResponse[]> {
+  getProducts(page: number = null, pageSize: number = null): Observable<getProductsResponse[]> {
     const headers = this.setupHeaders();
-    return this.http.get<getProductsResponse[]>(this.baseUrl, {headers});
+    let params: HttpParams = new HttpParams();
+
+    if(page) {
+      params = params.set('page', page.toString());
+    }
+    if(pageSize) {
+      params = params.set('pageSize', pageSize.toString());
+    }
+
+    return this.http.get<getProductsResponse[]>(this.baseUrl, {headers, params});
   }
 }

@@ -1,10 +1,57 @@
 const Product = require("../sequelize/models/product-model");
+const {logger} = require("../logger");
+const path = require("path");
+const _fileName = path.basename(__filename);
+const SharedConstants = require("../utils/constants/shared-constants");
+const ProductErrors = require("../utils/errors/product-errors");
+const User = require("../sequelize/models/user-model");
+const Op = require("sequelize").Op;
 
 class ProductService {
-    async getProducts() {
-        const products = await Product.findAll();
+    async getProducts(
+        productName,
+        sortBy = SharedConstants.SortBy.id,
+        sortOrder = SharedConstants.SortOrder.asc,
+        page = SharedConstants.Pagination.page.defaultValue,
+        pageSize = SharedConstants.Pagination.pageSize.defaultValue
+    ) {
+        let sort = [];
+        const conditions = {}
 
-        return products;
+        if (productName) {
+            conditions.name = {[Op.like]: `%${productName}%`};
+        }
+        if (sortBy) {
+            sort.push([sortBy, sortOrder]);
+        }
+
+        try {
+            return await Product.findAll({
+                where: conditions,
+                order: sort,
+                limit: +pageSize,
+                offset: (+page - 1) * +pageSize
+            });
+        } catch (error) {
+            logger.error(`${_fileName} : Error fetching products : Error: ${JSON.stringify(error)}`);
+        }
+    }
+
+    async getProductByParam(param, value) {
+        let product;
+
+        try {
+            product = await Product.findOne({
+                where: {[param]: value}
+            })
+        } catch (error) {
+            logger.error(`${_fileName} : Error getting product by ${param} : Product${param}: ${value} : Error: ${JSON.stringify(error)}`);
+            throw ProductErrors.DATABASE_ERROR;
+        }
+
+        if (!product) {
+            throw ProductErrors.PRODUCT_NOT_FOUND;
+        }
     }
 
     async insertProduct() {
@@ -13,6 +60,37 @@ class ProductService {
             userId: 5
         });
     }
+
+    async updateProduct(productId, fields) {
+        await this.getProductByParam('id', productId);
+
+        const transaction = await Product.sequelize.transaction();
+
+        try {
+            const updateProductPayload = {};
+
+            if (fields.name) {
+                updateProductPayload.name = fields.name
+            }
+            if (fields.value) {
+                updateProductPayload.value = fields.value
+            }
+
+            if (Object.keys(updateProductPayload).length > 0) {
+                await Product.update(updateProductPayload, {
+                    where: {
+                        id: productId
+                    },
+                    transaction
+                });
+            }
+
+            await transaction.commit();
+        } catch (error) {
+            await transaction.rollback();
+            logger.error(`${_fileName} : Error updating product : ProductId: ${productId} : Error: ${JSON.stringify(error)}`);
+        }
+    }
 }
 
-module.exports =  new ProductService();
+module.exports = new ProductService();

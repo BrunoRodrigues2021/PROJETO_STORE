@@ -15,7 +15,7 @@ class ProductController {
             this._handleGetProducts
         );
 
-        router.get('/:product_id',
+        router.get('/:id',
             this._handleGetProductById
         );
 
@@ -23,8 +23,8 @@ class ProductController {
             this._handleInsertProducts
         );
 
-        router.patch('/',
-            this._handleUpdateProducts
+        router.patch('/:id',
+            this._handleUpdateProduct
         );
 
         router.delete('/',
@@ -34,12 +34,15 @@ class ProductController {
 
     async _handleGetProducts(request, response) {
         logger.info(`${_fileName} : Getting all products`);
+        const {productName, sortBy, sortOrder, page, pageSize} = request.query;
+
         try {
             logger.info(`${_fileName} : Successfully getting all products`);
-            const products = await ProductService.getProducts();
+            const products = await ProductService.getProducts(productName, sortBy, sortOrder, page, pageSize);
             response.status(StatusCodes.OK).send(products);
         } catch (error) {
             logger.error(`${_fileName} : Error getting all products : Error: ${JSON.stringify(error)}`);
+            response.status(error.code).send({error: error});
         }
     }
 
@@ -55,6 +58,7 @@ class ProductController {
             });
         } catch (error) {
             logger.error(`${_fileName} : Error getting all products : Error: ${JSON.stringify(error)}`);
+            response.status(error.code).send({error: error});
         }
     }
 
@@ -71,15 +75,15 @@ class ProductController {
         }
     }
 
-    async _handleUpdateProducts(request, response) {
-        logger.info(`${_fileName} : Getting all products`);
+    async _handleUpdateProduct(request, response) {
+        logger.info(`${_fileName} : Updating product`);
         try {
-            logger.info(`${_fileName} : Successfully getting all products`);
-            response.status(StatusCodes.OK).send({
-                message: 'Using PATCH products'
-            });
+            logger.info(`${_fileName} : Successfully updating product`);
+            const result = await ProductService.updateProduct(+request.params.id, request.body);
+            response.status(StatusCodes.OK).send();
         } catch (error) {
-            logger.error(`${_fileName} : Error getting all products : Error: ${JSON.stringify(error)}`);
+            logger.error(`${_fileName} : Error updating product : Error: ${JSON.stringify(error)}`);
+            response.status(error.code).send({error: error});
         }
     }
 

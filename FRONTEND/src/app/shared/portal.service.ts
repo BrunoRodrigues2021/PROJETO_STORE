@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import * as http from "http";
 import {TranslateService} from "@ngx-translate/core";
-import {SharedConstants} from "./shared-constants";
+import {SharedConstants} from "./constants/shared-constants";
 
 @Injectable()
 export class PortalService {
@@ -47,7 +47,7 @@ export class PortalService {
 
   userLogout() {
     localStorage.clear();
-    this.navigateTo('login');
+    this.navigateTo('../login');
     // window.location.reload();
   }
 

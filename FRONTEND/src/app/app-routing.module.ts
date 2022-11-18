@@ -14,12 +14,12 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: "portal",
+    path: "",
     redirectTo: "portal",
     pathMatch: "full"
   },
   {
-    path: "portal",
+    path: "",
     component: MasterTemplateComponent,
     children: [
       {
@@ -31,11 +31,6 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "login",
-    pathMatch: "full"
-  },
-  {
-    path: "",
     redirectTo: "login",
     pathMatch: "full"
   },
