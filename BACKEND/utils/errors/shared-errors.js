@@ -76,6 +76,20 @@ class SharedErrors {
         };
     }
 
+    static get MISSING_NAME() {
+        return {
+            code: HttpCodes.BAD_REQUEST,
+            description: 'missingName'
+        };
+    }
+
+    static get INVALID_NAME() {
+        return {
+            code: HttpCodes.BAD_REQUEST,
+            description: 'invalidName'
+        };
+    }
+
     static get INVALID_PAGE_LIMIT() {
         return {
             code: HttpCodes.BAD_REQUEST,
@@ -108,6 +122,34 @@ class SharedErrors {
         return {
             code: HttpCodes.BAD_REQUEST,
             description: 'invalidPagination'
+        };
+    }
+
+    static get MISSING_SORT_BY() {
+        return {
+            code: HttpCodes.BAD_REQUEST,
+            description: 'missingSortBy'
+        };
+    }
+
+    static get INVALID_SORT_BY() {
+        return {
+            code: HttpCodes.BAD_REQUEST,
+            description: 'invalidSortBy'
+        };
+    }
+
+    static get MISSING_SORT_ORDER() {
+        return {
+            code: HttpCodes.BAD_REQUEST,
+            description: 'missingSortOrder'
+        };
+    }
+
+    static get INVALID_SORT_ORDER() {
+        return {
+            code: HttpCodes.BAD_REQUEST,
+            description: 'invalidSortOrder'
         };
     }
 }

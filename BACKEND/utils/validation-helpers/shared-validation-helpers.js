@@ -23,7 +23,7 @@ class SharedValidationHelpers {
     }
 
 
-    isPageNumberValid(pageNumber, isRequired = true, minPageNumber = Pagination.pageNumber.minValue) {
+    isPageNumberValid(pageNumber, isRequired = true, minPageNumber = Pagination.PAGE.MIN_VALUE) {
         if (this.isMissing(pageNumber)) {
             return !isRequired;
         }
@@ -34,8 +34,8 @@ class SharedValidationHelpers {
             && pageNumber >= minPageNumber;
     }
 
-    isPageLimitValid(pageLimit, isRequired = true, minPageLimit = Pagination.pageLimit.minValue,
-                     maxPageLimit = Pagination.pageLimit.maxValue) {
+    isPageLimitValid(pageLimit, isRequired = true, minPageLimit = Pagination.PAGE_SIZE.MIN_VALUE,
+                     maxPageLimit = Pagination.PAGE_SIZE.MAX_VALUE) {
 
         if (this.isMissing(pageLimit)) {
             return !isRequired;
@@ -64,6 +64,30 @@ class SharedValidationHelpers {
     _isEmptyString(string) {
         return typeof string === 'string'
             && !string.trim().length;
+    }
+
+    isSortByValid(
+        sortBy,
+        expectedValidSortBy,
+        isRequired = true
+    ) {
+        if (this.isMissing(sortBy)) {
+            return !isRequired;
+        }
+
+        return expectedValidSortBy.some((validSortBy) => validSortBy === sortBy);
+    }
+
+    isSortOrderValid(
+        sortOrder,
+        expectedValidSortOrder,
+        isRequired = true
+    ) {
+        if (this.isMissing(sortOrder)) {
+            return !isRequired;
+        }
+
+        return expectedValidSortOrder.some((validSortOrder) => validSortOrder === sortOrder);
     }
 }
 

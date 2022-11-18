@@ -79,7 +79,7 @@ class ProductController {
         logger.info(`${_fileName} : Updating product`);
         try {
             logger.info(`${_fileName} : Successfully updating product`);
-            const result = await ProductService.updateProduct(+request.params.id, request.body);
+            await ProductService.updateProduct(+request.params.id, request.body);
             response.status(StatusCodes.OK).send();
         } catch (error) {
             logger.error(`${_fileName} : Error updating product : Error: ${JSON.stringify(error)}`);

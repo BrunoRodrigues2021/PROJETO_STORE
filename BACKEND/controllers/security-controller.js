@@ -27,7 +27,7 @@ class ProductController {
             return response.status(StatusCodes.BAD_REQUEST).send({error: error});
         }
 
-        logger.info(`${_fileName} : Getting user by email : Eemail : ${request.body.email}`);
+        logger.info(`${_fileName} : Getting user by email : Email : ${request.body.email}`);
         try {
             const loginStatus = await LoginService.login(request.body);
             const userToken = await AuthService.generateToken(loginStatus);
@@ -35,7 +35,7 @@ class ProductController {
             logger.info(`${_fileName} : Successfully logged user in : User : ${request.body.email}`);
             response.status(StatusCodes.OK).send({token: userToken});
         } catch (error) {
-            logger.error(`${_fileName} : Error authenticating user : Eemail : ${request.body.email} : Error : ${JSON.stringify(error)}`);
+            logger.error(`${_fileName} : Error authenticating user : Email : ${request.body.email} : Error : ${JSON.stringify(error)}`);
             return response.status(error.code).send(error);
         }
 

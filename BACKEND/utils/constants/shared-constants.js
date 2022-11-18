@@ -1,26 +1,21 @@
 const Pagination = {
-    page: {
-        defaultValue: 1,
-        minValue: 1
+    PAGE: {
+        DEFAULT_VALUE: 1,
+        MIN_VALUE: 1
     },
-    pageSize: {
-        defaultValue: 10,
-        minValue: 1,
-        maxValue: 100
+    PAGE_SIZE: {
+        DEFAULT_VALUE: 10,
+        MIN_VALUE: 1,
+        MAX_VALUE: 100
     }
 };
 
-const SortBy = {
-    id: 'id'
-}
-
 const SortOrder = {
-    asc: 'ASC',
-    desc: 'DESC'
+    ASC: 'ASC',
+    DESC: 'DESC'
 }
 
 module.exports = {
     Pagination,
-    SortBy,
     SortOrder
 };

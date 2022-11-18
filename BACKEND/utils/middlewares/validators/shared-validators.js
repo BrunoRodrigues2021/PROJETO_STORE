@@ -15,7 +15,19 @@ class SharedValidators {
         return errors;
     }
 
-    _validatePageNumber(pageNumber, isRequired = true) {
+    _validateName(name, isRequired = true) {
+        const errors = [];
+
+        if (isRequired && SharedValidationHelpers.isMissing(name)) {
+            errors.push(SharedErrors.MISSING_NAME.description);
+        } else if (!SharedValidationHelpers.isStringValid(name)) {
+            errors.push(SharedErrors.INVALID_NAME.description);
+        }
+
+        return errors;
+    }
+
+    _validatePage(pageNumber, isRequired = true) {
         const errors = [];
 
         if (isRequired && SharedValidationHelpers.isMissing(pageNumber)) {
@@ -27,7 +39,7 @@ class SharedValidators {
         return errors;
     }
 
-    _validatePageLimit(pageLimit, isRequired = true) {
+    _validatePageSize(pageLimit, isRequired = true) {
         const errors = [];
 
         if (isRequired && SharedValidationHelpers.isMissing(pageLimit)) {
@@ -56,6 +68,38 @@ class SharedValidators {
         for (const param in requestBody) {
             if(!bodyAllowedParameters.has(param)) {
                 errors.push(SharedErrors.UNEXPECT_PARAMETER.description)
+            }
+        }
+
+        return errors;
+    }
+
+    _validateSortBy(sortBy, expectedValidSortBy, isRequired = true) {
+        const errors = [];
+
+        if (SharedValidationHelpers.isMissing(sortBy)) {
+            if (isRequired) {
+                errors.push(SharedErrors.MISSING_SORT_BY);
+            }
+        } else {
+            if (!SharedValidationHelpers.isSortByValid(sortBy, expectedValidSortBy, isRequired)) {
+                errors.push(SharedErrors.INVALID_SORT_BY);
+            }
+        }
+
+        return errors;
+    }
+
+    _validateSortOrder(sortOrder, expectedValidSortOrder, isRequired = true) {
+        const errors = [];
+
+        if (SharedValidationHelpers.isMissing(sortOrder)) {
+            if (isRequired) {
+                errors.push(SharedErrors.MISSING_SORT_ORDER);
+            }
+        } else {
+            if (!SharedValidationHelpers.isSortOrderValid(sortOrder, expectedValidSortOrder, isRequired)) {
+                errors.push(SharedErrors.INVALID_SORT_ORDER);
             }
         }
 

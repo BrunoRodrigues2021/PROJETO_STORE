@@ -3,17 +3,17 @@ const {logger} = require("../logger");
 const path = require("path");
 const _fileName = path.basename(__filename);
 const SharedConstants = require("../utils/constants/shared-constants");
+const ProductConstants = require("../utils/constants/product-constants");
 const ProductErrors = require("../utils/errors/product-errors");
-const User = require("../sequelize/models/user-model");
 const Op = require("sequelize").Op;
 
 class ProductService {
     async getProducts(
         productName,
-        sortBy = SharedConstants.SortBy.id,
-        sortOrder = SharedConstants.SortOrder.asc,
-        page = SharedConstants.Pagination.page.defaultValue,
-        pageSize = SharedConstants.Pagination.pageSize.defaultValue
+        sortBy = ProductConstants.SortBy.DEFAULT_SORT_BY,
+        sortOrder = SharedConstants.SortOrder.ASC,
+        page = SharedConstants.Pagination.PAGE.DEFAULT_VALUE,
+        pageSize = SharedConstants.Pagination.PAGE_SIZE.DEFAULT_VALUE
     ) {
         let sort = [];
         const conditions = {}
