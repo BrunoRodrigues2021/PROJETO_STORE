@@ -13,11 +13,11 @@
 }
 
 .button-primary {
-  background-color: $background-primary-color;
+  background-color: $color__primary;
   transition: 0.2s ease-in-out;
 }
 
 .button-primary:enabled:hover {
   transition: 0.2s ease-in-out;
-  background-color: $background-primary-color-light;
+  background-color: $color__primary--light;
 }

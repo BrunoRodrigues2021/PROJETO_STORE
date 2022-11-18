@@ -1,11 +1,18 @@
-export const SharedConstants = {
-  CURRENCY_EXCHANGE_RATE: {
-    EN: 'USD',
-    PT: 'BRL'
-  },
-
-  PAGINATION: {
-    DEFAULT_PAGE: 1,
-    DEFAULT_PAGE_SIZE: 10,
-  }
+export const CURRENCY_EXCHANGE_RATE = {
+  EN: 'USD',
+  PT: 'BRL'
 }
+
+export const DEFAULT_PAGINATION_PARAMETERS = {
+  page: 1,
+  pageSize: 10,
+  pageOptions: [10, 20, 50]
+}
+
+export enum SortOrder {
+  ASC = 'ASC',
+  DESC  ='DESC'
+}
+
+
+

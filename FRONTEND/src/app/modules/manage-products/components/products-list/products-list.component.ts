@@ -1,12 +1,18 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ManageProductsService} from "../../manage-products.service";
-import {getProductsResponse} from "../../interfaces/product-response-interface";
 import {BreadcrumbService} from "../../../../shared/components/breadcrumb/breadcrumb.service";
 import {Subscription} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
 import {BreadcrumbItemList} from "../../../../shared/components/interfaces/breacrumb-interfaces";
-import {SharedConstants} from "../../../../shared/constants/shared-constants";
+import {
+  CURRENCY_EXCHANGE_RATE,
+  DEFAULT_PAGINATION_PARAMETERS,
+  SortOrder
+} from "../../../../shared/constants/shared-constants";
 import {PaginationInterface} from "../../../../shared/interfaces/shared-interfaces";
+import {ProductFilters} from "../../utils/products-filters";
+import {ProductSortBy} from "../../utils/product-constants";
+import {Product} from "../../utils/models/product.model";
 
 @Component({
   selector: 'app-products-list',
@@ -14,16 +20,26 @@ import {PaginationInterface} from "../../../../shared/interfaces/shared-interfac
   styleUrls: ['./products-list.component.scss']
 })
 export class ProductsListComponent implements OnInit {
-  isProcessingRequest = false;
-  data: getProductsResponse[] = [];
-  currencyCode = SharedConstants.CURRENCY_EXCHANGE_RATE.EN
+  products: Product[] = [];
+  currencyCode = CURRENCY_EXCHANGE_RATE.EN
 
-  pagination: PaginationInterface = {
-    page: SharedConstants.PAGINATION.DEFAULT_PAGE,
-    pageSize: SharedConstants.PAGINATION.DEFAULT_PAGE_SIZE
-  };
+  DEFAULT_PAGINATION_PARAMETERS = DEFAULT_PAGINATION_PARAMETERS;
+
+  productsCount = 0;
+
+  SORT_ORDERS: typeof SortOrder = SortOrder;
+  SORT_BYS: typeof ProductSortBy = ProductSortBy;
+
+  productFilter: ProductFilters = new ProductFilters();
 
   private languageSubscription: Subscription ;
+
+  asyncOperationsStatus = {
+    isProcessingRequest: false,
+    isPerformingRequest(): boolean {
+      return Object.values(this).some((status) => status === true);
+    },
+  };
 
   constructor(
     private _manageProductsService: ManageProductsService,
@@ -54,24 +70,41 @@ export class ProductsListComponent implements OnInit {
     this.breadcrumbService.clearBreadcrumb();
   }
 
-  loadProducts() {
-    this.isProcessingRequest = true;
+  loadProducts(
+    resetPagination = false,
+    sortBy: ProductSortBy = this.productFilter.sortBy,
+    sortOrder: SortOrder = this.productFilter.sortOrder
+  ) {
 
-    this._manageProductsService.getProducts(this.pagination.page, this.pagination.pageSize).subscribe(
+    this.productsCount = 0;
+    this.asyncOperationsStatus.isProcessingRequest = true;
+
+    this.productFilter.sortBy = sortBy;
+    this.productFilter.sortOrder = sortOrder;
+
+    this._manageProductsService.getProducts(this.DEFAULT_PAGINATION_PARAMETERS.page, this.DEFAULT_PAGINATION_PARAMETERS.pageSize).subscribe(
       {
         next: (data) => {
-          this.data = data;
-          console.log(data)
+          const {count, rows} = data;
+
+
+          this.products = rows;
+          this.productsCount = count;
         },
         error: (error) => {
           console.log(error)
         },
         complete: () => {
-          this.isProcessingRequest = false;
+          this.asyncOperationsStatus.isProcessingRequest = false;
         }
       }
 
     );
+  }
+
+  async changePagination(event: any): Promise<void> {
+    this.productFilter.pagination.change(event);
+    await this.loadProducts();
   }
 
 }

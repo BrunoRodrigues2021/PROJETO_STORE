@@ -2,7 +2,7 @@
 
 .p-menubar {
   height: 60px;
-  background-color: #0A090C;
+  background-color: $color__primary;
   border-radius: 0;
   border: none;
 
@@ -31,7 +31,7 @@
   .p-menuitem-text {
     color: #2196F3;
   }
-  background-color: $background-secondary-color;
+  background-color: $color__primary;
 }
 
 @media screen and (max-width: 960px) {

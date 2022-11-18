@@ -1,0 +1,254 @@
+@import './constants';
+@mixin text-h1-headline($ffamily : $secondary-font-family,
+                     $fstyle : normal,
+                     $fweight : 300,
+                     $fsize: $fs-h1,
+                     $lheight: 120px,
+                     $ltspacing: -0.015rem,) {
+  font-family: $ffamily;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  font-size: $fsize;
+  line-height: $lheight;
+  letter-spacing: $ltspacing;
+}
+
+.text-h1-headline {
+  @include text-h1-headline();
+}
+
+@mixin text-h2-headline($ffamily : $secondary-font-family,
+                     $fstyle : normal,
+                     $fweight : 300,
+                     $fsize: $fs-h2,
+                     $lheight: 78px,
+                     $ltspacing: -0.005rem,) {
+  font-family: $ffamily;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  font-size: $fsize;
+  line-height: $lheight;
+  letter-spacing: $ltspacing;
+}
+
+.text-h2-headline {
+  @include text-h2-headline();
+}
+
+@mixin text-h3-headline($ffamily : $secondary-font-family,
+                     $fstyle : normal,
+                     $fweight : 400,
+                     $fsize: $fs-h3,
+                     $lheight: 60px,) {
+  font-family: $ffamily;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  font-size: $fsize;
+  line-height: $lheight;
+}
+
+.text-h3-headline {
+  @include text-h3-headline();
+}
+
+@mixin text-h4-headline($ffamily : $secondary-font-family,
+                     $fstyle : normal,
+                     $fweight : 400,
+                     $fsize: $fs-h4,
+                     $lheight: 42px,
+                     $ltspacing: 0.0025em,) {
+  font-family: $ffamily;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  font-size: $fsize;
+  line-height: $lheight;
+  letter-spacing: $ltspacing;
+}
+
+.text-h4-headline {
+  @include text-h4-headline();
+}
+
+@mixin text-h5-headline($ffamily : $secondary-font-family,
+                     $fstyle : normal,
+                     $fweight : 400,
+                     $fsize: $fs-h5,
+                     $lheight: 28px,) {
+  font-family: $ffamily;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  font-size: $fsize;
+  line-height: $lheight;
+}
+
+.text-h5-headline {
+  @include text-h5-headline();
+}
+
+@mixin text-h6-headline($ffamily : $secondary-font-family,
+                     $fstyle : normal,
+                     $fweight : 500,
+                     $fsize: $fs-h6,
+                     $lheight: 24px,
+                     $ltspacing: 0.0015em,) {
+  font-family: $ffamily;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  font-size: $fsize;
+  line-height: $lheight;
+  letter-spacing: $ltspacing;
+}
+
+.text-h6-headline {
+  @include text-h6-headline();
+}
+
+@mixin text-subtitle-tall($ffamily : $secondary-font-family,
+                     $fstyle : normal,
+                     $fweight : 400,
+                     $fsize: $fs-subtitle-tall,
+                     $lheight: 20px,
+                     $ltspacing: 0.0015rem,) {
+  font-family: $ffamily;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  font-size: $fsize;
+  line-height: $lheight;
+  letter-spacing: $ltspacing;
+}
+
+.text-subtitle-tall {
+  @include text-subtitle-tall();
+}
+
+@mixin text-subtitle-small($ffamily : $secondary-font-family,
+                     $fstyle : normal,
+                     $fweight : 400,
+                     $fsize: $fs-subtitle-small,
+                     $lheight: 16px,
+                     $ltspacing: 0.001rem,) {
+  font-family: $ffamily;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  font-size: $fsize;
+  line-height: $lheight;
+  letter-spacing: $ltspacing;
+}
+
+.text-subtitle-small {
+  @include text-subtitle-small();
+}
+
+@mixin text-body-tall($ffamily : $default-font-family,
+                     $fstyle : normal,
+                     $fweight : 400,
+                     $fsize: $fs-body-tall,
+                     $lheight: 24px,
+                     $ltspacing: 0.005rem,) {
+  font-family: $ffamily;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  font-size: $fsize;
+  line-height: $lheight;
+  letter-spacing: $ltspacing;
+}
+
+.text-body-tall {
+  @include text-body-tall();
+}
+
+@mixin text-body($ffamily : $default-font-family,
+                     $fstyle : normal,
+                     $fweight : 400,
+                     $fsize: $fs-body,
+                     $lheight: 20px,
+                     $ltspacing: 0.0025rem,) {
+  font-family: $ffamily;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  font-size: $fsize;
+  line-height: $lheight;
+  letter-spacing: $ltspacing;
+}
+
+.text-body {
+  @include text-body();
+}
+
+@mixin text-btn-uppercase($ffamily : $default-font-family,
+                     $fstyle : normal,
+                     $fweight : 400,
+                     $fsize: $fs-button,
+                     $lheight: 20px,
+                     $ltspacing: 0.0125rem,
+                     $ttransform : uppercase) {
+  font-family: $ffamily;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  font-size: $fsize;
+  line-height: $lheight;
+  letter-spacing: $ltspacing;
+  text-transform: $ttransform;
+}
+
+.text-btn-uppercase {
+  @include text-btn-uppercase();
+}
+
+@mixin text-btn($ffamily : $default-font-family,
+                     $fstyle : normal,
+                     $fweight : 600,
+                     $fsize: $fs-button,
+                     $lheight: 20px,
+                     $ltspacing: 0.0125rem,
+                     $ttransform : capitalize,
+                     $ffsetting: 'cpsp' on) {
+  font-family: $ffamily;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  font-size: $fsize;
+  line-height: $lheight;
+  letter-spacing: $ltspacing;
+  text-transform: $ttransform;
+  font-feature-settings: $ffsetting;
+}
+
+.text-btn {
+  @include text-btn();
+}
+
+@mixin text-caption($ffamily : $default-font-family,
+                     $fstyle : normal,
+                     $fweight : 400,
+                     $fsize: $fs-caption,
+                     $lheight: 16px,
+                     $ltspacing: 0.0125rem,) {
+  font-family: $ffamily;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  font-size: $fsize;
+  line-height: $lheight;
+  letter-spacing: $ltspacing;
+}
+
+.text-caption {
+  @include text-caption();
+}
+
+@mixin text-overline($ffamily : $default-font-family,
+                     $fstyle : normal,
+                     $fweight : 400,
+                     $fsize: $fs-overline,
+                     $lheight: 12px,
+                     $ltspacing: 0.015rem,) {
+  font-family: $ffamily;
+  font-style: $fstyle;
+  font-weight: $fweight;
+  font-size: $fsize;
+  line-height: $lheight;
+  letter-spacing: $ltspacing;
+}
+
+.text-overline {
+  @include text-overline();
+}

@@ -1,6 +1,10 @@
 {
   "portal": {
     "general": {
+      "table": {
+        "search": "Search",
+        "paginator": "Showing {first} to {last} of {totalRecords} entries"
+      },
       "currency": "BRL",
       "userMenuSettings": {
         "userManagement": "Gerenciamento de usuário",

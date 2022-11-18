@@ -1,0 +1,35 @@
+@import './colors';
+
+// Font-size
+$fs-default: 14px;
+$fs-very-small: 8px;
+$fs-small: 10px;
+$fs-medium: 12px;
+$fs-big: 16px;
+$fs-title: 22px;
+$fs-subtitle: 18px;
+$fs-h1: 80px;
+$fs-h2: 52px;
+$fs-h3: 40px;
+$fs-h4: 28px;
+$fs-h5: 20px;
+$fs-h6: 16px;
+$fs-subtitle-tall: 14px;
+$fs-subtitle-small: 12px;
+$fs-body-tall: 16px;
+$fs-body: 14px;
+$fs-button: 14px;
+$fs-caption: 12px;
+$fs-overline: 10px;
+
+// Font-weight
+$fw-bold: bold;
+$fw-400: 400;
+
+// Font-family
+$default-font-family: "Roboto", sans serif;
+$secondary-font-family: "Montserrat", sans serif;
+
+$box-shadow-1: 0px 2px 2px rgba(0, 0, 0, 0.16);
+$box-shadow-2: 0px 4px 4px rgba(0, 0, 0, 0.16);
+$box-shadow-3: 0px 8px 12px rgba(0, 0, 0, 0.16);

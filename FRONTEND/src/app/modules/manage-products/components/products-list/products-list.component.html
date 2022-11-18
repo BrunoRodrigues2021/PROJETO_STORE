@@ -1,8 +1,83 @@
-<p-table [value]="data" *ngIf="!isProcessingRequest else loading">
+<p-table [value]="products" *ngIf="!asyncOperationsStatus.isProcessingRequest else loading">
   <ng-template pTemplate="header">
     <tr>
       <th [translate]="'portal.components.product.table.headers.product'"></th>
-      <th [translate]="'portal.components.product.table.headers.value'"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <!-- Column Header: Product -->
+      <td>
+        <div class="d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center">
+            <span [translate]="'portal.components.product.table.headers.product'"></span>
+            <div class="sorting-options d-flex">
+              <i class="pi pi-sort-alpha-up"
+                 [ngClass]="{
+                         'disabled': asyncOperationsStatus.isProcessingRequest || !productsCount,
+                         'enabled': !asyncOperationsStatus.isProcessingRequest,
+                         'active': productFilter.sortOrder === SORT_ORDERS.ASC
+                                   && productFilter.sortBy === SORT_BYS.NAME
+                       }"
+                 (click)="loadProducts(false, SORT_BYS.NAME, SORT_ORDERS.ASC)"></i>
+              <i class="pi pi-sort-alpha-down"
+                 [ngClass]="{
+                         'disabled': asyncOperationsStatus.isProcessingRequest || !productsCount,
+                         'enabled': !asyncOperationsStatus.isProcessingRequest,
+                         'active': productFilter.sortOrder === SORT_ORDERS.DESC
+                                   && productFilter.sortBy === SORT_BYS.NAME
+                       }"
+                 (click)="loadProducts(false, SORT_BYS.NAME, SORT_ORDERS.DESC)"></i>
+            </div>
+          </div>
+          <span class="search-box p-input-icon-right mt-2">
+                  <input pInputText type="text"
+                         [disabled]="asyncOperationsStatus.isProcessingRequest"
+                         [(ngModel)]="productFilter.name"
+                         [placeholder]="'portal.general.table.search' | translate"
+                         (keydown.enter)="loadProducts(true)">
+                  <i role="button" class="pi pi-search"
+                     disabled="asyncOperationsStatus.isProcessingRequest"
+                     (click)="loadProducts(true)"></i>
+                </span>
+        </div>
+      </td>
+      <!-- Column Header: Value -->
+      <td>
+        <div class="d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center">
+            <span [translate]="'portal.components.product.table.headers.value'"></span>
+            <div class="sorting-options d-flex">
+              <i class="pi pi-sort-alpha-up"
+                 [ngClass]="{
+                         'disabled': asyncOperationsStatus.isProcessingRequest || !productsCount,
+                         'enabled': !asyncOperationsStatus.isProcessingRequest,
+                         'active': productFilter.sortOrder === SORT_ORDERS.ASC
+                                   && productFilter.sortBy === SORT_BYS.VALUE
+                       }"
+                 (click)="loadProducts(false, SORT_BYS.VALUE, SORT_ORDERS.ASC)"></i>
+              <i class="pi pi-sort-alpha-down"
+                 [ngClass]="{
+                         'disabled': asyncOperationsStatus.isProcessingRequest || !productsCount,
+                         'enabled': !asyncOperationsStatus.isProcessingRequest,
+                         'active': productFilter.sortOrder === SORT_ORDERS.DESC
+                                   && productFilter.sortBy === SORT_BYS.VALUE
+                       }"
+                 (click)="loadProducts(false, SORT_BYS.VALUE, SORT_ORDERS.DESC)"></i>
+            </div>
+          </div>
+          <span class="search-box p-input-icon-right mt-2">
+                  <input pInputText type="text"
+                         [disabled]="asyncOperationsStatus.isProcessingRequest"
+                         [(ngModel)]="productFilter.value"
+                         [placeholder]="'portal.general.table.search' | translate"
+                         (keydown.enter)="loadProducts(true)">
+                  <i role="button" class="pi pi-search"
+                     disabled="asyncOperationsStatus.isProcessingRequest"
+                     (click)="loadProducts(true)"></i>
+                </span>
+        </div>
+      </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-product>
@@ -12,6 +87,15 @@
     </tr>
   </ng-template>
 </p-table>
+
+<p-paginator dropdownAppendTo="body"
+             [showCurrentPageReport]="true"
+             [rows]="DEFAULT_PAGINATION_PARAMETERS.pageSize"
+             [rowsPerPageOptions]="DEFAULT_PAGINATION_PARAMETERS.pageOptions"
+             [totalRecords]="productsCount"
+             [currentPageReportTemplate]="'portal.general.table.paginator' | translate"
+             (onPageChange)="changePagination($event)">
+</p-paginator>
 
 <ng-template #loading>
   <p-progressSpinner class="small-spinner"></p-progressSpinner>

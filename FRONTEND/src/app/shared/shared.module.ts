@@ -13,6 +13,7 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
 import {MessageService} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {CurrencyExchangePipe} from './pipes/currency-exchange.pipe';
+import {PaginatorModule} from "primeng/paginator";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {CurrencyExchangePipe} from './pipes/currency-exchange.pipe';
     AvatarModule,
     OverlayPanelModule,
     TieredMenuModule,
-    TableModule
+    TableModule,
+    PaginatorModule
   ],
   providers: [MessageService],
   exports: [
@@ -46,6 +48,7 @@ import {CurrencyExchangePipe} from './pipes/currency-exchange.pipe';
     OverlayPanelModule,
     TieredMenuModule,
     TableModule,
+    PaginatorModule,
     CurrencyExchangePipe
   ],
   bootstrap: []

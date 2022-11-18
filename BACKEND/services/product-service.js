@@ -26,7 +26,7 @@ class ProductService {
         }
 
         try {
-            return await Product.findAll({
+            return await Product.findAndCountAll({
                 where: conditions,
                 order: sort,
                 limit: +pageSize,

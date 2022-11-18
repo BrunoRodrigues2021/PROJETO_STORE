@@ -20,7 +20,7 @@ class SharedValidators {
 
         if (isRequired && SharedValidationHelpers.isMissing(name)) {
             errors.push(SharedErrors.MISSING_NAME.description);
-        } else if (!SharedValidationHelpers.isStringValid(name)) {
+        } else if (!SharedValidationHelpers.isStringValid(name) && !SharedValidationHelpers._isEmpty(name)) {
             errors.push(SharedErrors.INVALID_NAME.description);
         }
 

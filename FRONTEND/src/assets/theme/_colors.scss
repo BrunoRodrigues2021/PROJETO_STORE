@@ -1,18 +1,98 @@
 @import './colors-general';
 
+/*Primary: Stratus Lake - 500 to 900 - default is 700*/
+$color__primary: $stratus-lake-800;
+$color__primary--light: $stratus-lake-600;
+$color__primary--very-light: $stratus-lake-500;
+$color__primary--dark: $stratus-lake-900;
 
-/*Colors*/
-$color-primary: $rich-black;
-$color-secondary: $maximum-blue;
+/*Primary Red: Dusk Cherry - default is 300*/
+$color__primary_red: $dusk-cherry-300;
+$color__primary_red--light: $dusk-cherry-variant;
+$color__primary_red--dark: $dusk-cherry-400;
 
-/*Background Colors*/
-$background-primary-color: $rich-black;
-$background-primary-color-light: $rich-black-light;
-$background-secondary-color: $maximum-blue;
-$background-tertiary-color: $middle-blue;
-$background-neutral-color: $nimbus-gray-100;
-$background-dark: $black;
-$background-light: $white;
+/*Secondary: Dusk Lake - 100 to 700 - default is 100*/
+$color__secondary: $dusk-lake-400;
+$color__secondary--light: $dusk-lake-100;
+$color__secondary--very-light: $dusk-lake-000;
+$color__secondary--dark: $dusk-lake-500;
+$color__secondary--very-dark: $dusk-lake-700;
+$color__secondary--full-dark: $dusk-lake-400;
+
+/*Tertiary: Stratus Lake - default is 500*/
+$color__tertiary: $stratus-lake-500;
+
+/*Quaternary: Nimbus - default is 300 */
+$color__quaternary: $nimbus-gray-300;
+
+/*Background*/
+$color__background: $nimbus-gray-100;
+$color__surface: $gray-98;
+
+/*Custom Background*/
+$background-selected-color: $color__secondary--light;
+$background-tiered-menu: $color__primary;
+$background-tiered-menu--very-light: $nimbus-gray-100;
+$background-tiered-menu--hover: $stratus-lake-700;
+$background-tiered-menu--active: $stratus-lake-600;
+$background-tiered-submenu: $stratus-lake-600;
+$background-tiered-submenu--hover: $stratus-lake-400;
+$background-color-paginator-highlight: $dusk-lake-150;
+$background-tired-menu: $color__primary;
+$background-tired-menu--very-light: $nimbus-gray-100;
+$background-tired-menu--hover: $stratus-lake-700;
+$background-tired-menu--active: $stratus-lake-600;
+$background-tired-submenu: $stratus-lake-600;
+$background-tired-submenu--hover: $stratus-lake-400;
+
+/*Toast Status*/
+$toast-status-success: $opal;
+$toast-status-error: $shades-tint;
+
+/*Status*/
+$status-success: $green-mana;
+$status-warning: $burnt-sienna;
+$status-error: $schiaparelli-red;
+$status-absence: $dusty-gray-variant;
+$status-blue: $havelock-blue;
+$status-working: $bismark-variant;
+
+/*Disabled Colors*/
+$status-disabled: $light-gray-variant;
+$text-color-disabled: $nimbus-gray-400;
+$background-disabled-color: $nimbus-gray-200;
 
 /*Border Colors*/
-$border-primary-color: $nimbus-gray-700;
+$border-gray: $nimbus-gray-300;
+$border-gray--light: $nimbus-gray-200;
+$border-gray--dark: $nimbus-gray-500;
+$border-gray-very--light: $nimbus-gray-100;
+$tiered-menu-separator: $nimbus-gray-700;
+$border-gray-table: $nimbus-gray-100;
+
+/*Text Colors*/
+$label-color: $night-rider;
+$label-color__light: $nimbus-gray-000;
+$label-color__primary: $stratus-lake-400;
+$text-color__primary: $nimbus-gray-700;
+$text-color: $dark-gray-variant;
+$text-color__light: $lighter-gray-variant;
+$text-color__dark: $darker-gray-variant;
+$text-color--secondary: $lotion;
+$text-color-breadcrumb: $nimbus-gray-900;
+$text-color-breadcrumb--last-child: $stratus-lake-700;
+$label-color-no-internet-connection: $stratus-lake-700;
+$text-color-no-internet-connection: $nimbus-gray-700;
+$text-on-surface: $nimbus-gray-700;
+$text-color-close-icon: $nimbus-gray-700;
+
+$label-gray: $nimbus-gray-300;
+$label-gray--dark: $nimbus-gray-500;
+$label-gray--multiselect: $nimbus-gray-700;
+$text-color-dropdown-tall: $nimbus-gray-900;
+$text-color-logout: $dusk-cherry-300;
+
+$color_text-on_primary: $nimbus-gray-000;
+$color_text-on_secondary: $stratus-lake-400;
+$color_text-on_background: $nimbus-gray-900;
+$color_text-on_surface: $nimbus-gray-700;

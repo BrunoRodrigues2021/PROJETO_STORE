@@ -1,0 +1,335 @@
+@import '../../constants';
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
+
+.p-datatable-wrapper {
+  background-color: $color__surface;
+  padding: 24px;
+}
+
+.p-datatable-thead {
+  background-color: $color__surface;
+}
+
+.p-datatable-thead td {
+  width: 160px;
+  height: 60px;
+  vertical-align: middle;
+  font-weight: $fw-400;
+  font-size: $fs-medium;
+  font-family: 'Montserrat';
+  font-style: normal;
+  color: $label-color__primary;
+  padding: 7px;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 16px;
+  letter-spacing: 0.001em;
+}
+
+.p-datatable .p-datatable-tbody > tr {
+  cursor: pointer;
+  background-color: $color__surface !important;
+  outline-color: $color__surface !important;
+}
+
+.p-datatable .p-datatable-tbody > tr > td,
+.p-datatable .p-datatable-tfoot > tr > td {
+  width: 160px;
+  border: none;
+  border-bottom: 1px solid $border-gray-table;
+  height: 60px;
+  vertical-align: middle;
+  font-size: $fs-medium;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 200px;
+  font-family: $default-font-family;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.0025em;
+  color: $text-color__primary;
+}
+
+.p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+  background: $color__background !important;
+}
+
+.p-datatable .p-datatable-tfoot > tr > td {
+  font-weight: 400;
+  background-color: $color__surface;
+}
+
+.p-datatable .p-datatable-tbody > tr.selected {
+  background-color: $background-selected-color;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  cursor: pointer;
+  background-color: $color__background !important;
+}
+
+.p-datatable .p-datatable-tbody > tr:active {
+  cursor: pointer;
+  background-color: $color__secondary--very-light !important;
+}
+
+.read-table .p-datatable .p-datatable-tbody > tr:hover {
+  cursor: default;
+}
+
+.p-datatable-thead, .p-datatable-tbody td.picture-column {
+  width: 30px;
+}
+
+.p-datatable .sorting-options {
+  font-size: $fs-default;
+
+  i.pi-sort-alpha-down,
+  i.pi-sort-alpha-up {
+    cursor: pointer;
+    padding-left: 5px;
+
+    &.active {
+      color: $color__secondary;
+    }
+
+    &.enabled {
+      cursor: pointer;
+    }
+
+    &.disabled {
+      pointer-events: none;
+    }
+  }
+}
+
+.p-datatable {
+  .p-dropdown, .p-multiselect {
+    background: $color__surface;
+    border: 1px solid $border-gray--light;
+    border-radius: 4px;
+    height: 36px;
+    align-items: center;
+    width: 100%;
+
+    .p-multiselect-item {
+      font-family: $default-font-family;
+      font-style: normal;
+      font-weight: 400;
+      font-size: $fs-default;
+      line-height: 20px;
+      letter-spacing: 0.0025em;
+      color: $label-gray--multiselect;
+      height: 44px;
+
+      &:focus {
+        box-shadow: none;
+
+        &.p-highlight {
+          background-color: $color__secondary--light;
+        }
+      }
+    }
+
+    .p-dropdown-label {
+      font-family: $default-font-family;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.005em;
+      color: $label-gray--multiselect;
+      margin-left: 12px;
+      border: none;
+    }
+
+    &:not(.p-disabled){
+      &:hover {
+        border-color: $color__primary;
+      }
+      &.p-focus {
+        box-shadow: none;
+        border: 1px solid $color__primary;
+      }
+    }
+  }
+
+  input {
+    &.p-inputtext{
+      background: $color__surface;
+      border: 1px solid $border-gray;
+      border-radius: 4px;
+      height: 36px;
+      width: 100%;
+      padding-right: 36px;
+
+      &:enabled {
+        &:hover {
+          background: $color__surface;
+          border: 1px solid $border-gray;
+          border-radius: 4px;
+        }
+        &:focus {
+          background: $color__surface;
+          box-sizing: border-box;
+          box-shadow: 0 0 0 1px $color__primary;
+          border-color: $color__primary;
+        }
+      }
+    }
+  }
+
+  .p-datatable-thead > tr > th {
+    border: none;
+    background-color: $color__surface;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.001em;
+    color: $label-color__primary;
+    padding-bottom: 12px;
+    padding-top: 0;
+  }
+
+  .p-sortable-column {
+    // header mouse hover
+    &:not(.p-highlight) {
+      &:hover {
+        background-color: inherit;
+        color: $label-color__primary;
+
+        .p-sortable-column-icon {
+          color: $label-color__primary;
+        }
+      }
+    }
+
+    // header clicked
+    &:focus {
+      box-shadow: none;
+    }
+
+    //icon sort color
+    .p-sortable-column-icon {
+      color: $label-color__primary;
+    }
+
+    // triggered when header is clicked and the child componente stay active
+    &.p-highlight {
+      background-color: inherit;
+      color: $label-color__primary;
+
+      .p-sortable-column-icon {
+        color: $label-color__primary;
+      }
+
+      &:hover {
+        background-color: inherit;
+        color: $label-color__primary;
+
+        .p-sortable-column-icon {
+          color: $label-color__primary;
+        }
+      }
+    }
+  }
+
+  // css for search icon of table-legacy
+  .p-input-icon-right > i {
+    top: 30%;
+  }
+
+  .p-input-icon-right:focus-within i {
+    background-color: $color__secondary--very-light;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+  }
+
+  .p-input-icon-right > i:last-of-type {
+    color: #323C3F;
+    font-size: 18px;
+    width: 28px;
+    height: 28px;
+    padding-left: 4px;
+    padding-top: 4px;
+  }
+}
+
+// those css below is used to set the filter icon as search icon
+p-columnfilter {
+  .p-inputtext {
+    background: $color__surface;
+    border: 1px solid $border-gray;
+    border-radius: 4px;
+    height: 36px;
+
+    &:enabled {
+      &:hover {
+        background: $color__surface;
+        border: 1px solid $border-gray;
+        border-radius: 4px;
+      }
+      &:focus {
+        background: $color__surface;
+        border: 2px solid $color__primary !important;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  &[role=menu] {
+    .p-column-filter-row {
+      .p-column-filter-menu-button {
+        pointer-events: all;
+      }
+    }
+  }
+}
+
+.p-column-filter-row {
+  position: relative;
+
+  &:focus .pi-filter, &:focus-within .pi-filter {
+    background-color: $color__secondary--very-light;
+    border-radius: 50%;
+  }
+
+  .p-column-filter-clear-button {
+    display: none;
+  }
+
+  .p-column-filter-menu-button {
+    position: absolute;
+    right: 4px;
+    pointer-events: none;
+
+    .pi-filter {
+      color: $text-color__primary;
+      font-size: 18px;
+      width: 2rem;
+      height: 2rem;
+      padding-top: 4px;
+      padding-left: 4px;
+
+      &:before {
+        content: "\e908";
+      }
+    }
+  }
+
+  .p-column-filter-menu-button-active {
+    background-color: transparent;
+  }
+
+  .p-column-filter-menu-button:focus {
+    background-color: $color__secondary--light;
+    box-shadow: none;
+  }
+
+}

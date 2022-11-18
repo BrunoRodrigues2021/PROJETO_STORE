@@ -12,6 +12,7 @@ import {PortalService} from "../../shared/portal.service";
 import {SharedModule} from "../../shared/shared.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {CurrencyExchangePipe} from "../../shared/pipes/currency-exchange.pipe";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -19,14 +20,15 @@ import {CurrencyExchangePipe} from "../../shared/pipes/currency-exchange.pipe";
     ProductsListComponent,
     ProductsAddComponent,
   ],
-  imports: [
-    CommonModule,
-    ManageProductsRouting,
-    FontAwesomeModule,
-    ButtonModule,
-    SharedModule,
-    TranslateModule
-  ],
+    imports: [
+        CommonModule,
+        ManageProductsRouting,
+        FontAwesomeModule,
+        ButtonModule,
+        SharedModule,
+        TranslateModule,
+        FormsModule
+    ],
   providers: [
     ManageProductsService,
     PortalService,
