@@ -16,10 +16,10 @@ class ProductValidators extends SharedValidators {
     validateGetProductsRequest(request, response, next) {
         logger.info(`${_fileName} : Validating get all products`);
 
-        const {productName, sortBy, sortOrder, page, pageSize} = request.query;
+        const {name, sortBy, sortOrder, page, pageSize} = request.query;
 
         const errors = [
-            ...this._validateName(productName, false),
+            ...this._validateName(name, false),
             ...this._validateSortBy(sortBy, Object.values(ProductConstants.SortBy.EXPECTED_VALID_SORT_BY), false),
             ...this._validateSortOrder(sortOrder, Object.values(SharedConstants.SortOrder), false),
             ...this._validatePage(page, false),

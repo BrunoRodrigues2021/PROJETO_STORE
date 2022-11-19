@@ -15,6 +15,7 @@ import {Product} from "../../utils/models/product.model";
 import {MessageService} from "primeng/api";
 import {Paginator} from "primeng/paginator";
 import {GetProductsRequest} from "../../interfaces/product-request-interfaces";
+import {PortalService} from "../../../../shared/portal.service";
 
 @Component({
   selector: 'app-products-list',
@@ -50,10 +51,11 @@ export class ProductsListComponent implements OnInit {
     private translateService: TranslateService,
     private messageService: MessageService,
     private breadcrumbService: BreadcrumbService,
+    private portalService: PortalService
   ) {}
 
   async ngOnInit() {
-    await this.clearFilter();
+    await this.clearFilters();
 
     const breadcrumbPages: BreadcrumbItemList = [
       {label: 'portal.general.breadcrumb.products.productsList', route: 'products'},
@@ -67,7 +69,7 @@ export class ProductsListComponent implements OnInit {
       this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
       this.currencyCode = await this.translateService.get('portal.general.currency').toPromise();
 
-      await this.clearFilter();
+      await this.clearFilters();
     });
   }
 
@@ -133,7 +135,7 @@ export class ProductsListComponent implements OnInit {
     }
   }
 
-  async clearFilter(): Promise<void> {
+  async clearFilters(): Promise<void> {
     this.productFilter.clearFilters();
     await this.loadProducts();
   }
@@ -141,6 +143,10 @@ export class ProductsListComponent implements OnInit {
   async changePagination(event: any): Promise<void> {
     this.productFilter.pagination.change(event);
     await this.loadProducts();
+  }
+
+  navigateToCreateProduct() {
+    this.portalService.navigateTo('/products/create');
   }
 
 }

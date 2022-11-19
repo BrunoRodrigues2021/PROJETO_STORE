@@ -3,7 +3,7 @@
     "general": {
       "table": {
         "search": "Pesquisar",
-        "paginator": "Mostrando {first} a {last} de {totalRecords} registros"
+        "paginator": "Showing {first} to {last} of {totalRecords} entries"
       },
       "currency": "USD",
       "userMenuSettings": {
@@ -44,6 +44,10 @@
           "headers": {
             "product": "Product",
             "value": "Value ($)"
+          },
+          "buttons": {
+            "create": "Create new product",
+            "clearFilters": "Clear filters"
           }
         }
       }

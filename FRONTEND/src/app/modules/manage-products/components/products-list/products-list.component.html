@@ -1,36 +1,53 @@
-<p-table [value]="products" [loading]="true" [showLoader]="false">
-  <ng-template pTemplate="header">
-    <tr>
-      <th [translate]="'portal.components.product.table.headers.product'"></th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="header">
-    <tr>
-      <!-- Column Header: Product -->
-      <td>
-        <div class="d-flex flex-column">
-          <div class="d-flex justify-content-between align-items-center">
-            <span [translate]="'portal.components.product.table.headers.product'"></span>
-            <div class="sorting-options d-flex">
-              <i class="pi pi-sort-alpha-up"
-                 [ngClass]="{
+<section class="section-actions">
+  <div class="button-container d-flex align-items-end justify-content-end">
+    <button pButton type="button"
+            class="create-button button-primary"
+            [label]="'portal.components.product.table.buttons.create' | translate"
+            icon="pi pi-plus"
+            (click)=navigateToCreateProduct()></button>
+    <button pButton type="button"
+            class="clear-button button-secondary"
+            [label]="'portal.components.product.table.buttons.clearFilters' | translate"
+            icon="pi pi-times"
+            [disabled]="asyncOperationsStatus.isProcessingRequest"
+            (click)="clearFilters()"></button>
+  </div>
+</section>
+<section class="section-list">
+  <div class="table-wrapper">
+    <p-table responsiveLayout="scroll" [value]="products" [loading]="true" [showLoader]="false">
+      <ng-template pTemplate="header">
+        <tr>
+          <th [translate]="'portal.components.product.table.headers.product'"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <!-- Column Header: Product -->
+          <td>
+            <div class="d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-center">
+                <span [translate]="'portal.components.product.table.headers.product'"></span>
+                <div class="sorting-options d-flex">
+                  <i class="pi pi-sort-alpha-up"
+                     [ngClass]="{
                          'disabled': asyncOperationsStatus.isProcessingRequest || !productsCount,
                          'enabled': !asyncOperationsStatus.isProcessingRequest,
                          'active': productFilter.sortOrder === SORT_ORDERS.ASC
                                    && productFilter.sortBy === SORT_BYS.NAME
                        }"
-                 (click)="loadProducts(false, SORT_BYS.NAME, SORT_ORDERS.ASC)"></i>
-              <i class="pi pi-sort-alpha-down"
-                 [ngClass]="{
+                     (click)="loadProducts(false, SORT_BYS.NAME, SORT_ORDERS.ASC)"></i>
+                  <i class="pi pi-sort-alpha-down"
+                     [ngClass]="{
                          'disabled': asyncOperationsStatus.isProcessingRequest || !productsCount,
                          'enabled': !asyncOperationsStatus.isProcessingRequest,
                          'active': productFilter.sortOrder === SORT_ORDERS.DESC
                                    && productFilter.sortBy === SORT_BYS.NAME
                        }"
-                 (click)="loadProducts(false, SORT_BYS.NAME, SORT_ORDERS.DESC)"></i>
-            </div>
-          </div>
-          <span class="search-box p-input-icon-right mt-2">
+                     (click)="loadProducts(false, SORT_BYS.NAME, SORT_ORDERS.DESC)"></i>
+                </div>
+              </div>
+              <span class="search-box p-input-icon-right mt-2">
                   <input pInputText type="text"
                          [disabled]="asyncOperationsStatus.isProcessingRequest"
                          [(ngModel)]="productFilter.name"
@@ -40,33 +57,33 @@
                      disabled="asyncOperationsStatus.isProcessingRequest"
                      (click)="loadProducts(true)"></i>
                 </span>
-        </div>
-      </td>
-      <!-- Column Header: Value -->
-      <td>
-        <div class="d-flex flex-column">
-          <div class="d-flex justify-content-between align-items-center">
-            <span [translate]="'portal.components.product.table.headers.value'"></span>
-            <div class="sorting-options d-flex">
-              <i class="pi pi-sort-alpha-up"
-                 [ngClass]="{
+            </div>
+          </td>
+          <!-- Column Header: Value -->
+          <td>
+            <div class="d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-center">
+                <span [translate]="'portal.components.product.table.headers.value'"></span>
+                <div class="sorting-options d-flex">
+                  <i class="pi pi-sort-alpha-up"
+                     [ngClass]="{
                          'disabled': asyncOperationsStatus.isProcessingRequest || !productsCount,
                          'enabled': !asyncOperationsStatus.isProcessingRequest,
                          'active': productFilter.sortOrder === SORT_ORDERS.ASC
                                    && productFilter.sortBy === SORT_BYS.VALUE
                        }"
-                 (click)="loadProducts(false, SORT_BYS.VALUE, SORT_ORDERS.ASC)"></i>
-              <i class="pi pi-sort-alpha-down"
-                 [ngClass]="{
+                     (click)="loadProducts(false, SORT_BYS.VALUE, SORT_ORDERS.ASC)"></i>
+                  <i class="pi pi-sort-alpha-down"
+                     [ngClass]="{
                          'disabled': asyncOperationsStatus.isProcessingRequest || !productsCount,
                          'enabled': !asyncOperationsStatus.isProcessingRequest,
                          'active': productFilter.sortOrder === SORT_ORDERS.DESC
                                    && productFilter.sortBy === SORT_BYS.VALUE
                        }"
-                 (click)="loadProducts(false, SORT_BYS.VALUE, SORT_ORDERS.DESC)"></i>
-            </div>
-          </div>
-          <span class="search-box p-input-icon-right mt-2">
+                     (click)="loadProducts(false, SORT_BYS.VALUE, SORT_ORDERS.DESC)"></i>
+                </div>
+              </div>
+              <span class="search-box p-input-icon-right mt-2">
                   <input pInputText type="text"
                          [disabled]="asyncOperationsStatus.isProcessingRequest"
                          [(ngModel)]="productFilter.value"
@@ -76,32 +93,33 @@
                      disabled="asyncOperationsStatus.isProcessingRequest"
                      (click)="loadProducts(true)"></i>
                 </span>
-        </div>
-      </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="loadingbody">
-    <tr *ngIf="asyncOperationsStatus.isProcessingRequest">
-      <td colspan="4" class="text-center h-100">
-        <p-progressSpinner class="default-spinner"></p-progressSpinner>
-      </td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-product>
-    <tr *ngIf="!asyncOperationsStatus.isProcessingRequest">
-      <td>{{product.name}}</td>
-      <td>{{product.value | currencyExchange | currency : currencyCode}}</td>
-    </tr>
-  </ng-template>
-</p-table>
-<p-paginator dropdownAppendTo="self"
-             [showCurrentPageReport]="true"
-             [rows]="DEFAULT_PAGINATION_PARAMETERS.pageSize"
-             [rowsPerPageOptions]="DEFAULT_PAGINATION_PARAMETERS.pageOptions"
-             [totalRecords]="productsCount"
-             [currentPageReportTemplate]="'portal.general.table.paginator' | translate"
-             (onPageChange)="changePagination($event)">
-</p-paginator>
-
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="loadingbody">
+        <tr *ngIf="asyncOperationsStatus.isProcessingRequest">
+          <td colspan="4" class="text-center h-100">
+            <p-progressSpinner class="default-spinner"></p-progressSpinner>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr *ngIf="!asyncOperationsStatus.isProcessingRequest">
+          <td>{{product.name}}</td>
+          <td>{{product.value | currencyExchange | currency : currencyCode}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-paginator dropdownAppendTo="self"
+                 [showCurrentPageReport]="true"
+                 [rows]="DEFAULT_PAGINATION_PARAMETERS.pageSize"
+                 [rowsPerPageOptions]="DEFAULT_PAGINATION_PARAMETERS.pageOptions"
+                 [totalRecords]="productsCount"
+                 [currentPageReportTemplate]="'portal.general.table.paginator' | translate"
+                 (onPageChange)="changePagination($event)">
+    </p-paginator>
+  </div>
+</section>
 
 <p-toast></p-toast>

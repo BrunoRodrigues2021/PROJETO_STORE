@@ -6,10 +6,12 @@ const SharedConstants = require("../utils/constants/shared-constants");
 const ProductConstants = require("../utils/constants/product-constants");
 const ProductErrors = require("../utils/errors/product-errors");
 const Op = require("sequelize").Op;
+const sequelize = require("sequelize");
 
 class ProductService {
     async getProducts(
-        productName,
+        name,
+        value,
         sortBy = ProductConstants.SortBy.DEFAULT_SORT_BY,
         sortOrder = SharedConstants.SortOrder.ASC,
         page = SharedConstants.Pagination.PAGE.DEFAULT_VALUE,
@@ -18,8 +20,12 @@ class ProductService {
         let sort = [];
         const conditions = {}
 
-        if (productName) {
-            conditions.name = {[Op.like]: `%${productName}%`};
+        if (name) {
+            conditions.name = {[Op.like]: `%${name}%`};
+        }
+        if (value) {
+            conditions.value = sequelize.where(sequelize.cast(sequelize.col('value'), 'CHAR'),
+                {[Op.like]: `%${value}%`});
         }
         if (sortBy) {
             sort.push([sortBy, sortOrder]);

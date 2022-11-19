@@ -34,14 +34,15 @@ class ProductController {
 
     async _handleGetProducts(request, response) {
         logger.info(`${_fileName} : Getting all products`);
-        const {productName, sortBy, sortOrder, page, pageSize} = request.query;
+        const {name, value, sortBy, sortOrder, page, pageSize} = request.query;
 
         try {
             logger.info(`${_fileName} : Successfully getting all products`);
-            const products = await ProductService.getProducts(productName, sortBy, sortOrder, page, pageSize);
+            const products = await ProductService.getProducts(name, value, sortBy, sortOrder, page, pageSize);
             response.status(StatusCodes.OK).send(products);
         } catch (error) {
-            logger.error(`${_fileName} : Error getting all products : Error: ${JSON.stringify(error)}`);
+            logger.error(`${_fileName} :
+            Error getting all products : Error: ${JSON.stringify(error)}`);
             response.status(error.code).send({error: error});
         }
     }
