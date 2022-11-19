@@ -30,7 +30,8 @@
           "userCreate": "User create",
           "userDelete": "User delete"
         }
-      }
+      },
+      "error": "Something went wrong"
     },
     "components": {
       "login": {

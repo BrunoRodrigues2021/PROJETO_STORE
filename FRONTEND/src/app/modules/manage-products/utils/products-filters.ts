@@ -21,6 +21,8 @@ export class ProductFilters {
   }
 
   clearFilters() {
+    this.name = null;
+    this.value = null;
     this.sortBy = null;
     this.sortOrder = null;
     this.pagination.page = DEFAULT_PAGINATION_PARAMETERS.page;

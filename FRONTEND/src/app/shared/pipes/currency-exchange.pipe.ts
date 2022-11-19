@@ -19,8 +19,6 @@ export class CurrencyExchangePipe implements PipeTransform {
       exchangeRate = 5.398052;
     }
 
-    console.log("ALTERADO: " + exchangeRate)
-
     return (currency * exchangeRate).toFixed(2);
   }
 

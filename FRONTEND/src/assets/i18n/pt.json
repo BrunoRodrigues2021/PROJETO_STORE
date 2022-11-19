@@ -30,7 +30,8 @@
           "userCreate": "Criar usuário",
           "userDelete": "Deletar usuário"
         }
-      }
+      },
+      "error": "Algo deu errado"
     },
     "components": {
       "login": {

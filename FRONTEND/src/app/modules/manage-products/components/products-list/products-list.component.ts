@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ManageProductsService} from "../../manage-products.service";
 import {BreadcrumbService} from "../../../../shared/components/breadcrumb/breadcrumb.service";
 import {Subscription} from "rxjs";
@@ -9,10 +9,12 @@ import {
   DEFAULT_PAGINATION_PARAMETERS,
   SortOrder
 } from "../../../../shared/constants/shared-constants";
-import {PaginationInterface} from "../../../../shared/interfaces/shared-interfaces";
 import {ProductFilters} from "../../utils/products-filters";
 import {ProductSortBy} from "../../utils/product-constants";
 import {Product} from "../../utils/models/product.model";
+import {MessageService} from "primeng/api";
+import {Paginator} from "primeng/paginator";
+import {GetProductsRequest} from "../../interfaces/product-request-interfaces";
 
 @Component({
   selector: 'app-products-list',
@@ -41,14 +43,17 @@ export class ProductsListComponent implements OnInit {
     },
   };
 
+  @ViewChild(Paginator) paginator: Paginator;
+
   constructor(
     private _manageProductsService: ManageProductsService,
     private translateService: TranslateService,
+    private messageService: MessageService,
     private breadcrumbService: BreadcrumbService,
   ) {}
 
   async ngOnInit() {
-    this.loadProducts();
+    await this.clearFilter();
 
     const breadcrumbPages: BreadcrumbItemList = [
       {label: 'portal.general.breadcrumb.products.productsList', route: 'products'},
@@ -62,7 +67,7 @@ export class ProductsListComponent implements OnInit {
       this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
       this.currencyCode = await this.translateService.get('portal.general.currency').toPromise();
 
-      this.loadProducts();
+      await this.clearFilter();
     });
   }
 
@@ -75,31 +80,62 @@ export class ProductsListComponent implements OnInit {
     sortBy: ProductSortBy = this.productFilter.sortBy,
     sortOrder: SortOrder = this.productFilter.sortOrder
   ) {
-
-    this.productsCount = 0;
     this.asyncOperationsStatus.isProcessingRequest = true;
+    this.products = [];
+    this.productsCount = 0;
+
 
     this.productFilter.sortBy = sortBy;
     this.productFilter.sortOrder = sortOrder;
 
-    this._manageProductsService.getProducts(this.DEFAULT_PAGINATION_PARAMETERS.page, this.DEFAULT_PAGINATION_PARAMETERS.pageSize).subscribe(
-      {
-        next: (data) => {
-          const {count, rows} = data;
-
-
-          this.products = rows;
-          this.productsCount = count;
-        },
-        error: (error) => {
-          console.log(error)
-        },
-        complete: () => {
-          this.asyncOperationsStatus.isProcessingRequest = false;
-        }
+    try {
+      if (resetPagination) {
+        this.productFilter.pagination.reset(this.paginator);
       }
 
-    );
+      const getProductsRequestPayload: GetProductsRequest = {
+        name: this.productFilter.name,
+        value: this.productFilter.value,
+        sortBy: this.productFilter.sortBy,
+        sortOrder: this.productFilter.sortOrder,
+        page: this.productFilter.pagination.page,
+        pageSize: this.productFilter.pagination.pageSize,
+      }
+
+      this._manageProductsService.getProducts(getProductsRequestPayload).subscribe(
+        {
+          next: async (data) => {
+            const {count, rows} = data;
+
+            this.products = rows;
+            this.productsCount = count;
+          },
+          error: async () => {
+            const message = await this.translateService
+              .get('portal.general.error').toPromise();
+
+            this.messageService.add({
+              severity: 'error',
+              summary: await this.translateService
+                .get('portal.general.error').toPromise(),
+              detail: message
+            });
+          },
+          complete: () => {
+            this.asyncOperationsStatus.isProcessingRequest = false;
+          }
+        }
+
+      );
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async clearFilter(): Promise<void> {
+    this.productFilter.clearFilters();
+    await this.loadProducts();
   }
 
   async changePagination(event: any): Promise<void> {

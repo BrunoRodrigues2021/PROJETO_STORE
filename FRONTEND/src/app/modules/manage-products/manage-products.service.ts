@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {getProductsResponse} from "./interfaces/product-response-interface";
 import {PortalService} from "../../shared/portal.service";
+import {GetProductsRequest} from "./interfaces/product-request-interfaces";
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +17,27 @@ export class ManageProductsService extends PortalService {
     super();
   }
 
-  getProducts(page: number = null, pageSize: number = null): Observable<getProductsResponse> {
+  getProducts(requestPayload: GetProductsRequest): Observable<getProductsResponse> {
     const headers = this.setupHeaders();
     let params: HttpParams = new HttpParams();
 
-    if(page) {
-      params = params.set('page', page.toString());
+    if(requestPayload.name) {
+      params = params.set('name', requestPayload.name);
     }
-    if(pageSize) {
-      params = params.set('pageSize', pageSize.toString());
+    if(requestPayload.value) {
+      params = params.set('value', requestPayload.value);
+    }
+    if(requestPayload.sortBy) {
+      params = params.set('sortBy', requestPayload.sortBy);
+    }
+    if(requestPayload.sortOrder) {
+      params = params.set('sortOrder', requestPayload.sortOrder);
+    }
+    if(requestPayload.page) {
+      params = params.set('page', requestPayload.page);
+    }
+    if(requestPayload.pageSize) {
+      params = params.set('pageSize', requestPayload.pageSize);
     }
 
     return this.http.get<getProductsResponse>(this.baseUrl, {headers, params});
