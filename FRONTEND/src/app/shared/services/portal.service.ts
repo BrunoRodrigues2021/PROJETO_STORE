@@ -1,9 +1,9 @@
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
-import {CURRENCY_EXCHANGE_RATE} from "./constants/shared-constants";
+import {getCurrencyResponse} from "../interfaces/currency-interfaces";
 
 @Injectable()
 export class PortalService {
@@ -13,8 +13,9 @@ export class PortalService {
     protected translateService: TranslateService
   ) {}
 
-  static LOCAL_STORAGE_TOKEN = 'portalToken';
+  public static LOCAL_STORAGE_TOKEN = 'portalToken';
   public static LANGUAGE_STORAGE_KEY = 'PortalLanguage';
+  public static CURRENCY_STORAGE_KEY = 'CurrencyExchangeRate';
   public static LANGUAGES = {
     'pt': 'pt',
     'en': 'en'
@@ -34,14 +35,12 @@ export class PortalService {
     localStorage.setItem(PortalService.LANGUAGE_STORAGE_KEY, language);
   }
 
-  getCurrencyExchangeRate(): string {
-    if (localStorage.getItem(PortalService.LANGUAGE_STORAGE_KEY) === 'en') {
-      return CURRENCY_EXCHANGE_RATE.EN;
-    } else if (localStorage.getItem(PortalService.LANGUAGE_STORAGE_KEY) === 'pt') {
-      return CURRENCY_EXCHANGE_RATE.PT;
-    }
+  static getCurrencyExchangeRate() {
+    return JSON.parse(localStorage.getItem(PortalService.CURRENCY_STORAGE_KEY));
+  }
 
-    return CURRENCY_EXCHANGE_RATE.EN;
+  static setCurrencyExchangeRate(currency: getCurrencyResponse) {
+    localStorage.setItem(PortalService.CURRENCY_STORAGE_KEY, JSON.stringify(currency));
   }
 
   userLogout() {

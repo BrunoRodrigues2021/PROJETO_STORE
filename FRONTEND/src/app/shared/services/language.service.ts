@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
-import {BreadcrumbService} from "./components/breadcrumb/breadcrumb.service";
+import {BreadcrumbService} from "../components/breadcrumb/breadcrumb.service";
 import {PortalService} from "./portal.service";
 import {Router} from "@angular/router";
 

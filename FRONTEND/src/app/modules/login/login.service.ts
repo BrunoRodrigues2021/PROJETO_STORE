@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {PortalService} from "../../shared/portal.service";
+import {PortalService} from "../../shared/services/portal.service";
 import {Observable} from "rxjs";
 
 @Injectable({

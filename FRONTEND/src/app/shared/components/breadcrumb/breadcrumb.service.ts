@@ -1,8 +1,6 @@
-import {MenuItem} from 'primeng/api';
-import {EventEmitter, Injectable, OnInit} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {TranslateService} from '@ngx-translate/core';
-import {PortalService} from "../../portal.service";
+import {PortalService} from "../../services/portal.service";
 import {BreadcrumbItemList} from "../interfaces/breacrumb-interfaces";
 
 @Injectable()

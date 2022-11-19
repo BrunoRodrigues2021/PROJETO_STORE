@@ -1,10 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {PortalService} from "../../shared/portal.service";
+import {PortalService} from "../../shared/services/portal.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "./login.service";
-import {AuthService} from "../../shared/auth.service";
+import {AuthService} from "../../shared/services/auth.service";
 import {TranslateService} from "@ngx-translate/core";
+import {MessageService} from "primeng/api";
+import {CurrencyService} from "../../shared/services/currency.service";
+import {getCurrencyResponse} from "../../shared/interfaces/currency-interfaces";
 
 @Component({
   selector: 'app-login',
@@ -21,6 +24,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private loginService: LoginService,
     private translateService: TranslateService,
     private authService: AuthService,
+    private messageService: MessageService,
+    private currencyService: CurrencyService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -56,8 +61,8 @@ export class LoginComponent implements OnInit, OnDestroy {
           } else {
             PortalService.setLanguage('en');
           }
-
-            this.router.navigate(['/home']).then();
+          this.loadCurrencyExchangeRate();
+          this.router.navigate(['/home']).then();
         },
         error: (error) => {
           this.httpError = error.error;
@@ -99,5 +104,27 @@ export class LoginComponent implements OnInit, OnDestroy {
     //       }
     //     }
     //   );
+  }
+
+  loadCurrencyExchangeRate() {
+    this.currencyService.getExchangeCurrencyRate().subscribe(
+      {
+        next: async (data) => {
+          CurrencyService.setCurrencyExchangeRate(data);
+        },
+        error: async () => {
+          const message = await this.translateService
+            .get('portal.general.error').toPromise();
+
+          this.messageService.add({
+            severity: 'error',
+            summary: await this.translateService
+              .get('portal.general.error').toPromise(),
+            detail: message
+          });
+        }
+      }
+
+    );
   }
 }

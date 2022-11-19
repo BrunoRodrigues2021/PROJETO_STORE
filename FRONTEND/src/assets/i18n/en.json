@@ -43,7 +43,7 @@
         "table": {
           "headers": {
             "product": "Product",
-            "value": "Value ($)"
+            "value": "Value (USD)"
           },
           "buttons": {
             "create": "Create new product",

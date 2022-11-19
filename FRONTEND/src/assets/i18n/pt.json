@@ -43,7 +43,7 @@
         "table": {
           "headers": {
             "product": "Produto",
-            "value": "Valor (R$)"
+            "value": "Valor (BRL)"
           },
           "buttons": {
             "create": "Criar novo produto",

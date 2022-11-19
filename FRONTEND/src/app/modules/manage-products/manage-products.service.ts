@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {getProductsResponse} from "./interfaces/product-response-interface";
-import {PortalService} from "../../shared/portal.service";
+import {PortalService} from "../../shared/services/portal.service";
 import {GetProductsRequest} from "./interfaces/product-request-interfaces";
 
 @Injectable({

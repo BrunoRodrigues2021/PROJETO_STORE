@@ -11,7 +11,7 @@ import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate
 import {BreadcrumbService} from "./shared/components/breadcrumb/breadcrumb.service";
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {httpLoaderFactory} from "./shared/http-loader-factory";
-import {PortalService} from "./shared/portal.service";
+import {PortalService} from "./shared/services/portal.service";
 import {ComponentsModule} from "./master-template/template/components.module";
 import {BreadcrumbModule} from "./shared/components/breadcrumb/breadcrumb.module";
 

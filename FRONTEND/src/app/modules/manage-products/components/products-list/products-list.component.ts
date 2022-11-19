@@ -15,7 +15,7 @@ import {Product} from "../../utils/models/product.model";
 import {MessageService} from "primeng/api";
 import {Paginator} from "primeng/paginator";
 import {GetProductsRequest} from "../../interfaces/product-request-interfaces";
-import {PortalService} from "../../../../shared/portal.service";
+import {PortalService} from "../../../../shared/services/portal.service";
 
 @Component({
   selector: 'app-products-list',
@@ -32,6 +32,8 @@ export class ProductsListComponent implements OnInit {
 
   SORT_ORDERS: typeof SortOrder = SortOrder;
   SORT_BYS: typeof ProductSortBy = ProductSortBy;
+
+  showDetails = null;
 
   productFilter: ProductFilters = new ProductFilters();
 
@@ -132,6 +134,17 @@ export class ProductsListComponent implements OnInit {
 
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  showItemDetails(tableItemSelected): void {
+    this.showDetails = {...tableItemSelected};
+  }
+
+  async closeItemDetails(refresh: boolean) {
+    this.showDetails = null;
+    if (refresh) {
+      await this.loadProducts(true);
     }
   }
 

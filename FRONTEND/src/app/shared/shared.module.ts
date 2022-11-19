@@ -14,6 +14,7 @@ import {MessageService} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {CurrencyExchangePipe} from './pipes/currency-exchange.pipe';
 import {PaginatorModule} from "primeng/paginator";
+import {SidebarModule} from "primeng/sidebar";
 
 @NgModule({
   declarations: [
@@ -32,10 +33,12 @@ import {PaginatorModule} from "primeng/paginator";
     OverlayPanelModule,
     TieredMenuModule,
     TableModule,
-    PaginatorModule
+    PaginatorModule,
+    SidebarModule
   ],
   providers: [MessageService],
   exports: [
+    CurrencyExchangePipe,
     CardModule,
     ButtonModule,
     PasswordModule,
@@ -49,7 +52,7 @@ import {PaginatorModule} from "primeng/paginator";
     TieredMenuModule,
     TableModule,
     PaginatorModule,
-    CurrencyExchangePipe
+    SidebarModule
   ],
   bootstrap: []
 })

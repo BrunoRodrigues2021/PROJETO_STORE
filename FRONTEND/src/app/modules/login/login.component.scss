@@ -1,5 +1,9 @@
 @import "../../../assets/theme/colors";
 
+::ng-deep .p-button {
+  display: unset;
+}
+
 .main-container {
   position: absolute;
   width: 100%;

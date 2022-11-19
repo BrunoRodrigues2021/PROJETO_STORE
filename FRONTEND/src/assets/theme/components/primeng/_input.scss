@@ -216,9 +216,12 @@ $tsc-input-text-error: $status-error;
   color: $tsc-input-text;
   font-size: 20px;
 }
-.p-input-icon-right > i:first-of-type {
-  color: $tsc-input-text;
-  font-size: 20px;
+.p-input-icon-right > i {
+  top: 35% !important;
+  &:first-of-type {
+    color: $tsc-input-text;
+    font-size: 20px;
+  }
 }
 .input-title {
   font-style: normal;

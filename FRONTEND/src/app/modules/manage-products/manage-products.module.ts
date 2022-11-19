@@ -8,17 +8,19 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ManageProductsService} from "./manage-products.service";
 
 import {ButtonModule} from 'primeng/button';
-import {PortalService} from "../../shared/portal.service";
+import {PortalService} from "../../shared/services/portal.service";
 import {SharedModule} from "../../shared/shared.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {CurrencyExchangePipe} from "../../shared/pipes/currency-exchange.pipe";
 import {FormsModule} from "@angular/forms";
+import { ProductsDetailsComponent } from './products-details/products-details.component';
 
 
 @NgModule({
   declarations: [
     ProductsListComponent,
     ProductsAddComponent,
+    ProductsDetailsComponent,
   ],
     imports: [
         CommonModule,

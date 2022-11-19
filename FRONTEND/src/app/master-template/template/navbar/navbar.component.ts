@@ -3,9 +3,9 @@ import {MenuItem, MessageService, PrimeNGConfig} from 'primeng/api';
 import {OverlayPanel} from "primeng/overlaypanel";
 import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
 import {Subscription} from "rxjs";
-import {BuildMenuService} from "../../../shared/build-menu.service";
+import {BuildMenuService} from "../../../shared/services/build-menu.service";
 import {Router} from "@angular/router";
-import {PortalService} from "../../../shared/portal.service";
+import {PortalService} from "../../../shared/services/portal.service";
 
 @Component({
   selector: 'app-navbar',
@@ -29,13 +29,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private buildMenuService: BuildMenuService,
     private portalService: PortalService,
     private config: PrimeNGConfig,
-    private cdr: ChangeDetectorRef,
-    private router: Router
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
-    // this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
-
     this.userMenuItems = this.buildMenuService.getUserOptionsMenu();
     this.portalMenuItems = this.buildMenuService.getPortalMenuItems();
 

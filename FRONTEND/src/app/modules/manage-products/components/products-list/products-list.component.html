@@ -4,12 +4,13 @@
             class="create-button button-primary"
             [label]="'portal.components.product.table.buttons.create' | translate"
             icon="pi pi-plus"
+            [disabled]="asyncOperationsStatus.isProcessingRequest || showDetails"
             (click)=navigateToCreateProduct()></button>
     <button pButton type="button"
             class="clear-button button-secondary"
             [label]="'portal.components.product.table.buttons.clearFilters' | translate"
             icon="pi pi-times"
-            [disabled]="asyncOperationsStatus.isProcessingRequest"
+            [disabled]="asyncOperationsStatus.isProcessingRequest || showDetails"
             (click)="clearFilters()"></button>
   </div>
 </section>
@@ -105,7 +106,8 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-product>
-        <tr *ngIf="!asyncOperationsStatus.isProcessingRequest">
+        <tr [class.selected]="(showDetails && showDetails.id === product.id)"
+          *ngIf="!asyncOperationsStatus.isProcessingRequest" (click)="showItemDetails(product)">
           <td>{{product.name}}</td>
           <td>{{product.value | currencyExchange | currency : currencyCode}}</td>
         </tr>
@@ -120,6 +122,12 @@
                  (onPageChange)="changePagination($event)">
     </p-paginator>
   </div>
+</section>
+
+<section class="hidden-scrollbar" *ngIf="showDetails">
+  <p-sidebar [visible]="showDetails" position="right" transitionOptions="200ms" [modal]="false" [baseZIndex]="100">
+    <app-products-details></app-products-details>
+  </p-sidebar>
 </section>
 
 <p-toast></p-toast>
