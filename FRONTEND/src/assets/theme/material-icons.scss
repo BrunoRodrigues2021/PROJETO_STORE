@@ -2244,9 +2244,19 @@ $mi-icons: (
 }
 
 @each $name, $value in $mi-icons {
-  .mi-#{$name}:before {
-    @include mi-icon($icon: $value);
-    font-size: 12px;
+  .mi- {
+    &#{$name}:before {
+      @include mi-icon($icon: $value);
+      font-size: 20px;
+    }
+    &#{$name}-big:before {
+      @include mi-icon($icon: $value);
+      font-size: 34px;
+    }
+    &#{$name}-small:before {
+      @include mi-icon($icon: $value);
+      font-size: 12px;
+    }
   }
 
   .mi-#{$name}-left:before {

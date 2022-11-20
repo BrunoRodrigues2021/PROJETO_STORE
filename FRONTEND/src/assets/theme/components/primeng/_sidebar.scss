@@ -1,1 +1,125 @@
 @import '../../constants';
+
+.p-sidebar {
+  background: $color__surface;
+  border: none;
+  border-radius: 5px 0px 0px 0px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+  top: 60px !important;
+
+  .p-sidebar-right {
+    width: 359px !important;
+  }
+
+  .p-sidebar-content {
+    padding: 0;
+    margin: 0;
+  }
+
+  .p-sidebar-header, p-sidebar-footer {
+    display: none !important;
+  }
+  .p-sidebar-close-icon {
+    display: none;
+  }
+}
+
+.details-sidebar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 0;
+  z-index: 111;
+  transition: all 0.3s;
+  top: 62px;
+
+  &.activated {
+    width: 360px;
+    filter: drop-shadow(0px 16px 24px rgba(0, 0, 0, 0.16));
+    border-radius: 5px 0px 0px 0px;
+    background-color: $color__surface;
+    border: 1px solid $border-gray;
+    border-right: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+.details-sidebar-header {
+  padding-inline: 24px;
+  padding-block: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $color__primary;
+  font-size: $fs-subtitle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: normal;
+
+  h5 {
+    margin-bottom: 0;
+    margin-right: auto;
+    font-weight: normal;
+
+    @extend .text-h5-headline;
+    padding-right: 12px;
+    width: 100%;
+  }
+
+  button {
+    margin: 6px 0 0 0;
+    height: 24px;
+    width: 24px;
+
+    &:first-child{
+      padding-left: 0;
+      margin-left: 0;
+    }
+
+    &:last-child{
+      padding-right: 0;
+      margin-right: 0;
+    }
+  }
+}
+
+.details-sidebar-separator {
+  border-bottom: 1px solid $border-gray--light;
+}
+
+
+@mixin details-sidebar-dl {
+  margin-bottom: 0;
+  dt {
+    color: $color__secondary--dark;
+    margin-bottom: 4px;
+    line-height: 14px;
+    font-weight: normal;
+  }
+  dd {
+    margin-bottom: 16px;
+    line-height: 16.4px;
+    font-weight: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+}
+
+.details-sidebar-dl {
+  @include details-sidebar-dl();
+}
+
+.details-sidebar-content {
+  padding-inline: 24px;
+  padding-top: 16px;
+
+  h2 {
+    margin-bottom: 24px;
+    font-weight: normal;
+  }
+  dl {
+    @include details-sidebar-dl();
+  }
+}
+

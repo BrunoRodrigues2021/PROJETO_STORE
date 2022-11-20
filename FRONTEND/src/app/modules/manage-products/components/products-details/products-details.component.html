@@ -1,0 +1,40 @@
+<!--<div class="flex justify-content-center">-->
+<!--  <p-progressSpinner *ngIf="isLoading" class="small-spinner"></p-progressSpinner>-->
+<!--</div>-->
+<div class="details">
+  <div class="details-sidebar-header">
+    <h5>Detalhes</h5>
+    <button pButton class="button-icon" icon="icon mi-edit" (click)="editProduct()"></button>
+    <button pButton class="button-icon" icon="icon mi-delete" (click)="deleteProduct()"></button>
+    <button pButton class="button-icon" icon="icon mi-close" (click)="closeDetails()"></button>
+  </div>
+  <div class="details-sidebar-separator"></div>
+  <div class="details-sidebar-content">
+    <dl class="sidebar-content-list">
+      <div class="row">
+        <div class="col">
+            <dt>Produto</dt>
+            <dd>Leite</dd>
+        </div>
+        <div class="col">
+            <dt>Valor</dt>
+            <dd>R$10,00</dd>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <dt>Data de criação</dt>
+            <dd>19/11/2022</dd>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <dt>Ultima atualização</dt>
+          <dd>19/11/2022</dd>
+        </div>
+      </div>
+    </dl>
+  </div>
+</div>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" transitionOptions="200ms"></p-confirmDialog>

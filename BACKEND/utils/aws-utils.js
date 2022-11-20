@@ -9,6 +9,10 @@ const _fileName = path.basename(__filename);
 class AwsUtils {
 
     constructor() {
+        this._secretsClient = new aws.SecretsManager({
+            endpoint: config.aws.secrets.endpoint,
+            region: config.aws.region
+        });
         this._ssmClient = new aws.SSM({
             apiVersion: 'latest',
             region: config.aws.region
@@ -23,6 +27,16 @@ class AwsUtils {
         } catch (error) {
             logger.error(`${_fileName} : Error getting parameters from parameter store : ParametersPath : ${parametersPath} : Error : ${JSON.stringify(error)}`);
             throw AwsErrors.GET_PARAMETERS_FROM_PARAMETER_STORE_ERROR;
+        }
+    }
+
+    async getSecrets(secretId) {
+        logger.info(`${_fileName} : Getting secretId from secrets : SecretId : ${secretId}`);
+        try {
+            return await this._secretsClient.getSecretValue({SecretId: secretId}).promise();
+        } catch (error) {
+            logger.error(`${_fileName} : Error getting secretId from secrets : SecretId : ${secretId} : Error : ${error}`);
+            throw AwsErrors.GET_SECRETS_ERROR;
         }
     }
 }

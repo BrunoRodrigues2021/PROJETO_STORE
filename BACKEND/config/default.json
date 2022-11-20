@@ -5,12 +5,17 @@
       "storeDb": {
         "parameters": "/store/dev/db_config"
       }
+    },
+    "secrets": {
+      "endpoint": "https://secretsmanager.us-east-1.amazonaws.com",
+      "secretSignerName": "store/privateKey",
+      "secretVerifierName": "store/publicKey"
     }
   },
   "jwt": {
     "audience": "localhost",
     "issuer": "portalStore",
-    "expirationTime": "1h",
+    "expirationTime": "6h",
     "algorithm": "RS256"
   },
   "routesPrefix": "/store",

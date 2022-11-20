@@ -126,7 +126,10 @@
 
 <section class="hidden-scrollbar" *ngIf="showDetails">
   <p-sidebar [visible]="showDetails" position="right" transitionOptions="200ms" [modal]="false" [baseZIndex]="100">
-    <app-products-details></app-products-details>
+    <app-products-details
+      (closeDetailsEvent)="closeItemDetails($event)"
+    >
+    </app-products-details>
   </p-sidebar>
 </section>
 

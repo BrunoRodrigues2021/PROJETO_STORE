@@ -55,10 +55,10 @@ export class PortalService {
   protected setupHeaders() {
     const token = PortalService.getUser();
 
-    const httpHeaders: HttpHeaders = new HttpHeaders();
+    let httpHeaders: HttpHeaders = new HttpHeaders();
 
-    httpHeaders.set('Authorization', `Bearer ${token ? token : ''}`);
-    httpHeaders.set('Content-Type', 'text');
+    httpHeaders = httpHeaders.set('Authorization', `Bearer ${token ? token : ''}`);
+    httpHeaders = httpHeaders.set('Content-Type', 'application/json');
 
     return httpHeaders;
   }

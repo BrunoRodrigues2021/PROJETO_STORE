@@ -3,6 +3,7 @@ const router = express.Router();
 const {StatusCodes} = require('http-status-codes');
 const ProductValidatorMiddlewares = require('../utils/middlewares/validators/product-validators');
 const ProductService = require('../services/product-service');
+const SecurityMiddlewares = require("../utils/middlewares/security-middlewares");
 
 const logger = require('../logger');
 const path = require('path');
@@ -11,6 +12,7 @@ const _fileName = path.basename(__filename);
 class ProductController {
     constructor() {
         router.get('/',
+            SecurityMiddlewares.authenticateRequest,
             ProductValidatorMiddlewares.validateGetProductsRequest,
             this._handleGetProducts
         );

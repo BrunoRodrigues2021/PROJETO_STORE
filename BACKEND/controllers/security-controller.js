@@ -4,7 +4,7 @@ const {StatusCodes} = require('http-status-codes');
 
 const SecurityValidatorMiddlewares = require('../utils/middlewares/validators/security-validators');
 const LoginService = require('../services/login-service');
-const AuthService = require('../services/auth-service');
+const SecurityService = require('../services/security-service.js');
 
 const logger = require('../logger');
 const path = require('path');
@@ -30,7 +30,7 @@ class ProductController {
         logger.info(`${_fileName} : Getting user by email : Email : ${request.body.email}`);
         try {
             const loginStatus = await LoginService.login(request.body);
-            const userToken = await AuthService.generateToken(loginStatus);
+            const userToken = await SecurityService.generateToken(loginStatus);
 
             logger.info(`${_fileName} : Successfully logged user in : User : ${request.body.email}`);
             response.status(StatusCodes.OK).send({token: userToken});

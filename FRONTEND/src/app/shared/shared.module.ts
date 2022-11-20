@@ -10,11 +10,12 @@ import {MenubarModule} from "primeng/menubar";
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {AvatarModule} from 'primeng/avatar';
 import {TieredMenuModule} from 'primeng/tieredmenu';
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {CurrencyExchangePipe} from './pipes/currency-exchange.pipe';
 import {PaginatorModule} from "primeng/paginator";
 import {SidebarModule} from "primeng/sidebar";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @NgModule({
   declarations: [
@@ -34,9 +35,10 @@ import {SidebarModule} from "primeng/sidebar";
     TieredMenuModule,
     TableModule,
     PaginatorModule,
-    SidebarModule
+    SidebarModule,
+    ConfirmDialogModule,
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   exports: [
     CurrencyExchangePipe,
     CardModule,
@@ -52,7 +54,8 @@ import {SidebarModule} from "primeng/sidebar";
     TieredMenuModule,
     TableModule,
     PaginatorModule,
-    SidebarModule
+    SidebarModule,
+    ConfirmDialogModule,
   ],
   bootstrap: []
 })

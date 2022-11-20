@@ -13,7 +13,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {CurrencyExchangePipe} from "../../shared/pipes/currency-exchange.pipe";
 import {FormsModule} from "@angular/forms";
-import { ProductsDetailsComponent } from './products-details/products-details.component';
+import { ProductsDetailsComponent } from './components/products-details/products-details.component';
 
 
 @NgModule({
