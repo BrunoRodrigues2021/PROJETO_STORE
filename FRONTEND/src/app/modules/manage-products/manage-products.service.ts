@@ -9,7 +9,6 @@ import {GetProductsRequest} from "./interfaces/product-request-interfaces";
   providedIn: 'root'
 })
 export class ManageProductsService extends PortalService {
-
   baseUrl = this.BASE_PATH + '/product';
 
   constructor(private http: HttpClient) {

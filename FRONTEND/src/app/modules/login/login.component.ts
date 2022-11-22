@@ -8,6 +8,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {MessageService} from "primeng/api";
 import {CurrencyService} from "../../shared/services/currency.service";
 import {getCurrencyResponse} from "../../shared/interfaces/currency-interfaces";
+import {finalize} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,13 @@ import {getCurrencyResponse} from "../../shared/interfaces/currency-interfaces";
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   httpError: any;
-  isProcessingRequest = false;
+
+  asyncOperationsStatus = {
+    isProcessingRequest: false,
+    isPerformingRequest(): boolean {
+      return Object.values(this).some((status) => status === true);
+    },
+  };
 
   constructor(
     private router: Router,
@@ -41,15 +48,19 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.isProcessingRequest = false;
+    this.asyncOperationsStatus.isProcessingRequest = false;
     this.loginForm.reset();
     this.httpError = null;
   }
 
   executeLogin() {
-    this.isProcessingRequest = true;
+    this.asyncOperationsStatus.isProcessingRequest = true;
 
-    this.loginService.sendLoginRequest(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+    this.loginService.sendLoginRequest(this.loginForm.value.email, this.loginForm.value.password).pipe(
+      finalize(() =>
+        this.asyncOperationsStatus.isProcessingRequest = false
+      ))
+      .subscribe({
         next: (response) => {
           PortalService.setUser(response['token']);
           const parsedToken = this.authService.getParsedToken();
@@ -61,14 +72,13 @@ export class LoginComponent implements OnInit, OnDestroy {
           } else {
             PortalService.setLanguage('en');
           }
+
+          this.translateService.use(PortalService.getLanguage());
           this.loadCurrencyExchangeRate();
           this.router.navigate(['/home']).then();
         },
         error: (error) => {
           this.httpError = error.error;
-        },
-        complete: () => {
-          this.isProcessingRequest = false;
         }
       }
     );

@@ -31,6 +31,10 @@ export class PortalService {
     localStorage.setItem(PortalService.LOCAL_STORAGE_TOKEN, token);
   }
 
+  static getLanguage() {
+    return localStorage.getItem(PortalService.LANGUAGE_STORAGE_KEY);
+  }
+
   static setLanguage(language: string) {
     localStorage.setItem(PortalService.LANGUAGE_STORAGE_KEY, language);
   }
@@ -52,13 +56,15 @@ export class PortalService {
     this.router.navigate([route]).then();
   }
 
-  protected setupHeaders() {
+  protected setupHeaders(contentType = null) {
     const token = PortalService.getUser();
 
     let httpHeaders: HttpHeaders = new HttpHeaders();
 
     httpHeaders = httpHeaders.set('Authorization', `Bearer ${token ? token : ''}`);
-    httpHeaders = httpHeaders.set('Content-Type', 'application/json');
+    if (contentType) {
+      httpHeaders = httpHeaders.set('Content-Type', contentType);
+    }
 
     return httpHeaders;
   }

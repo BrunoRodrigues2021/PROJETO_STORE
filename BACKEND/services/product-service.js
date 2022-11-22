@@ -1,12 +1,13 @@
 const Product = require("../sequelize/models/product-model");
 const {logger} = require("../logger");
-const path = require("path");
-const _fileName = path.basename(__filename);
 const SharedConstants = require("../utils/constants/shared-constants");
 const ProductConstants = require("../utils/constants/product-constants");
 const ProductErrors = require("../utils/errors/product-errors");
 const Op = require("sequelize").Op;
 const sequelize = require("sequelize");
+
+const path = require("path");
+const _fileName = path.basename(__filename);
 
 class ProductService {
     async getProducts(
@@ -68,7 +69,7 @@ class ProductService {
     }
 
     async updateProduct(productId, fields) {
-        await this.getProductByParam('id', productId);
+        await this.getProductByParam(ProductConstants.Product.ID, productId);
 
         const transaction = await Product.sequelize.transaction();
 

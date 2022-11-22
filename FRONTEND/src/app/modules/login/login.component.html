@@ -5,18 +5,16 @@
         <p-image src="./assets/images/store_logo_black.png" alt="Image" width="150"></p-image>
         <form id="login_form" [formGroup]="loginForm" (ngSubmit)="executeLogin()">
           <div class="mt-4">
-          <span class="p-float-label">
-             <input id="email" type="email" class="form-field-large p-inputtext-sm"
-                    formControlName="email" pInputText>
-            <label for="email">Email</label>
-          </span>
-            <span class="p-float-label mt-4">
-            <input id="password" type="password" class="form-field-large p-inputtext-sm"
-                   formControlName="password" pInputText>
-            <label for="password">Password</label>
-          </span>
+            <div class="d-flex flex-column">
+              <label for="email" class="basic-label">Email</label>
+              <input id="email" type="email" class="form-field-large p-inputtext-sm"
+                     formControlName="email" pInputText>
+              <label for="password" class="basic-label mt-2">Password</label>
+              <input id="password" type="password" class="form-field-large p-inputtext-sm"
+                     formControlName="password" pInputText>
+            </div>
             <div class="mt-4">
-              <button *ngIf="!isProcessingRequest else loading" pButton type="submit"
+              <button *ngIf="!asyncOperationsStatus.isProcessingRequest else loading" pButton type="submit"
                       class="button-primary form-field-large"
                       [textContent]="'portal.components.login.buttons.login' | translate"
                       [disabled]="loginForm.invalid"></button>
@@ -26,8 +24,9 @@
             </div>
           </div>
         </form>
-        <div *ngIf="httpError">
+        <div *ngIf="httpError && !asyncOperationsStatus.isProcessingRequest">
           {{httpError.description}}
+          <app-errors></app-errors>
         </div>
       </div>
     </p-card>

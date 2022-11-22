@@ -3,6 +3,7 @@ import {MenuItem} from "primeng/api";
 import {TranslateService} from "@ngx-translate/core";
 import {LanguageService} from "./language.service";
 import {PortalService} from "./portal.service";
+import {LANGUAGES} from "../constants/shared-constants";
 
 @Injectable({
   providedIn: 'root',
@@ -31,13 +32,13 @@ export class BuildMenuService {
             items: [
               {
                 label: this.translateService.instant('portal.general.userMenuSettings.english'),
-                command: () => this.languageService.changeLanguage('en'),
-                disabled: (this.translateService.currentLang) === 'en'
+                command: () => this.languageService.changeLanguage(LANGUAGES.EN),
+                disabled: (this.translateService.currentLang) === LANGUAGES.EN
               },
               {
                 label: this.translateService.instant('portal.general.userMenuSettings.portuguese'),
-                command: () => this.languageService.changeLanguage('pt'),
-                disabled: (this.translateService.currentLang) === 'pt'
+                command: () => this.languageService.changeLanguage(LANGUAGES.PT),
+                disabled: (this.translateService.currentLang) === LANGUAGES.PT
               }
             ]
           }

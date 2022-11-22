@@ -25,9 +25,13 @@ class SecurityMiddlewares {
             parsedToken = await SecurityService.getParsedToken(token);
         } catch (error) {
             logger.error(`${_fileName} : Error authenticating request : Error : ${error}`);
-            return response.status(SecurityErrors.INTERNAL_SERVER_ERROR.code).send({
-                error: SecurityErrors.INTERNAL_SERVER_ERROR
-            });
+            return (error.name === "TokenExpiredError") ?
+                response.status(SecurityErrors.TOKEN_EXPIRED.code).send({
+                    error: SecurityErrors.TOKEN_EXPIRED
+                }) :
+                response.status(SecurityErrors.INTERNAL_SERVER_ERROR.code).send({
+                    error: SecurityErrors.INTERNAL_SERVER_ERROR
+                });
         }
 
         if (!parsedToken) {

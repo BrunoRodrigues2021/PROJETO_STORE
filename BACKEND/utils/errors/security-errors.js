@@ -6,6 +6,13 @@ class SecurityErrors extends SharedErrors {
         super();
     }
 
+    static get TOKEN_EXPIRED() {
+        return {
+            code: HttpCodes.INTERNAL_SERVER_ERROR,
+            description: 'tokenExpired'
+        }
+    }
+
     static get MISSING_CREDENTIALS() {
         return {
             code: HttpCodes.UNAUTHORIZED,

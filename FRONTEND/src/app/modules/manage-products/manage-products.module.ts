@@ -1,19 +1,18 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {ManageProductsRouting} from './manage-products.routing';
+import {ManageProductsRoutingModule} from './manage-products-routing.module';
 import {ProductsListComponent} from './components/products-list/products-list.component';
 import {ProductsAddComponent} from './components/products-add/products-add.component';
+import {ProductsDetailsComponent} from './components/products-details/products-details.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ManageProductsService} from "./manage-products.service";
 
-import {ButtonModule} from 'primeng/button';
 import {PortalService} from "../../shared/services/portal.service";
 import {SharedModule} from "../../shared/shared.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {CurrencyExchangePipe} from "../../shared/pipes/currency-exchange.pipe";
 import {FormsModule} from "@angular/forms";
-import { ProductsDetailsComponent } from './components/products-details/products-details.component';
 
 
 @NgModule({
@@ -24,9 +23,8 @@ import { ProductsDetailsComponent } from './components/products-details/products
   ],
     imports: [
         CommonModule,
-        ManageProductsRouting,
+        ManageProductsRoutingModule,
         FontAwesomeModule,
-        ButtonModule,
         SharedModule,
         TranslateModule,
         FormsModule

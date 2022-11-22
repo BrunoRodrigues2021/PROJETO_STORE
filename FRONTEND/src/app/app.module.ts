@@ -19,6 +19,7 @@ import {SharedModule} from "./shared/shared.module";
 import {CommonModule} from "@angular/common";
 import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
 import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
+import {ErrorsModule} from "./master-template/template/errors/errors/errors.module";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
     BrowserAnimationsModule,
     BreadcrumbModule,
     SharedModule,
+    ErrorsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -57,7 +59,7 @@ import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
 })
 export class AppModule {
   constructor(private translateService: TranslateService) {
-    translateService.use(<string>translateService.getBrowserLang());
+    translateService.use('en');
     translateService.setDefaultLang('en');
   }
 }

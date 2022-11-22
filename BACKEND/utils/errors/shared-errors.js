@@ -53,6 +53,13 @@ class SharedErrors {
         };
     }
 
+    static get PARSING_FORM_ERROR() {
+        return {
+            code: HttpStatus.INTERNAL_SERVER_ERROR,
+            description: 'parsingFormError'
+        };
+    }
+
     /** Shared Validation Errors */
 
     static get UNEXPECT_PARAMETER() {

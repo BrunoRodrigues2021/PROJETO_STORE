@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ManageProductsService} from "../../manage-products.service";
 import {BreadcrumbService} from "../../../../shared/components/breadcrumb/breadcrumb.service";
-import {Subscription} from "rxjs";
+import {finalize, Subscription} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
 import {BreadcrumbItemList} from "../../../../shared/components/interfaces/breacrumb-interfaces";
 import {
@@ -106,7 +106,11 @@ export class ProductsListComponent implements OnInit {
         pageSize: this.productFilter.pagination.pageSize,
       }
 
-      this._manageProductsService.getProducts(getProductsRequestPayload).subscribe(
+      this._manageProductsService.getProducts(getProductsRequestPayload).pipe(
+        finalize(() =>
+          this.asyncOperationsStatus.isProcessingRequest = false
+        ))
+        .subscribe(
         {
           next: async (data) => {
             const {count, rows} = data;
@@ -124,9 +128,6 @@ export class ProductsListComponent implements OnInit {
                 .get('portal.general.error').toPromise(),
               detail: message
             });
-          },
-          complete: () => {
-            this.asyncOperationsStatus.isProcessingRequest = false;
           }
         }
 

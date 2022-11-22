@@ -1,5 +1,6 @@
 const SharedValidators = require('./shared-validators');
 const SecurityErrors = require('../../errors/security-errors');
+const UserConstants = require('../../../utils/constants/user-constants');
 const SharedValidationHelpers = require('../../validation-helpers/shared-validation-helpers');
 
 const logger = require("../../../logger");
@@ -17,7 +18,8 @@ class SecurityValidators extends SharedValidators {
 
         const errors = [
             ...this._validateCredentials(request.body),
-            ...this._validateRequestBodyParameters(request.body, ['email', 'password'])
+            ...this._validateRequestBodyParameters(request.body,
+                [UserConstants.User.EMAIL, UserConstants.User.PASSWORD])
         ];
 
         if(errors.length) {

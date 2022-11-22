@@ -1,4 +1,5 @@
 const SharedValidators = require('./shared-validators');
+const UserConstants = require("../../constants/user-constants");
 const UserErrors = require('../../errors/user-errors');
 
 const logger = require("../../../logger");
@@ -34,7 +35,8 @@ class UserValidators extends SharedValidators {
         logger.info(`${_fileName} : Validating update user information`);
 
         const errors = [
-            ...this._validateRequestBodyParameters(request.body, ['name', 'email', 'language'])
+            // ...this._validateRequestBodyParameters(request.body,
+            //     [UserConstants.User.NAME, UserConstants.User.EMAIL, UserConstants.User.LANGUAGE])
         ];
 
         if(errors.length) {

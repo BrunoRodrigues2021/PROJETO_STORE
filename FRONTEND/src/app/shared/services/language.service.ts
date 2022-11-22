@@ -3,6 +3,10 @@ import {TranslateService} from "@ngx-translate/core";
 import {BreadcrumbService} from "../components/breadcrumb/breadcrumb.service";
 import {PortalService} from "./portal.service";
 import {Router} from "@angular/router";
+import moment from 'moment';
+import {ManageUsersService} from "../../modules/manage-users/manage-users.service";
+import {AuthService} from "./auth.service";
+import {MessageService} from "primeng/api";
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +15,9 @@ export class LanguageService extends PortalService {
 
   constructor(
     private breadcrumbService: BreadcrumbService,
+    private userService: ManageUsersService,
+    private authService: AuthService,
+    private messageService: MessageService,
     translateService: TranslateService,
     router: Router
   ) {
@@ -18,30 +25,38 @@ export class LanguageService extends PortalService {
   }
 
   changeLanguage(language: string) {
-    this.breadcrumbService.clearBreadcrumb();
-    this.translateService.use(language);
-    PortalService.setLanguage(language);
+    moment.locale(language);
 
-    // this.moment.locale(language);
+    const formData: FormData = new FormData();
+    formData.append('language', language);
+
+    // let payload = {};
     //
-    // this.hideOverlay();
-    //
-    // const formData: FormData = new FormData();
-    // formData.append('language', language);
-    //
-    // this.userService.updateUserInfo(formData)
-    //   .pipe(finalize(() => {
-    //   }))
-    //   .subscribe(
-    //     async () => {
-    //       this.translateService.use(language);
-    //       localStorage.setItem(PortalService.LANGUAGE_STORAGE_KEY, language);
-    //     },
-    //     async () => {
-    //       const message = await this.translateService.get('app.editAccountPage.errors.couldNotUpdateLanguage').toPromise();
-    //       this.messageService.add({severity: 'error', summary: 'Error', detail: message});
-    //     }
-    //   )
+    // if (language) {
+    //   payload['language'] = language;
+    // }
+
+    this.userService.updateUser(this.authService.getParsedToken().userData.id, formData).subscribe(
+      {
+        next: async () => {
+          this.breadcrumbService.clearBreadcrumb();
+          this.translateService.use(language);
+          PortalService.setLanguage(language);
+        },
+        error: async () => {
+          const message = await this.translateService
+            .get('portal.general.error').toPromise();
+
+          this.messageService.add({
+            severity: 'error',
+            summary: await this.translateService
+              .get('portal.general.error').toPromise(),
+            detail: message
+          });
+        }
+      }
+
+    );
   }
 
   public getCurrentPortalLanguage() {
