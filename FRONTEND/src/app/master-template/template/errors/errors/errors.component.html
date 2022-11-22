@@ -1,1 +1,13 @@
-<p>errors works!</p>
+<ng-template *ngIf="errors.length > 0 else simple">
+  <div class="container-error">
+    <p>{{errors | translate}}</p>
+  </div>
+</ng-template>
+
+<ng-template #simple>
+  <span class="text-error">
+    {{'portal.components.' + component + '.errors.' + errors.description | translate}}
+  </span>
+</ng-template>
+
+

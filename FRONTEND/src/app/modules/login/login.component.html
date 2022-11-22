@@ -1,34 +1,57 @@
 <div class="main-container">
   <div class="login-container">
     <p-card>
-      <div class="content flex-column d-flex justify-content-center align-items-center">
-        <p-image src="./assets/images/store_logo_black.png" alt="Image" width="150"></p-image>
-        <form id="login_form" [formGroup]="loginForm" (ngSubmit)="executeLogin()">
-          <div class="mt-4">
-            <div class="d-flex flex-column">
-              <label for="email" class="basic-label">Email</label>
-              <input id="email" type="email" class="form-field-large p-inputtext-sm"
-                     formControlName="email" pInputText>
-              <label for="password" class="basic-label mt-2">Password</label>
-              <input id="password" type="password" class="form-field-large p-inputtext-sm"
-                     formControlName="password" pInputText>
-            </div>
+      <ng-template pTemplate="body">
+        <div class="content flex-column d-flex justify-content-center align-items-center">
+          <p-image src="./assets/images/store_logo_black.png" alt="Image" width="150"></p-image>
+          <form id="login_form" [formGroup]="loginForm" (ngSubmit)="executeLogin()">
             <div class="mt-4">
-              <button *ngIf="!asyncOperationsStatus.isProcessingRequest else loading" pButton type="submit"
-                      class="button-primary form-field-large"
-                      [textContent]="'portal.components.login.buttons.login' | translate"
-                      [disabled]="loginForm.invalid"></button>
-              <ng-template #loading>
-                <p-progressSpinner class="small-spinner"></p-progressSpinner>
-              </ng-template>
+              <div class="d-flex flex-column">
+                <label for="email" class="basic-label">Email</label>
+                <input id="email" type="email" class="form-field-large p-inputtext-sm"
+                       formControlName="email" pInputText>
+                <label for="password" class="basic-label mt-2">Password</label>
+                <input id="password" type="password" class="form-field-large p-inputtext-sm"
+                       formControlName="password" pInputText>
+              </div>
+              <div *ngIf="httpError && !asyncOperationsStatus.isProcessingRequest">
+                <app-errors component="login" [errors]="httpError"></app-errors>
+              </div>
+              <div class="mt-3">
+                <button *ngIf="!asyncOperationsStatus.isProcessingRequest else loading" pButton type="submit"
+                        class="button-primary w-100 d-flex justify-content-center"
+                        [textContent]="'portal.components.login.buttons.login' | translate"
+                        [disabled]="loginForm.invalid"></button>
+                <ng-template #loading>
+                  <p-progressSpinner class="small-spinner"></p-progressSpinner>
+                </ng-template>
+              </div>
             </div>
-          </div>
-        </form>
-        <div *ngIf="httpError && !asyncOperationsStatus.isProcessingRequest">
-          {{httpError.description}}
-          <app-errors></app-errors>
+          </form>
         </div>
-      </div>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <ng-container *ngIf="loginStep === loginSteps.LOGIN">
+          <div class="d-flex flex-column justify-content-center align-items-center">
+            <span class="text-body login-instructions">Forgot your password?</span>
+            <span class="text-body login-instructions">Reset right now</span>
+          </div>
+          <div class="d-flex flex-column justify-content-center align-items-center">
+            <button pButton type="button" class="button-tertiary"
+                    [textContent]="'portal.components.login.buttons.resetPassword' | translate"
+                    (click)="loginStep = loginSteps.RESET_PASSWORD"></button>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="loginStep === loginSteps.RESET_PASSWORD">
+          <div class="d-flex flex-column justify-content-center align-items-center">
+            <button pButton type="button" class="button-tertiary"
+                    [textContent]="'portal.general.buttons.back' | translate"
+                    (click)="loginStep = loginSteps.LOGIN"></button>
+          </div>
+        </ng-container>
+      </ng-template>
     </p-card>
   </div>
 </div>
+
+

@@ -252,3 +252,9 @@
 .text-overline {
   @include text-overline();
 }
+
+
+.text-error {
+  @extend .text-body;
+  color: $color__primary_red--dark;
+}

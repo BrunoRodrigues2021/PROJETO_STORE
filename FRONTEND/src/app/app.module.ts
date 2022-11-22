@@ -20,6 +20,7 @@ import {CommonModule} from "@angular/common";
 import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
 import {JwtInterceptor} from "./shared/interceptors/jwt.interceptor";
 import {ErrorsModule} from "./master-template/template/errors/errors/errors.module";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -39,6 +40,10 @@ import {ErrorsModule} from "./master-template/template/errors/errors/errors.modu
     BreadcrumbModule,
     SharedModule,
     ErrorsModule,
+    CommonModule,
+    RouterModule,
+    SharedModule,
+    TranslateModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

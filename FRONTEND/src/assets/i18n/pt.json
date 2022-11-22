@@ -1,6 +1,9 @@
 {
   "portal": {
     "general": {
+      "buttons": {
+        "back": "Voltar"
+      },
       "table": {
         "search": "Search",
         "paginator": "Mostrando {first} a {last} de {totalRecords} registros"
@@ -35,8 +38,16 @@
     },
     "components": {
       "login": {
+        "instructions": {
+          "resetPasswordInstruction1": "Esqueceu sua senha?",
+          "resetPasswordInstruction2": "Redefinir agora mesmo"
+        },
         "buttons": {
-          "login": "Entrar"
+          "login": "Entrar",
+          "resetPassword": "Redefinir senha"
+        },
+        "errors": {
+          "invalidCredentials": "Seu e-mail ou senha está incorreto"
         }
       },
       "product": {

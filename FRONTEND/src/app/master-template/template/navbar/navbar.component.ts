@@ -49,7 +49,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   backToHome() {
-    this.portalService.navigateTo("/portal");
+    this.portalService.navigateTo("home");
   }
 
   primeNgTranslate(lang: string) {

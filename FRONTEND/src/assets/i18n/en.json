@@ -1,6 +1,9 @@
 {
   "portal": {
     "general": {
+      "buttons": {
+        "back": "Back"
+      },
       "table": {
         "search": "Pesquisar",
         "paginator": "Showing {first} to {last} of {totalRecords} entries"
@@ -35,8 +38,16 @@
     },
     "components": {
       "login": {
+        "instructions": {
+          "resetPasswordInstruction1": "Forgot your password?",
+          "resetPasswordInstruction2": "Reset right now"
+        },
         "buttons": {
-          "login": "Login"
+          "login": "Login",
+          "resetPassword": "Reset password"
+        },
+        "errors": {
+          "invalidCredentials": "Your email or password is incorrect"
         }
       },
       "product": {

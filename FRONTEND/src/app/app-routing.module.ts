@@ -5,8 +5,6 @@ import {BrowserModule} from "@angular/platform-browser";
 import {Routes, RouterModule} from "@angular/router";
 import {LoginComponent} from "./modules/login/login.component";
 import {AuthGuard} from "./shared/guards/auth.guard";
-import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
-
 
 const routes: Routes = [
   {
@@ -15,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "portal",
+    redirectTo: "home",
     pathMatch: "full"
   },
   {

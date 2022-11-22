@@ -3,13 +3,13 @@
     <button pButton type="button"
             class="create-button button-primary"
             [label]="'portal.components.product.table.buttons.create' | translate"
-            icon="pi pi-plus"
+            icon="icon mi-add"
             [disabled]="asyncOperationsStatus.isProcessingRequest || showDetails"
             (click)=navigateToCreateProduct()></button>
     <button pButton type="button"
             class="clear-button button-secondary"
             [label]="'portal.components.product.table.buttons.clearFilters' | translate"
-            icon="pi pi-times"
+            icon="icon mi-close"
             [disabled]="asyncOperationsStatus.isProcessingRequest || showDetails"
             (click)="clearFilters()"></button>
   </div>

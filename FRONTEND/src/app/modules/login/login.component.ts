@@ -7,8 +7,8 @@ import {AuthService} from "../../shared/services/auth.service";
 import {TranslateService} from "@ngx-translate/core";
 import {MessageService} from "primeng/api";
 import {CurrencyService} from "../../shared/services/currency.service";
-import {getCurrencyResponse} from "../../shared/interfaces/currency-interfaces";
 import {finalize} from "rxjs";
+import {LoginSteps} from "./utils/login-constants";
 
 @Component({
   selector: 'app-login',
@@ -18,6 +18,9 @@ import {finalize} from "rxjs";
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   httpError: any;
+
+  loginSteps = LoginSteps;
+  loginStep = LoginSteps.LOGIN;
 
   asyncOperationsStatus = {
     isProcessingRequest: false,

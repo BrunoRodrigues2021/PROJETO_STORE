@@ -1,7 +1,33 @@
 @import "../../../assets/theme/colors";
 
-::ng-deep .p-button {
-  display: unset;
+::ng-deep {
+
+  .p-card {
+    .p-card-footer {
+      padding: 0;
+      height: 60px;
+      background-color: $color__quaternary;
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: space-around;
+
+      .row {
+        text-align: center;
+      }
+      .login-instructions {
+        font-weight: bold;
+        color: $label-gray--dark !important;
+      }
+
+      .p-button {
+        color: $color__primary--very-light;
+        font-weight: bold;
+      }
+    }
+  }
 }
 
 .main-container {
@@ -25,4 +51,10 @@
   width: 450px;
   height: 500px;
   background-color: $color__background;
+}
+
+@media (max-width: 991px) {
+  .login-container {
+    justify-content: unset;
+  }
 }
