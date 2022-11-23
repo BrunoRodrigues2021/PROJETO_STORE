@@ -1,0 +1,29 @@
+@import '../../constants';
+
+.p-checkbox .p-checkbox-box {
+  width: 16px;
+  height: 16px;;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight:hover {
+  background-color: $color__primary__very-light !important;
+  border-color: $color__primary__very-light !important;
+}
+
+.p-checkbox-box {
+  border-color: $color__primary;
+}
+
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+  box-shadow: none;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  background: $color__primary;
+  border-color: $color__primary;
+}
+
+.p-checkbox .p-checkbox-box .p-checkbox-icon {
+  font-size: $fs-very-small;
+  padding-top: 1.8px;
+}

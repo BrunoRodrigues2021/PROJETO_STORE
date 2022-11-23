@@ -64,8 +64,9 @@ class ProductService {
     }
 
     async insertProduct() {
-        const newProduct = await Product.create({
-            name: 'Leite',
+        await Product.create({
+            name: 'Produto Teste',
+            value: 1599.99,
             userId: 5
         });
     }

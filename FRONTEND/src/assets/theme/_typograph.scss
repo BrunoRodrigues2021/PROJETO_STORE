@@ -258,3 +258,8 @@
   @extend .text-body;
   color: $color__primary_red--dark;
 }
+
+.text-important {
+  color: $color__primary--very-light;
+  font-weight: bold;
+}

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {BreadcrumbService} from "../components/breadcrumb/breadcrumb.service";
 import {PortalService} from "./portal.service";
@@ -25,39 +25,37 @@ export class LanguageService extends PortalService {
     super(router, translateService);
   }
 
-  changeLanguage(language: string) {
+  changeLanguage(language: string, updateLanguage: boolean = true) {
     moment.locale(language);
 
     const formData: FormData = new FormData();
     formData.append('language', language);
+    if (updateLanguage) {
+      this.userService.updateUser(this.authService.getParsedToken().userData.id, formData).subscribe(
+        {
+          next: async () => {
+            this.breadcrumbService.clearBreadcrumb();
+            this.translateService.use(language);
+            PortalService.setLanguage(language);
+          },
+          error: async () => {
+            const message = await lastValueFrom(this.translateService
+              .get('portal.general.error'));
 
-    // let payload = {};
-    //
-    // if (language) {
-    //   payload['language'] = language;
-    // }
-
-    this.userService.updateUser(this.authService.getParsedToken().userData.id, formData).subscribe(
-      {
-        next: async () => {
-          this.breadcrumbService.clearBreadcrumb();
-          this.translateService.use(language);
-          PortalService.setLanguage(language);
-        },
-        error: async () => {
-          const message = await lastValueFrom(this.translateService
-            .get('portal.general.error'));
-
-          this.messageService.add({
-            severity: 'error',
-            summary: await lastValueFrom(this.translateService
-              .get('portal.general.error')),
-            detail: message
-          });
+            this.messageService.add({
+              severity: 'error',
+              summary: await lastValueFrom(this.translateService
+                .get('portal.general.error')),
+              detail: message
+            });
+          }
         }
-      }
-
-    );
+      );
+    } else {
+      this.breadcrumbService.clearBreadcrumb();
+      this.translateService.use(language);
+      PortalService.setLanguage(language);
+    }
   }
 
   public getCurrentPortalLanguage() {

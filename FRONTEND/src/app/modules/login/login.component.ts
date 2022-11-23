@@ -62,6 +62,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   executeLogin() {
+    this.httpError = null;
     this.asyncOperationsStatus.isProcessingRequest = true;
 
     this.loginService.sendLoginRequest(this.loginForm.value.email, this.loginForm.value.password).pipe(

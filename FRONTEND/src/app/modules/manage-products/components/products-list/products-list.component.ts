@@ -33,6 +33,7 @@ export class ProductsListComponent implements OnInit {
   SORT_BYS: typeof ProductSortBy = ProductSortBy;
 
   itemSelected = null;
+  selectedProducts = [];
 
   productFilter: ProductFilters = new ProductFilters();
 
@@ -136,6 +137,10 @@ export class ProductsListComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async deleteSelectedProducts() {
+    console.log(this.selectedProducts)
   }
 
   async showItemDetails(tableItemSelected) {

@@ -8,6 +8,12 @@
             (click)=navigateToCreateProduct()></button>
     <button pButton type="button"
             class="clear-button button-secondary"
+            [label]="'portal.components.product.list.table.buttons.delete' | translate"
+            icon="icon mi-delete"
+            [disabled]="asyncOperationsStatus.isProcessingRequest || itemSelected || !selectedProducts.length"
+            (click)="deleteSelectedProducts()"></button>
+    <button pButton type="button"
+            class="clear-button button-secondary"
             [label]="'portal.components.product.list.table.buttons.clearFilters' | translate"
             icon="icon mi-close"
             [disabled]="asyncOperationsStatus.isProcessingRequest || itemSelected"
@@ -16,14 +22,12 @@
 </section>
 <section class="section-list">
   <div class="table-wrapper">
-    <p-table responsiveLayout="scroll" [value]="products" [loading]="true" [showLoader]="false" selectionMode="single" dataKey="id" [(selection)]="itemSelected">
+    <p-table responsiveLayout="scroll" [value]="products" [loading]="true" [showLoader]="false" dataKey="id" [(selection)]="selectedProducts">
       <ng-template pTemplate="header">
         <tr>
-          <th [translate]="'portal.components.product.list.table.headers.product'"></th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="header">
-        <tr>
+          <th class="table-checkbox">
+            <p-tableHeaderCheckbox [disabled]="itemSelected"></p-tableHeaderCheckbox>
+          </th>
           <!-- Column Header: Product -->
           <td>
             <div class="d-flex flex-column">
@@ -103,9 +107,15 @@
       </ng-template>
       <ng-template pTemplate="body" let-product>
         <tr [pSelectableRow]="product"
-          *ngIf="!asyncOperationsStatus.isProcessingRequest" (click)="showItemDetails(product)">
+          *ngIf="!asyncOperationsStatus.isProcessingRequest">
+          <td  class="table-checkbox">
+            <p-tableCheckbox [value]="product" [disabled]="itemSelected"></p-tableCheckbox>
+          </td>
           <td>{{product.name}}</td>
-          <td>{{product.value | currencyExchange | currency : currencyCode}}</td>
+          <td>
+            {{product.value | currencyExchange | currency : currencyCode}}
+            <button type="button" pButton pRipple icon="icon mi-more_vert" class="btn-test" (click)="showItemDetails(product)"></button>
+          </td>
         </tr>
       </ng-template>
     </p-table>

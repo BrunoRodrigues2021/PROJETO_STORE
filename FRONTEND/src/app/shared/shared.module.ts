@@ -16,6 +16,7 @@ import {CurrencyExchangePipe} from './pipes/currency-exchange.pipe';
 import {PaginatorModule} from "primeng/paginator";
 import {SidebarModule} from "primeng/sidebar";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {CheckboxModule} from "primeng/checkbox";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     PaginatorModule,
     SidebarModule,
     ConfirmDialogModule,
+    CheckboxModule
   ],
   providers: [MessageService, ConfirmationService],
   exports: [
@@ -56,6 +58,7 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     PaginatorModule,
     SidebarModule,
     ConfirmDialogModule,
+    CheckboxModule
   ],
   bootstrap: []
 })

@@ -4,6 +4,7 @@ import {finalize, lastValueFrom} from "rxjs";
 import {ManageProductsService} from "../../manage-products.service";
 import {Product} from "../../utils/models/product.model";
 import {TranslateService} from "@ngx-translate/core";
+import {PortalService} from "../../../../shared/services/portal.service";
 
 @Component({
   selector: 'app-products-details',
@@ -12,6 +13,7 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class ProductsDetailsComponent implements OnInit, OnChanges {
   product: Product;
+  dateFormat;
 
   @Input() productId: number;
   @Output() closeDetailsEvent = new EventEmitter<boolean>();
@@ -33,6 +35,8 @@ export class ProductsDetailsComponent implements OnInit, OnChanges {
   ) {}
 
   async ngOnInit() {
+    this.dateFormat = PortalService.getCurrentDateFormat();
+    console.log(this.dateFormat)
     this.currencyCode = await lastValueFrom(this.translateService.get('portal.general.currency'));
   }
 
@@ -58,6 +62,7 @@ export class ProductsDetailsComponent implements OnInit, OnChanges {
           {
             next: async (data) => {
               this.product = data;
+              console.log(this.product.updatedAt);
             },
             error: async () => {
               const message = await lastValueFrom(this.translateService

@@ -53,6 +53,11 @@
   background-color: $color__background;
 }
 
+form {
+  padding: 0 30px;
+  width: 100%;
+}
+
 @media (max-width: 991px) {
   .login-container {
     justify-content: unset;

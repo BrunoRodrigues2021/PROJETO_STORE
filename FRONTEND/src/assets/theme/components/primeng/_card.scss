@@ -3,4 +3,7 @@
 .p-card {
   position: relative;
   border-radius: 0;
+  .p-card-content {
+    padding: 0;
+  }
 }

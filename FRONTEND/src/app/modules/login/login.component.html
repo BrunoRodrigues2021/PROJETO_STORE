@@ -5,16 +5,13 @@
         <div class="content flex-column d-flex justify-content-center align-items-center">
           <p-image src="./assets/images/store_logo_black.png" alt="Image" width="150"></p-image>
           <ng-container *ngIf="loginStep === loginSteps.LOGIN">
-          <form id="login_form" [formGroup]="loginForm" (ngSubmit)="executeLogin()">
-            <div class="mt-4">
-              <div class="d-flex flex-column">
-                <label for="email" class="basic-label">Email</label>
-                <input id="email" type="email" class="form-field-large p-inputtext-sm"
-                       formControlName="email" pInputText>
-                <label for="password" class="basic-label mt-2">Password</label>
-                <input id="password" type="password" class="form-field-large p-inputtext-sm"
-                       formControlName="password" pInputText>
-              </div>
+            <form id="login_form" [formGroup]="loginForm" (ngSubmit)="executeLogin()">
+              <label for="email" class="basic-label">Email</label>
+              <input id="email" type="email" class="p-inputtext-sm"
+                     formControlName="email" pInputText>
+              <label for="password" class="basic-label mt-2">Password</label>
+              <input id="password" type="password" class="p-inputtext-sm"
+                     formControlName="password" pInputText>
               <div *ngIf="httpError && !asyncOperationsStatus.isProcessingRequest">
                 <app-errors component="login" [errors]="httpError"></app-errors>
               </div>
@@ -23,29 +20,26 @@
                         class="button-primary w-100 d-flex justify-content-center"
                         [textContent]="'portal.components.login.buttons.login' | translate"
                         [disabled]="loginForm.invalid"></button>
-                <ng-template [ngTemplateOutlet]="loading" *ngIf="asyncOperationsStatus.isProcessingRequest"></ng-template>
+                <ng-template [ngTemplateOutlet]="loading"
+                             *ngIf="asyncOperationsStatus.isProcessingRequest"></ng-template>
               </div>
-            </div>
-          </form>
+            </form>
           </ng-container>
           <ng-container *ngIf="loginStep === loginSteps.RESET_PASSWORD">
             <form id="reset_password_form" [formGroup]="resetPasswordForm" (ngSubmit)="resetPassword()">
-              <div class="mt-4">
-                <div class="d-flex flex-column">
-                  <label for="email" class="basic-label">Email</label>
-                  <input id="email_reset_password" type="email" class="form-field-large p-inputtext-sm"
-                         formControlName="email" pInputText>
-                </div>
-                <div *ngIf="httpError && !asyncOperationsStatus.isProcessingRequest">
-                  <app-errors component="login" [errors]="httpError"></app-errors>
-                </div>
-                <div class="mt-3">
-                  <button *ngIf="!asyncOperationsStatus.isProcessingRequest" pButton type="submit"
-                          class="button-primary w-100 d-flex justify-content-center"
-                          [textContent]="'portal.general.buttons.send' | translate"
-                          [disabled]="resetPasswordForm.invalid"></button>
-                  <ng-template [ngTemplateOutlet]="loading" *ngIf="asyncOperationsStatus.isProcessingRequest"></ng-template>
-                </div>
+              <h3 class="text-body-tall text-important"
+                  [translate]="'portal.components.login.labels.resetPasswordTitle'"></h3>
+              <p class="text-body" [translate]="'portal.components.login.labels.resetPasswordDescription'"></p>
+              <label for="email_reset_password" class="basic-label">Email</label>
+              <input id="email_reset_password" type="email" class="p-inputtext-sm"
+                     formControlName="email" pInputText>
+              <div class="mt-3">
+                <button *ngIf="!asyncOperationsStatus.isProcessingRequest" pButton type="submit"
+                        class="button-primary w-100 d-flex justify-content-center"
+                        [textContent]="'portal.general.buttons.send' | translate"
+                        [disabled]="resetPasswordForm.invalid"></button>
+                <ng-template [ngTemplateOutlet]="loading"
+                             *ngIf="asyncOperationsStatus.isProcessingRequest"></ng-template>
               </div>
             </form>
           </ng-container>
@@ -54,8 +48,10 @@
       <ng-template pTemplate="footer">
         <ng-container *ngIf="loginStep === loginSteps.LOGIN">
           <div class="d-flex flex-column justify-content-center align-items-center">
-            <span class="text-body login-instructions">Forgot your password?</span>
-            <span class="text-body login-instructions">Reset right now</span>
+            <span class="text-body login-instructions"
+                  [translate]="'portal.components.login.labels.resetPasswordInstruction1'"></span>
+            <span class="text-body login-instructions"
+                  [translate]="'portal.components.login.labels.resetPasswordInstruction2'"></span>
           </div>
           <div class="d-flex flex-column justify-content-center align-items-center">
             <button pButton type="button" class="button-tertiary"

@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {getCurrencyResponse} from "../interfaces/currency-interfaces";
+import {DATE_FORMAT, LANGUAGES} from "../constants/shared-constants";
 
 @Injectable()
 export class PortalService {
@@ -45,6 +46,18 @@ export class PortalService {
 
   static setCurrencyExchangeRate(currency: getCurrencyResponse) {
     localStorage.setItem(PortalService.CURRENCY_STORAGE_KEY, JSON.stringify(currency));
+  }
+
+  static getCurrentDateFormat() {
+    console.log(this.getLanguage())
+    if (this.getLanguage() === LANGUAGES.EN) {
+      console.log("EN")
+      return DATE_FORMAT.EN;
+    } else if (this.getLanguage() === LANGUAGES.PT) {
+      console.log("PT")
+      return DATE_FORMAT.PT;
+    }
+    return DATE_FORMAT.EN;
   }
 
   userLogout() {

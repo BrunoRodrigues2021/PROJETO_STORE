@@ -38,20 +38,25 @@
           "userDelete": "Deletar usuário"
         }
       },
-      "error": "Algo deu errado"
+      "errors": {
+        "genericError": "Algo deu errado"
+      }
     },
     "components": {
       "login": {
-        "instructions": {
+        "labels": {
           "resetPasswordInstruction1": "Esqueceu sua senha?",
-          "resetPasswordInstruction2": "Redefinir agora mesmo"
+          "resetPasswordInstruction2": "Redefinir agora mesmo",
+          "resetPasswordTitle": "Redefinir senha",
+          "resetPasswordDescription": "Por favor, digite seu e-mail e ele caso exista em nosso sistema, enviaremos um e-mail para você recuperar sua senha"
         },
         "buttons": {
           "login": "Entrar",
           "resetPassword": "Redefinir senha"
         },
         "errors": {
-          "invalidCredentials": "Seu e-mail ou senha está incorreto"
+          "invalidCredentials": "Seu e-mail ou senha está incorreto",
+          "undefined": "Ocorreu um erro desconhecido"
         }
       },
       "product": {
@@ -63,6 +68,7 @@
             },
             "buttons": {
               "create": "Criar novo produto",
+              "delete":  "Excluir selecionados",
               "clearFilters": "Limpar filtros"
             }
           }

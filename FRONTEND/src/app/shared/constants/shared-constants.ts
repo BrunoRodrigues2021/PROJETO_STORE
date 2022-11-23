@@ -14,10 +14,12 @@ export const LANGUAGES = {
   PT: 'pt'
 }
 
+export const DATE_FORMAT = {
+  EN: {date: 'MM/dd/yyyy hh:mm a', timezone: 'GMT-5'},
+  PT: {date: 'dd/MM/yyyy hh:mm a', timezone: 'GMT-3'}
+}
+
 export enum SortOrder {
   ASC = 'ASC',
   DESC  ='DESC'
 }
-
-
-

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 import {ManageProductsRoutingModule} from './manage-products-routing.module';
 import {ProductsListComponent} from './components/products-list/products-list.component';
@@ -30,7 +30,8 @@ import {FormsModule} from "@angular/forms";
   providers: [
     ManageProductsService,
     PortalService,
-    CurrencyExchangePipe
+    CurrencyExchangePipe,
+    DatePipe
   ]
 })
 export class ManageProductsModule {

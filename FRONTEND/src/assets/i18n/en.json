@@ -38,20 +38,25 @@
           "userDelete": "User delete"
         }
       },
-      "error": "Something went wrong"
+      "errors": {
+        "genericError": "Something went wrong"
+      }
     },
     "components": {
       "login": {
-        "instructions": {
+        "labels": {
           "resetPasswordInstruction1": "Forgot your password?",
-          "resetPasswordInstruction2": "Reset right now"
+          "resetPasswordInstruction2": "Reset right now",
+          "resetPasswordTitle": "Reset password",
+          "resetPasswordDescription": "Please enter your email and if it exists in our system, we will send you an email to recover your password"
         },
         "buttons": {
           "login": "Login",
           "resetPassword": "Reset password"
         },
         "errors": {
-          "invalidCredentials": "Your email or password is incorrect"
+          "invalidCredentials": "Your email or password is incorrect",
+          "undefined": "An unknown error has occurred"
         }
       },
       "product": {
@@ -63,6 +68,7 @@
             },
             "buttons": {
               "create": "Create new product",
+              "delete":  "Delete selected",
               "clearFilters": "Clear filters"
             }
           }
