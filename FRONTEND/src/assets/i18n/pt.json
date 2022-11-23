@@ -2,7 +2,11 @@
   "portal": {
     "general": {
       "buttons": {
-        "back": "Voltar"
+        "next": "Próximo",
+        "back": "Voltar",
+        "send": "Enviar",
+        "yes": "Sim",
+        "no": "Não"
       },
       "table": {
         "search": "Search",
@@ -51,14 +55,24 @@
         }
       },
       "product": {
-        "table": {
-          "headers": {
+        "list": {
+          "table": {
+            "headers": {
+              "product": "Produto",
+              "value": "Valor (BRL)"
+            },
+            "buttons": {
+              "create": "Criar novo produto",
+              "clearFilters": "Limpar filtros"
+            }
+          }
+        },
+        "details": {
+          "fields": {
             "product": "Produto",
-            "value": "Valor (BRL)"
-          },
-          "buttons": {
-            "create": "Criar novo produto",
-            "clearFilters": "Limpar filtros"
+            "value": "Valor",
+            "createdAt": "Data de criação",
+            "updatedAt": "Ultima atualização"
           }
         }
       }

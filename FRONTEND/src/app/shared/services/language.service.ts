@@ -7,6 +7,7 @@ import moment from 'moment';
 import {ManageUsersService} from "../../modules/manage-users/manage-users.service";
 import {AuthService} from "./auth.service";
 import {MessageService} from "primeng/api";
+import {lastValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
@@ -44,13 +45,13 @@ export class LanguageService extends PortalService {
           PortalService.setLanguage(language);
         },
         error: async () => {
-          const message = await this.translateService
-            .get('portal.general.error').toPromise();
+          const message = await lastValueFrom(this.translateService
+            .get('portal.general.error'));
 
           this.messageService.add({
             severity: 'error',
-            summary: await this.translateService
-              .get('portal.general.error').toPromise(),
+            summary: await lastValueFrom(this.translateService
+              .get('portal.general.error')),
             detail: message
           });
         }

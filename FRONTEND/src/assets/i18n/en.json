@@ -2,7 +2,11 @@
   "portal": {
     "general": {
       "buttons": {
-        "back": "Back"
+        "next": "Next",
+        "back": "Back",
+        "send": "Send",
+        "yes": "Yes",
+        "no": "No"
       },
       "table": {
         "search": "Pesquisar",
@@ -51,14 +55,24 @@
         }
       },
       "product": {
-        "table": {
-          "headers": {
+        "list": {
+          "table": {
+            "headers": {
+              "product": "Product",
+              "value": "Value (USD)"
+            },
+            "buttons": {
+              "create": "Create new product",
+              "clearFilters": "Clear filters"
+            }
+          }
+        },
+        "details": {
+          "fields": {
             "product": "Product",
-            "value": "Value (USD)"
-          },
-          "buttons": {
-            "create": "Create new product",
-            "clearFilters": "Clear filters"
+            "value": "Value",
+            "createdAt": "Creation date",
+            "updatedAt": "Last update"
           }
         }
       }

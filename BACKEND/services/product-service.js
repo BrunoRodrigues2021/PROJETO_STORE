@@ -44,7 +44,7 @@ class ProductService {
         }
     }
 
-    async getProductByParam(param, value) {
+    async getProductByParam(param = 'id', value) {
         let product;
 
         try {
@@ -59,6 +59,8 @@ class ProductService {
         if (!product) {
             throw ProductErrors.PRODUCT_NOT_FOUND;
         }
+
+        return product;
     }
 
     async insertProduct() {

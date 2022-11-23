@@ -285,6 +285,8 @@ $button-color-disabled: rgba(0, 0, 0, 0.36);
   @extend .p-button-outlined;
   @extend .p-button-rounded;
   min-width: 75px;
+  display: flex;
+  justify-content: center;
 }
 
 .button-tertiary {

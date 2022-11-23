@@ -34,6 +34,10 @@
   cursor: pointer;
   background-color: $color__surface !important;
   outline-color: $color__surface !important;
+
+  &.p-highlight {
+    background-color: $color__background !important;
+  }
 }
 
 .p-datatable .p-datatable-tbody > tr > td,

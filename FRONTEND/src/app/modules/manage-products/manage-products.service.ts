@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {getProductsResponse} from "./interfaces/product-response-interface";
 import {PortalService} from "../../shared/services/portal.service";
 import {GetProductsRequest} from "./interfaces/product-request-interfaces";
+import {Product} from "./utils/models/product.model";
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,11 @@ export class ManageProductsService extends PortalService {
     }
 
     return this.http.get<getProductsResponse>(this.baseUrl, {headers, params});
+  }
+
+  getProduct(productId: number): Observable<Product> {
+    const headers = this.setupHeaders();
+    const url = this.baseUrl + "/" + productId
+    return this.http.get<Product>(url, {headers});
   }
 }

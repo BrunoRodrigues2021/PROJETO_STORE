@@ -18,7 +18,7 @@ class ProductController {
         );
 
         router.get('/:id',
-            this._handleGetProductById
+            this._handleGetProduct
         );
 
         router.post('/',
@@ -26,6 +26,7 @@ class ProductController {
         );
 
         router.patch('/:id',
+            SecurityMiddlewares.authenticateRequest,
             this._handleUpdateProduct
         );
 
@@ -49,18 +50,14 @@ class ProductController {
         }
     }
 
-    async _handleGetProductById(request, response) {
-        logger.info(`${_fileName} : Getting all products`);
+    async _handleGetProduct(request, response) {
+        logger.info(`${_fileName} : Getting product ${+request.params.id}`);
         try {
-            const id = request.params.product_id;
-
-            logger.info(`${_fileName} : Successfully getting all products`);
-            response.status(StatusCodes.OK).send({
-                message: 'Using GET product By ID',
-                id: id
-            });
+            logger.info(`${_fileName} : Successfully getting product ${+request.params.id}`);
+            const product = await  ProductService.getProductByParam('id', +request.params.id);
+            response.status(StatusCodes.OK).send(product);
         } catch (error) {
-            logger.error(`${_fileName} : Error getting all products : Error: ${JSON.stringify(error)}`);
+            logger.error(`${_fileName} : Error getting product ${+request.params.id} : Error: ${JSON.stringify(error)}`);
             response.status(error.code).send({error: error});
         }
     }

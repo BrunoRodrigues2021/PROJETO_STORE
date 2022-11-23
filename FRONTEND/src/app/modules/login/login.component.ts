@@ -7,7 +7,7 @@ import {AuthService} from "../../shared/services/auth.service";
 import {TranslateService} from "@ngx-translate/core";
 import {MessageService} from "primeng/api";
 import {CurrencyService} from "../../shared/services/currency.service";
-import {finalize} from "rxjs";
+import {finalize, lastValueFrom} from "rxjs";
 import {LoginSteps} from "./utils/login-constants";
 
 @Component({
@@ -17,6 +17,7 @@ import {LoginSteps} from "./utils/login-constants";
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
+  resetPasswordForm: FormGroup;
   httpError: any;
 
   loginSteps = LoginSteps;
@@ -47,6 +48,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8), Validators.email]],
       password: ['', [Validators.required, Validators.maxLength(64), Validators.minLength(8)]]
+    });
+
+    this.resetPasswordForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.maxLength(128), Validators.minLength(8), Validators.email]],
     });
   }
 
@@ -119,6 +124,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     //   );
   }
 
+  resetPassword() {
+
+  }
+
   loadCurrencyExchangeRate() {
     this.currencyService.getExchangeCurrencyRate().subscribe(
       {
@@ -126,13 +135,13 @@ export class LoginComponent implements OnInit, OnDestroy {
           CurrencyService.setCurrencyExchangeRate(data);
         },
         error: async () => {
-          const message = await this.translateService
-            .get('portal.general.error').toPromise();
+          const message = await lastValueFrom(this.translateService
+            .get('portal.general.error'));
 
           this.messageService.add({
             severity: 'error',
-            summary: await this.translateService
-              .get('portal.general.error').toPromise(),
+            summary: await lastValueFrom(this.translateService
+              .get('portal.general.error')),
             detail: message
           });
         }

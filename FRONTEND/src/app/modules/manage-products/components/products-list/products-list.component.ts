@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ManageProductsService} from "../../manage-products.service";
 import {BreadcrumbService} from "../../../../shared/components/breadcrumb/breadcrumb.service";
-import {finalize, Subscription} from "rxjs";
+import {finalize, lastValueFrom, Subscription} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
 import {BreadcrumbItemList} from "../../../../shared/components/interfaces/breacrumb-interfaces";
 import {
@@ -25,7 +25,6 @@ import {PortalService} from "../../../../shared/services/portal.service";
 export class ProductsListComponent implements OnInit {
   products: Product[] = [];
   currencyCode = CURRENCY_EXCHANGE_RATE.EN
-
   DEFAULT_PAGINATION_PARAMETERS = DEFAULT_PAGINATION_PARAMETERS;
 
   productsCount = 0;
@@ -33,7 +32,7 @@ export class ProductsListComponent implements OnInit {
   SORT_ORDERS: typeof SortOrder = SortOrder;
   SORT_BYS: typeof ProductSortBy = ProductSortBy;
 
-  showDetails = null;
+  itemSelected = null;
 
   productFilter: ProductFilters = new ProductFilters();
 
@@ -64,13 +63,14 @@ export class ProductsListComponent implements OnInit {
     ];
 
     this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
-    this.currencyCode = await this.translateService.get('portal.general.currency').toPromise();
+    this.currencyCode = await lastValueFrom(this.translateService.get('portal.general.currency'));
 
     this.languageSubscription = this.translateService.onLangChange.subscribe(async () => {
       this.breadcrumbService.clearBreadcrumb();
       this.breadcrumbService.pushBreadcrumb(breadcrumbPages);
-      this.currencyCode = await this.translateService.get('portal.general.currency').toPromise();
+      this.currencyCode = await lastValueFrom(this.translateService.get('portal.general.currency'));
 
+      await this.closeItemDetails(true);
       await this.clearFilters();
     });
   }
@@ -119,13 +119,13 @@ export class ProductsListComponent implements OnInit {
             this.productsCount = count;
           },
           error: async () => {
-            const message = await this.translateService
-              .get('portal.general.error').toPromise();
+            const message = await lastValueFrom(this.translateService
+              .get('portal.general.error'));
 
             this.messageService.add({
               severity: 'error',
-              summary: await this.translateService
-                .get('portal.general.error').toPromise(),
+              summary: await lastValueFrom(this.translateService
+                .get('portal.general.error')),
               detail: message
             });
           }
@@ -138,12 +138,12 @@ export class ProductsListComponent implements OnInit {
     }
   }
 
-  showItemDetails(tableItemSelected): void {
-    this.showDetails = {...tableItemSelected};
+  async showItemDetails(tableItemSelected) {
+    this.itemSelected = {...tableItemSelected};
   }
 
-  async closeItemDetails(refresh: boolean) {
-    this.showDetails = null;
+  async closeItemDetails(refresh: boolean = false) {
+    this.itemSelected = null;
     if (refresh) {
       await this.loadProducts(true);
     }

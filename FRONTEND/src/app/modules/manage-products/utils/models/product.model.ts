@@ -1,6 +1,7 @@
 export class Product {
   private _id: number;
   private _name: string;
+  private _value: number;
   private _createdAt: string;
   private _updatedAt: string;
   private _userId: number;
@@ -21,6 +22,14 @@ export class Product {
 
   set name(value: string) {
     this._name = value;
+  }
+
+  get value(): number {
+    return this._value;
+  }
+
+  set value(value: number) {
+    this._value = value;
   }
 
   get createdAt(): string {
