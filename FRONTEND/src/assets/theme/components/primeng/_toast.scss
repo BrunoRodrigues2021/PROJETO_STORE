@@ -1,0 +1,44 @@
+@import '../../constants';
+
+.p-toast {
+  z-index: 250 !important;
+}
+
+.p-toast .p-toast-message .p-toast-message-content {
+  padding: 7px 14px;
+}
+
+.p-toast-icon-close-icon {
+  font-size: 20px;
+}
+
+.p-toast .p-toast-message.p-toast-message-success {
+  background-color: $toast-status-success;
+}
+
+.p-toast .p-toast-message.p-toast-message-error {
+  background-color: $toast-status-error;
+}
+
+.p-toast.p-component {
+  width: 280px;
+}
+
+.p-toast .p-toast-message .p-toast-message-content .p-toast-detail {
+  word-break: break-word;
+  height: auto;
+  font-size: $fs-default;
+  font-family: $default-font-family;
+  margin: 0;
+}
+.p-toast-message-icon {
+  display: none;
+}
+.p-toast-icon-close {
+  &:hover {
+    background-color: transparent !important;
+  }
+  &:focus {
+    box-shadow: none !important;
+  }
+}

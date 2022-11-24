@@ -7,6 +7,7 @@ const SecurityMiddlewares = require("../utils/middlewares/security-middlewares")
 
 const logger = require('../logger');
 const path = require('path');
+const ParseMiddlewares = require("../utils/middlewares/parse-middlewares");
 const _fileName = path.basename(__filename);
 
 class ProductController {
@@ -18,10 +19,12 @@ class ProductController {
         );
 
         router.get('/:id',
+            SecurityMiddlewares.authenticateRequest,
             this._handleGetProduct
         );
 
         router.post('/',
+            SecurityMiddlewares.authenticateRequest,
             this._handleInsertProducts
         );
 
@@ -31,6 +34,8 @@ class ProductController {
         );
 
         router.delete('/',
+            ParseMiddlewares.parseMultidataForm,
+            SecurityMiddlewares.authenticateRequest,
             this._handleDeleteProducts
         );
     }
@@ -88,14 +93,14 @@ class ProductController {
     }
 
     async _handleDeleteProducts(request, response) {
-        logger.info(`${_fileName} : Getting all products`);
+        logger.info(`${_fileName} : Deleting products`);
         try {
-            logger.info(`${_fileName} : Successfully getting all products`);
-            response.status(StatusCodes.OK).send({
-                message: 'Using DELETE products'
-            });
+            logger.info(`${_fileName} : Successfully deleted products`);
+            await ProductService.deleteProduct(JSON.parse(request.body.listOfProductId));
+            response.status(StatusCodes.OK).send();
         } catch (error) {
-            logger.error(`${_fileName} : Error getting all products : Error: ${JSON.stringify(error)}`);
+            logger.error(`${_fileName} : Error deleting products : Error: ${JSON.stringify(error)}`);
+            response.status(error.code).send({error: error});
         }
     }
 }

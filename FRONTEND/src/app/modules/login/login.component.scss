@@ -30,24 +30,20 @@
   }
 }
 
-.main-container {
+.login-content {
   position: absolute;
   width: 100%;
   height: 100%;
-}
-
-.login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
 }
 
 .content {
   width: 100%;
 }
 
-::ng-deep .login-container .p-card {
+::ng-deep .login-content .p-card {
   width: 450px;
   height: 500px;
   background-color: $color__background;
@@ -59,7 +55,7 @@ form {
 }
 
 @media (max-width: 991px) {
-  .login-container {
+  .login-content {
     justify-content: unset;
   }
 }

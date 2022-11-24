@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ManageProductsService} from "../../manage-products.service";
 import {BreadcrumbService} from "../../../../shared/components/breadcrumb/breadcrumb.service";
 import {finalize, lastValueFrom, Subscription} from "rxjs";
@@ -12,7 +12,7 @@ import {
 import {ProductFilters} from "../../utils/products-filters";
 import {ProductSortBy} from "../../utils/product-constants";
 import {Product} from "../../utils/models/product.model";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import {Paginator} from "primeng/paginator";
 import {GetProductsRequest} from "../../interfaces/product-request-interfaces";
 import {PortalService} from "../../../../shared/services/portal.service";
@@ -29,15 +29,18 @@ export class ProductsListComponent implements OnInit {
 
   productsCount = 0;
 
+  TESTE = [];
+
   SORT_ORDERS: typeof SortOrder = SortOrder;
   SORT_BYS: typeof ProductSortBy = ProductSortBy;
 
   itemSelected = null;
   selectedProducts = [];
+  productIsDeleted = false;
 
   productFilter: ProductFilters = new ProductFilters();
 
-  private languageSubscription: Subscription ;
+  private languageSubscription: Subscription;
 
   asyncOperationsStatus = {
     isProcessingRequest: false,
@@ -49,12 +52,14 @@ export class ProductsListComponent implements OnInit {
   @ViewChild(Paginator) paginator: Paginator;
 
   constructor(
-    private _manageProductsService: ManageProductsService,
+    private productService: ManageProductsService,
     private translateService: TranslateService,
     private messageService: MessageService,
     private breadcrumbService: BreadcrumbService,
-    private portalService: PortalService
-  ) {}
+    private portalService: PortalService,
+    private confirmationService: ConfirmationService
+  ) {
+  }
 
   async ngOnInit() {
     await this.clearFilters();
@@ -80,6 +85,14 @@ export class ProductsListComponent implements OnInit {
     this.breadcrumbService.clearBreadcrumb();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    this.productIsDeleted = changes['productDeleted'].currentValue;
+    console.log(this.productIsDeleted)
+    if(this.productIsDeleted) {
+      this.loadProducts(true);
+    }
+  }
+
   loadProducts(
     resetPagination = false,
     sortBy: ProductSortBy = this.productFilter.sortBy,
@@ -88,7 +101,6 @@ export class ProductsListComponent implements OnInit {
     this.asyncOperationsStatus.isProcessingRequest = true;
     this.products = [];
     this.productsCount = 0;
-
 
     this.productFilter.sortBy = sortBy;
     this.productFilter.sortOrder = sortOrder;
@@ -107,32 +119,31 @@ export class ProductsListComponent implements OnInit {
         pageSize: this.productFilter.pagination.pageSize,
       }
 
-      this._manageProductsService.getProducts(getProductsRequestPayload).pipe(
+      this.productService.getProducts(getProductsRequestPayload).pipe(
         finalize(() =>
           this.asyncOperationsStatus.isProcessingRequest = false
         ))
         .subscribe(
-        {
-          next: async (data) => {
-            const {count, rows} = data;
+          {
+            next: async (data) => {
+              const {count, rows} = data;
 
-            this.products = rows;
-            this.productsCount = count;
-          },
-          error: async () => {
-            const message = await lastValueFrom(this.translateService
-              .get('portal.general.error'));
+              this.products = rows;
+              this.productsCount = count;
+            },
+            error: async () => {
+              const message = await lastValueFrom(this.translateService
+                .get('portal.general.errors.genericError'));
 
-            this.messageService.add({
-              severity: 'error',
-              summary: await lastValueFrom(this.translateService
-                .get('portal.general.error')),
-              detail: message
-            });
+              this.messageService.add({
+                severity: 'error',
+                summary: await lastValueFrom(this.translateService
+                  .get('portal.general.toast.error')),
+                detail: message
+              });
+            }
           }
-        }
-
-      );
+        );
 
     } catch (error) {
       console.log(error);
@@ -140,7 +151,72 @@ export class ProductsListComponent implements OnInit {
   }
 
   async deleteSelectedProducts() {
-    console.log(this.selectedProducts)
+    const message = await lastValueFrom(this.translateService
+              .get((this.selectedProducts.length > 1) ?
+                'portal.components.product.list.toast.success.productsDelete' :
+                'portal.components.product.list.toast.success.productDelete'
+              ));
+
+            this.messageService.add({
+              severity: 'success',
+              summary: await lastValueFrom(this.translateService
+                .get('portal.general.toast.success')),
+              detail: message
+            });
+
+    // this.asyncOperationsStatus.isProcessingRequest = true;
+    //
+    // const listOfProductId = [];
+    // const formData: FormData = new FormData();
+    //
+    // this.selectedProducts.forEach(item => {
+    //   listOfProductId.push(item.id);
+    // });
+    //
+    // formData.append('listOfProductId', JSON.stringify(listOfProductId));
+    //
+    // this.productService.deleteProduct(formData).pipe(
+    //   finalize(() => {
+    //     this.asyncOperationsStatus.isProcessingRequest = false;
+    //     this.selectedProducts = [];
+    //   }))
+    //   .subscribe(
+    //     {
+    //       next: async () => {
+    //         this.loadProducts(true);
+    //
+    //         const message = await lastValueFrom(this.translateService
+    //           .get((this.selectedProducts.length > 1) ?
+    //             'portal.components.product.list.toast.success.productsDelete' :
+    //             'portal.components.product.list.toast.success.productDelete'
+    //           ));
+    //
+    //         this.messageService.add({
+    //           severity: 'success',
+    //           summary: await lastValueFrom(this.translateService
+    //             .get('portal.general.toast.success')),
+    //           detail: message
+    //         });
+    //       },
+    //       error: async () => {
+    //         const message = await lastValueFrom(this.translateService
+    //           .get('portal.components.product.list.toast.error.productDelete'));
+    //
+    //         this.messageService.add({
+    //           severity: 'error',
+    //           summary: await lastValueFrom(this.translateService
+    //             .get('portal.general.toast.error')),
+    //           detail: message
+    //         });
+    //       }
+    //     }
+    //   );
+  }
+
+  confirmDeletion() {
+    this.confirmationService.confirm({
+      key: 'deleteProductsConfirmDialog'
+    });
   }
 
   async showItemDetails(tableItemSelected) {

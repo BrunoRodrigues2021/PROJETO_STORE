@@ -5,6 +5,9 @@
         "next": "Next",
         "back": "Back",
         "send": "Send",
+        "create": "Create",
+        "done": "Done",
+        "exit": "Exit",
         "yes": "Yes",
         "no": "No"
       },
@@ -29,17 +32,19 @@
         "home": "Home",
         "products": {
           "productsList": "Products",
-          "productCreate": "Product create",
-          "productDelete": "Product delete"
+          "productCreate": "Product create"
         },
         "users":  {
           "usersList": "Users",
-          "userCreate": "User create",
-          "userDelete": "User delete"
+          "userCreate": "User create"
         }
       },
       "errors": {
         "genericError": "Something went wrong"
+      },
+      "toast": {
+        "error": "Error",
+        "success": "Success"
       }
     },
     "components": {
@@ -70,6 +75,21 @@
               "create": "Create new product",
               "delete":  "Delete selected",
               "clearFilters": "Clear filters"
+            }
+          },
+          "toast": {
+            "success": {
+              "productDelete": "The product have been deleted",
+              "productsDelete": "The products have been deleted"
+            },
+            "error": {
+              "productDelete": "The products couldn't be deleted"
+            }
+          },
+          "dialog": {
+            "productDelete": {
+              "title": "Product exclusion",
+              "description": "Are you sure you want to delete the following products?"
             }
           }
         },

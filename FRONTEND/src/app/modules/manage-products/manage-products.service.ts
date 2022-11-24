@@ -48,4 +48,9 @@ export class ManageProductsService extends PortalService {
     const url = this.baseUrl + "/" + productId
     return this.http.get<Product>(url, {headers});
   }
+
+  deleteProduct(listOfProductId: FormData): Observable<any> {
+    const headers = this.setupHeaders();
+    return this.http.delete<any>(this.baseUrl, {headers, body: listOfProductId});
+  }
 }

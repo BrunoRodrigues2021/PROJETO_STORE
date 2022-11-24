@@ -5,6 +5,9 @@
         "next": "Próximo",
         "back": "Voltar",
         "send": "Enviar",
+        "close": "Fechar",
+        "create": "Criar",
+        "exit": "Sair",
         "yes": "Sim",
         "no": "Não"
       },
@@ -29,17 +32,19 @@
         "home": "Início",
         "products": {
           "productsList": "Produtos",
-          "productCreate": "Criar produto",
-          "productDelete": "Deletar produto"
+          "productCreate": "Criar produto"
         },
         "users": {
           "usersList": "Usuários",
-          "userCreate": "Criar usuário",
-          "userDelete": "Deletar usuário"
+          "userCreate": "Criar usuário"
         }
       },
       "errors": {
         "genericError": "Algo deu errado"
+      },
+      "toast": {
+        "error": "Erro",
+        "success": "Sucesso"
       }
     },
     "components": {
@@ -71,6 +76,19 @@
               "delete":  "Excluir selecionados",
               "clearFilters": "Limpar filtros"
             }
+          },
+          "toast": {
+            "success": {
+              "productDelete": "Os produtos foram deletados"
+            },
+            "error": {
+              "productDelete": "O produto não pode ser deletado",
+              "productsDelete": "Os produtos não puderam ser deletados"
+            }
+          },
+          "productDelete": {
+            "title": "Exclusão de produto",
+            "description": "Tem certeza de que deseja excluir os seguintes produtos?"
           }
         },
         "details": {

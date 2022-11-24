@@ -1,0 +1,65 @@
+@import '../../constants';
+
+.main-container {
+  background-color: $gray-98;
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  padding: 28px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 35px;
+
+  .main-container-header {
+    width: 100%;
+
+    .container-instruction {
+      width: 300px;
+      text-align: center;
+      color: $nimbus-gray-300;
+
+      h4 {
+        @extend .text-h4-headline;
+        color: $color__primary--very-light;
+      }
+
+      dl {
+        margin-top: 2em;
+
+        dt {
+          @extend .text-subtitle-tall;
+        }
+        dd {
+          font-size: $fs-small;
+          font-family: $default-font-family;
+        }
+      }
+    }
+  }
+
+  form {
+    margin-top: 3em;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+}
+
+@media (max-width: 991px) {
+  .main-container {
+    .main-container-header {
+      .container-instruction {
+        dl, h4 {
+          margin-top: 0.7em;
+        }
+      }
+    }
+    form {
+      margin-top: 0;
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}

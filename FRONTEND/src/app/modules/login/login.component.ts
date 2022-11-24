@@ -137,12 +137,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         },
         error: async () => {
           const message = await lastValueFrom(this.translateService
-            .get('portal.general.error'));
+            .get('portal.general.errors.genericError'));
 
           this.messageService.add({
             severity: 'error',
             summary: await lastValueFrom(this.translateService
-              .get('portal.general.error')),
+              .get('portal.general.toast.error')),
             detail: message
           });
         }

@@ -11,7 +11,8 @@ import {PortalService} from "../../shared/services/portal.service";
 import {SharedModule} from "../../shared/shared.module";
 import {TranslateModule} from "@ngx-translate/core";
 import {CurrencyExchangePipe} from "../../shared/pipes/currency-exchange.pipe";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {RoundPipe} from "../../shared/pipes/round-value.pipe";
 
 
 @NgModule({
@@ -25,13 +26,15 @@ import {FormsModule} from "@angular/forms";
         ManageProductsRoutingModule,
         SharedModule,
         TranslateModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
   providers: [
     ManageProductsService,
     PortalService,
     CurrencyExchangePipe,
-    DatePipe
+    DatePipe,
+    RoundPipe
   ]
 })
 export class ManageProductsModule {

@@ -1,1 +1,54 @@
-<p>products-add works!</p>
+<div class="main-container">
+  <div class="main-container-header">
+    <p-steps [model]="stepItems" [activeIndex]="activeStep"></p-steps>
+    <div class="d-flex justify-content-center">
+      <div class="container-instruction">
+        <h4>Product creation</h4>
+        <dl>
+          <dt>Please provide the following information to perform the creation</dt>
+          <dd>* require field</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <form id="login_form" [formGroup]="productCreationForm" (ngSubmit)="createProduct()">
+    <div class="row">
+      <div class="col-sm-6">
+        <label for="name" class="basic-label">Product name</label>
+        <input id="name" type="text" class="p-inputtext-sm"
+               formControlName="name" pInputText>
+      </div>
+      <div class="col-sm-6">
+        <label for="value" class="basic-label">Product value</label>
+        <input id="value" type="text" class="p-inputtext-sm"
+               formControlName="value" pInputText>
+      </div>
+    </div>
+    <div class="mt-5">
+      <div class="d-flex flex-row-reverse justify-content-between">
+        <button *ngIf="!asyncOperationsStatus.isProcessingRequest && activeStep + 1 < stepItems.length" pButton type="submit"
+                class="button-tertiary d-flex justify-content-center"
+                icon="icon mi-east"
+                iconPos="right"
+                [label]="'portal.general.buttons.next' | translate"
+                [disabled]="activeStep + 1 === stepItems.length"
+                (click)="activeStep = activeStep + 1"></button>
+        <button *ngIf="!asyncOperationsStatus.isProcessingRequest && activeStep + 1 === stepItems.length" pButton type="submit"
+                class="button-tertiary d-flex justify-content-center"
+                icon="icon mi-check"
+                iconPos="right"
+                [label]="'portal.general.buttons.create' | translate"></button>
+        <button *ngIf="!asyncOperationsStatus.isProcessingRequest" pButton type="submit"
+                class="button-tertiary d-flex justify-content-center"
+                icon="icon mi-west"
+                [label]="'portal.general.buttons.back' | translate"
+                [disabled]="activeStep === 0"
+                (click)="activeStep = activeStep - 1"></button>
+        <button pButton type="submit"
+                class="button-tertiary-danger d-flex justify-content-center"
+                icon="icon mi-logout"
+                [label]="'portal.general.buttons.exit' | translate"></button>
+      </div>
+    </div>
+  </form>
+</div>

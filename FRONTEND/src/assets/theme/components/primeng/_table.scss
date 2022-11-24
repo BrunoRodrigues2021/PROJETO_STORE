@@ -6,6 +6,7 @@
 .p-datatable-wrapper {
   background-color: $color__surface;
   padding: 14px 24px;
+  border-radius: 5px;
 }
 
 .p-datatable-thead {
@@ -32,6 +33,10 @@
   th .p-checkbox .p-checkbox-box {
     margin-top: 12px;
   }
+}
+
+.p-datatable .p-datatable-tbody td button {
+  float: right;
 }
 
 .p-datatable .p-datatable-tbody > tr {
@@ -339,4 +344,9 @@ p-columnfilter {
     background-color: $color__secondary--light;
     box-shadow: none;
   }
+}
+
+.table-checkbox {
+  width: 0 !important;
+  padding: 0 0 0 15px!important;
 }

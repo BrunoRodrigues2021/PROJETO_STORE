@@ -17,6 +17,7 @@ export class ProductsDetailsComponent implements OnInit, OnChanges {
 
   @Input() productId: number;
   @Output() closeDetailsEvent = new EventEmitter<boolean>();
+  @Output("loadProducts") loadProducts: EventEmitter<any> = new EventEmitter();
 
   currencyCode;
 
@@ -36,7 +37,6 @@ export class ProductsDetailsComponent implements OnInit, OnChanges {
 
   async ngOnInit() {
     this.dateFormat = PortalService.getCurrentDateFormat();
-    console.log(this.dateFormat)
     this.currencyCode = await lastValueFrom(this.translateService.get('portal.general.currency'));
   }
 
@@ -62,16 +62,15 @@ export class ProductsDetailsComponent implements OnInit, OnChanges {
           {
             next: async (data) => {
               this.product = data;
-              console.log(this.product.updatedAt);
             },
             error: async () => {
               const message = await lastValueFrom(this.translateService
-                .get('portal.general.error'));
+                .get('portal.general.errors.genericError'));
 
               this.messageService.add({
                 severity: 'error',
                 summary: await lastValueFrom(this.translateService
-                  .get('portal.general.error')),
+                  .get('portal.general.toast.error')),
                 detail: message
               });
             }
@@ -86,13 +85,55 @@ export class ProductsDetailsComponent implements OnInit, OnChanges {
 
   }
 
-  deleteProduct(): void {
+  async deleteProduct() {
+      this.asyncOperationsStatus.isProcessingRequest = true;
+
+      const formData: FormData = new FormData();
+      formData.append('listOfProductId', JSON.stringify([this.productId]));
+
+      this.productService.deleteProduct(formData).pipe(
+        finalize(() => {
+          this.asyncOperationsStatus.isProcessingRequest = false;
+        }))
+        .subscribe(
+          {
+            next: async () => {
+              const message = await lastValueFrom(this.translateService
+                .get('portal.components.product.list.toast.success.productDelete'));
+
+              this.messageService.add({
+                severity: 'success',
+                summary: await lastValueFrom(this.translateService
+                  .get('portal.general.toast.success')),
+                detail: message
+              });
+
+              this.loadProducts.emit();
+              this.closeDetails();
+            },
+            error: async () => {
+              const message = await lastValueFrom(this.translateService
+                .get('portal.components.product.list.toast.error.productDelete'));
+
+              this.messageService.add({
+                severity: 'error',
+                summary: await lastValueFrom(this.translateService
+                  .get('portal.general.toast.error')),
+                detail: message
+              });
+            }
+          }
+        );
+  }
+
+   confirmDeletion() {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to perform this action?',
-      accept: () => {
-        //Actual logic to perform a confirmation
+      accept: async () => {
+        await this.deleteProduct()
       }
     });
   }
+
 
 }

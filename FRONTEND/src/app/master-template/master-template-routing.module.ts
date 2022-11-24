@@ -30,15 +30,15 @@ export const MasterTemplateRoutes: Routes = [
       }
     ],
   },
-  {
-    path: "",
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: "**",
-    redirectTo: 'error404',
-    pathMatch: 'full'
-  },
+  // {
+  //   path: "",
+  //   redirectTo: 'home',
+  //   pathMatch: 'full'
+  // },
+  // {
+  //   path: "**",
+  //   redirectTo: 'error404',
+  //   pathMatch: 'full'
+  // },
 
 ];

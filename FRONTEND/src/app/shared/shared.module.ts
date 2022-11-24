@@ -17,10 +17,13 @@ import {PaginatorModule} from "primeng/paginator";
 import {SidebarModule} from "primeng/sidebar";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {CheckboxModule} from "primeng/checkbox";
+import {RoundPipe} from "./pipes/round-value.pipe";
+import {StepsModule} from "primeng/steps";
 
 @NgModule({
   declarations: [
-    CurrencyExchangePipe
+    CurrencyExchangePipe,
+    RoundPipe
   ],
   imports: [
     CardModule,
@@ -38,11 +41,13 @@ import {CheckboxModule} from "primeng/checkbox";
     PaginatorModule,
     SidebarModule,
     ConfirmDialogModule,
-    CheckboxModule
+    CheckboxModule,
+    StepsModule
   ],
   providers: [MessageService, ConfirmationService],
   exports: [
     CurrencyExchangePipe,
+    RoundPipe,
     CardModule,
     ButtonModule,
     PasswordModule,
@@ -58,7 +63,8 @@ import {CheckboxModule} from "primeng/checkbox";
     PaginatorModule,
     SidebarModule,
     ConfirmDialogModule,
-    CheckboxModule
+    CheckboxModule,
+    StepsModule
   ],
   bootstrap: []
 })

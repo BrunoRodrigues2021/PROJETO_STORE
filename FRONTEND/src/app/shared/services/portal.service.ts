@@ -51,10 +51,8 @@ export class PortalService {
   static getCurrentDateFormat() {
     console.log(this.getLanguage())
     if (this.getLanguage() === LANGUAGES.EN) {
-      console.log("EN")
       return DATE_FORMAT.EN;
     } else if (this.getLanguage() === LANGUAGES.PT) {
-      console.log("PT")
       return DATE_FORMAT.PT;
     }
     return DATE_FORMAT.EN;

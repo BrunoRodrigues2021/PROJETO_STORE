@@ -101,6 +101,22 @@ class ProductService {
             logger.error(`${_fileName} : Error updating product : ProductId: ${productId} : Error: ${JSON.stringify(error)}`);
         }
     }
+
+    async deleteProduct(listOfProductId) {
+        const transaction = await Product.sequelize.transaction();
+        try {
+            await Product.destroy( {
+                where: {
+                    id: listOfProductId
+                },
+                transaction
+            });
+            await transaction.commit();
+        } catch (error) {
+            await transaction.rollback();
+            logger.error(`${_fileName} : Error deleting products : ProductList: ${listOfProductId} : Error: ${JSON.stringify(error)}`);
+        }
+    }
 }
 
 module.exports = new ProductService();

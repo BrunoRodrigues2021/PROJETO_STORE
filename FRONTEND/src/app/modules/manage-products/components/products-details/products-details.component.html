@@ -2,13 +2,15 @@
   <div class="details-sidebar-header">
     <h5>Detalhes</h5>
     <button pButton class="button-icon" icon="icon mi-edit" (click)="editProduct()"></button>
-    <button pButton class="button-icon" icon="icon mi-delete" (click)="deleteProduct()"></button>
+    <button pButton class="button-icon" icon="icon mi-delete" (click)="confirmDeletion()"></button>
     <button pButton class="button-icon" icon="i\con mi-close" (click)="closeDetails()"></button>
   </div>
   <div class="details-sidebar-separator"></div>
   <div class="details-sidebar-content">
     <ng-template #loading>
+      <div class="spinner-container">
         <p-progressSpinner class="small-spinner"></p-progressSpinner>
+      </div>
     </ng-template>
     <dl class="sidebar-content-list" *ngIf="!asyncOperationsStatus.isProcessingRequest else loading">
       <div class="row">

@@ -8,6 +8,10 @@
   background-color: $color__background;
   padding-bottom: 20px;
 
+  .p-card {
+    height: calc(100% - 60px);
+  }
+
   .p-card-content {
     padding-top: 0.25rem;
     padding-bottom: 0;
@@ -16,11 +20,5 @@
   .p-card-body {
     padding-top: 0.25rem;
     padding-bottom: 0;
-  }
-}
-
-@media (max-width: 991px) {
-  .template-container ::ng-deep .p-card {
-    height: auto;
   }
 }
